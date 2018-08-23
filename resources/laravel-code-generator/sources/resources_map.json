@@ -1,0 +1,62 @@
+[
+    {
+        "model-name": "city",
+        "resource-file": "cities.json",
+        "table-name": "cities",
+        "with-migration": true
+    },
+    {
+        "model-name": "county",
+        "resource-file": "counties.json",
+        "table-name": "counties",
+        "with-migration": true
+    },
+    {
+        "model-name": "identityCardSeries",
+        "resource-file": "identity_card_series.json",
+        "table-name": "identity_card_series",
+        "with-migration": true
+    },
+    {
+        "model-name": "identityCardType",
+        "resource-file": "identity_card_types.json",
+        "table-name": "identity_card_types",
+        "with-migration": true
+    },
+    {
+        "model-name": "notificationType",
+        "resource-file": "notification_types.json",
+        "table-name": "notification_types",
+        "with-migration": true
+    },
+    {
+        "model-name": "order",
+        "resource-file": "orders.json",
+        "table-name": "orders",
+        "with-migration": true
+    },
+    {
+        "model-name": "productType",
+        "resource-file": "product_types.json",
+        "table-name": "product_types",
+        "with-migration": true
+    },
+    {
+        "model-name": "transport",
+        "resource-file": "transports.json",
+        "table-name": "transports",
+        "with-migration": true
+    },
+    {
+        "model-name": "userNotification",
+        "resource-file": "user_notifications.json",
+        "table-name": "user_notifications",
+        "with-migration": true
+    },
+    {
+        "model-name": "user",
+        "resource-file": "users.json",
+        "table-name": "users",
+        "with-migration": true
+    }
+]

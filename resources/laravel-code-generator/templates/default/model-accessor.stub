@@ -4,7 +4,7 @@
      * @param  string  $value
      * @return array
      */
-    public function get[% field_name_cap %]Attribute($value)
+    public function [% field_name_cap %]Attribute($value)
     {
         [% content %]
     }
