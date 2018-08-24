@@ -46,7 +46,7 @@
             <dt>Type</dt>
             <dd><a href="{{ url('/notificationTypes/show/' . optional($userNotification->getNotificationType)->id) }}">{{ optional($userNotification->getNotificationType)->name }}</a></dd>
             <dt>User</dt>
-            <dd><a href="{{ url('/users/show/' . optional($userNotification->getUser)->id) }}">{{ optional($userNotification->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($userNotification->getUser)->id) }}">{{ optional($userNotification->getUser)->first_name }}</a></dd>
 
         </dl>
 

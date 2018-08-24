@@ -42,7 +42,7 @@
             <dt>Name</dt>
             <dd>{{ $city->name}}</dd>
             <dt>County</dt>
-            <dd><a href="{{ url('/counties/show/' . optional($city->getCounty)->id) }}">{{ optional($city->getCounty)->id }}</a></dd>
+            <dd><a href="{{ url('/counties/show/' . optional($city->getCounty)->id) }}">{{ optional($city->getCounty)->name }}</a></dd>
 
         </dl>
 

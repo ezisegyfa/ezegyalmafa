@@ -107,7 +107,7 @@
                     "county",
                     "id"
                 ],
-                "field": "id"
+                "field": "name"
             },
             "foreign-constraint": {
                 "field": "county",
@@ -131,7 +131,7 @@
                 "city",
                 "id"
             ],
-            "field": "id"
+            "field": "first_name"
         }
     ],
     "indexes": [],

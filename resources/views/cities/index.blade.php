@@ -51,7 +51,7 @@
                     @foreach($cities as $city)
                         <tr>
                             <td> {{ $city->name}} </td>
-                            <td> <a href="{{ url('/counties/show/' . optional($city->getCounty)->id) }}">{{ optional($city->getCounty)->id }}</a> </td>
+                            <td> <a href="{{ url('/counties/show/' . optional($city->getCounty)->id) }}">{{ optional($city->getCounty)->name }}</a> </td>
 
                             <td>
 

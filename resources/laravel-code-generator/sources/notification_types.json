@@ -80,7 +80,7 @@
                 "type",
                 "id"
             ],
-            "field": "id"
+            "field": "text"
         }
     ],
     "indexes": [],

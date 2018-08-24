@@ -190,7 +190,7 @@
                     "user",
                     "id"
                 ],
-                "field": "id"
+                "field": "first_name"
             },
             "foreign-constraint": {
                 "field": "user",

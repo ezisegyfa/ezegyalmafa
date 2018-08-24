@@ -32,7 +32,7 @@ class UserNotificationsController extends Controller
     public function create()
     {
         $getNotificationTypes = NotificationType::pluck('name','id')->all();
-$getUsers = User::pluck('id','id')->all();
+$getUsers = User::pluck('first_name','id')->all();
         
         return view('user_notifications.create', compact('getNotificationTypes','getUsers'));
     }
@@ -87,7 +87,7 @@ $getUsers = User::pluck('id','id')->all();
     {
         $userNotification = userNotification::findOrFail($id);
         $getNotificationTypes = NotificationType::pluck('name','id')->all();
-$getUsers = User::pluck('id','id')->all();
+$getUsers = User::pluck('first_name','id')->all();
 
         return view('user_notifications.edit', compact('userNotification','getNotificationTypes','getUsers'));
     }

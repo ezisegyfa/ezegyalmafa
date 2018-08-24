@@ -31,8 +31,8 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        $getUsers = User::pluck('id','id')->all();
-$getProductTypes = ProductType::pluck('id','id')->all();
+        $getUsers = User::pluck('first_name','id')->all();
+$getProductTypes = ProductType::pluck('name','id')->all();
         
         return view('orders.create', compact('getUsers','getProductTypes'));
     }
@@ -86,8 +86,8 @@ $getProductTypes = ProductType::pluck('id','id')->all();
     public function edit($id)
     {
         $order = order::findOrFail($id);
-        $getUsers = User::pluck('id','id')->all();
-$getProductTypes = ProductType::pluck('id','id')->all();
+        $getUsers = User::pluck('first_name','id')->all();
+$getProductTypes = ProductType::pluck('name','id')->all();
 
         return view('orders.edit', compact('order','getUsers','getProductTypes'));
     }

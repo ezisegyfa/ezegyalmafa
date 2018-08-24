@@ -42,9 +42,9 @@
             <dt>Quantity</dt>
             <dd>{{ $order->quantity}}</dd>
             <dt>User</dt>
-            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->first_name }}</a></dd>
             <dt>Product Type</dt>
-            <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->id }}</a></dd>
+            <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->name }}</a></dd>
             <dt>Created At</dt>
             <dd>{{ $order->created_at}}</dd>
             <dt>Updated At</dt>

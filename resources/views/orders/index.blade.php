@@ -52,8 +52,8 @@
                     @foreach($orders as $order)
                         <tr>
                             <td> {{ $order->quantity}} </td>
-                            <td> <a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->id }}</a> </td>
-                            <td> <a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->id }}</a> </td>
+                            <td> <a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->first_name }}</a> </td>
+                            <td> <a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->name }}</a> </td>
 
                             <td>
 

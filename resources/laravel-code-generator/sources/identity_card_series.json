@@ -80,7 +80,7 @@
                 "seria",
                 "id"
             ],
-            "field": "id"
+            "field": "first_name"
         }
     ],
     "indexes": [],

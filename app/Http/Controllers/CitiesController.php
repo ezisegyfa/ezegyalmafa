@@ -30,7 +30,7 @@ class CitiesController extends Controller
      */
     public function create()
     {
-        $getCounties = County::pluck('id','id')->all();
+        $getCounties = County::pluck('name','id')->all();
         
         return view('cities.create', compact('getCounties'));
     }
@@ -84,7 +84,7 @@ class CitiesController extends Controller
     public function edit($id)
     {
         $city = city::findOrFail($id);
-        $getCounties = County::pluck('id','id')->all();
+        $getCounties = County::pluck('name','id')->all();
 
         return view('cities.edit', compact('city','getCounties'));
     }

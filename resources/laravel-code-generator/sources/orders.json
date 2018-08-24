@@ -105,7 +105,7 @@
                     "user",
                     "id"
                 ],
-                "field": "id"
+                "field": "first_name"
             },
             "foreign-constraint": {
                 "field": "user",
@@ -156,7 +156,7 @@
                     "product_type",
                     "id"
                 ],
-                "field": "id"
+                "field": "name"
             },
             "foreign-constraint": {
                 "field": "product_type",
@@ -248,7 +248,7 @@
                 "order",
                 "id"
             ],
-            "field": "id"
+            "field": "quantity"
         }
     ],
     "indexes": [],
