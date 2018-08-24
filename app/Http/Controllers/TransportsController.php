@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\transport;
+use App\Models\Transport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception;
@@ -18,7 +18,7 @@ class TransportsController extends Controller
      */
     public function index()
     {
-        $transports = transport::with('getorder')->paginate(25);
+        $transports = Transport::with('getorder')->paginate(25);
 
         return view('transports.index', compact('transports'));
     }
@@ -48,7 +48,7 @@ class TransportsController extends Controller
             
             $data = $this->getData($request);
             
-            transport::create($data);
+            Transport::create($data);
 
             return redirect()->route('transports.transport.index')
                              ->with('success_message', 'Transport was successfully added!');
@@ -69,7 +69,7 @@ class TransportsController extends Controller
      */
     public function show($id)
     {
-        $transport = transport::with('getorder')->findOrFail($id);
+        $transport = Transport::with('getorder')->findOrFail($id);
 
         return view('transports.show', compact('transport'));
     }
@@ -83,7 +83,7 @@ class TransportsController extends Controller
      */
     public function edit($id)
     {
-        $transport = transport::findOrFail($id);
+        $transport = Transport::findOrFail($id);
         $getOrders = Order::pluck('quantity','id')->all();
 
         return view('transports.edit', compact('transport','getOrders'));
@@ -103,7 +103,7 @@ class TransportsController extends Controller
             
             $data = $this->getData($request);
             
-            $transport = transport::findOrFail($id);
+            $transport = Transport::findOrFail($id);
             $transport->update($data);
 
             return redirect()->route('transports.transport.index')
@@ -126,7 +126,7 @@ class TransportsController extends Controller
     public function destroy($id)
     {
         try {
-            $transport = transport::findOrFail($id);
+            $transport = Transport::findOrFail($id);
             $transport->delete();
 
             return redirect()->route('transports.transport.index')

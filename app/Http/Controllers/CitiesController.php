@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\city;
+use App\Models\City;
 use App\Models\County;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +18,7 @@ class CitiesController extends Controller
      */
     public function index()
     {
-        $cities = city::with('getcounty')->paginate(25);
+        $cities = City::with('getcounty')->paginate(25);
 
         return view('cities.index', compact('cities'));
     }
@@ -48,7 +48,7 @@ class CitiesController extends Controller
             
             $data = $this->getData($request);
             
-            city::create($data);
+            City::create($data);
 
             return redirect()->route('cities.city.index')
                              ->with('success_message', 'City was successfully added!');
@@ -69,7 +69,7 @@ class CitiesController extends Controller
      */
     public function show($id)
     {
-        $city = city::with('getcounty')->findOrFail($id);
+        $city = City::with('getcounty')->findOrFail($id);
 
         return view('cities.show', compact('city'));
     }
@@ -83,7 +83,7 @@ class CitiesController extends Controller
      */
     public function edit($id)
     {
-        $city = city::findOrFail($id);
+        $city = City::findOrFail($id);
         $getCounties = County::pluck('name','id')->all();
 
         return view('cities.edit', compact('city','getCounties'));
@@ -103,7 +103,7 @@ class CitiesController extends Controller
             
             $data = $this->getData($request);
             
-            $city = city::findOrFail($id);
+            $city = City::findOrFail($id);
             $city->update($data);
 
             return redirect()->route('cities.city.index')
@@ -126,7 +126,7 @@ class CitiesController extends Controller
     public function destroy($id)
     {
         try {
-            $city = city::findOrFail($id);
+            $city = City::findOrFail($id);
             $city->delete();
 
             return redirect()->route('cities.city.index')

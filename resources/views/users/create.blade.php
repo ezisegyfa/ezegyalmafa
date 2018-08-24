@@ -28,7 +28,7 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('users.user.store') }}" accept-charset="UTF-8" id="create_user_form" name="create_user_form" class="form-horizontal">
+            <form method="POST" accept-charset="UTF-8" id="create_user_form" name="create_user_form" class="form-horizontal">
             {{ csrf_field() }}
             @include ('users.form', [
                                         'user' => null,
@@ -47,4 +47,29 @@
 
 @endsection
 
+@section('scripts')
+<script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var form = $('#create_user_form')
+        form.on('submit', function(e){
+            e.preventDefault()
 
+            var postData = form.serializeArray()
+            var redirectUrl = '{!! route('users.user.store') !!}'
+
+            ajaxPostWithLog({
+                url : redirectUrl,
+                data : postData,
+                success : function(e){
+                    get('/home')
+                },
+                error : function(jqXhr, json, errorThrown){
+                    postData.errors = jqXhr.errors
+                    post(redirectUrl, postData)
+                }
+            })
+        })
+    })
+</script>
+@endsection

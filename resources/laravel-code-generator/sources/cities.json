@@ -124,10 +124,10 @@
     ],
     "relations": [
         {
-            "name": "getUser",
+            "name": "getBuyer",
             "type": "hasOne",
             "params": [
-                "App\\Models\\User",
+                "App\\Models\\Buyer",
                 "city",
                 "id"
             ],

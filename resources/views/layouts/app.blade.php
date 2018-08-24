@@ -12,7 +12,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js"></script>
     <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
 
@@ -22,7 +21,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

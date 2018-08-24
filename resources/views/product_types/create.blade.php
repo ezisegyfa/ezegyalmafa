@@ -28,7 +28,7 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('product_types.product_type.store') }}" accept-charset="UTF-8" id="create_product_type_form" name="create_product_type_form" class="form-horizontal">
+            <form method="POST" accept-charset="UTF-8" id="create_product_type_form" name="create_product_type_form" class="form-horizontal">
             {{ csrf_field() }}
             @include ('product_types.form', [
                                         'productType' => null,
@@ -47,4 +47,29 @@
 
 @endsection
 
+@section('scripts')
+<script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var form = $('#create_product_type_form')
+        form.on('submit', function(e){
+            e.preventDefault()
 
+            var postData = form.serializeArray()
+            var redirectUrl = '{!! route('product_types.product_type.store') !!}'
+
+            ajaxPostWithLog({
+                url : redirectUrl,
+                data : postData,
+                success : function(e){
+                    get('/home')
+                },
+                error : function(jqXhr, json, errorThrown){
+                    postData.errors = jqXhr.errors
+                    post(redirectUrl, postData)
+                }
+            })
+        })
+    })
+</script>
+@endsection

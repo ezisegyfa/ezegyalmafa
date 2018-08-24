@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\identityCardSeries;
+use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
 use Exception;
 
@@ -17,7 +17,7 @@ class IdentityCardSeriesController extends Controller
      */
     public function index()
     {
-        $identityCardSeriesObjects = identityCardSeries::paginate(25);
+        $identityCardSeriesObjects = IdentityCardSeries::paginate(25);
 
         return view('identity_card_series.index', compact('identityCardSeriesObjects'));
     }
@@ -47,7 +47,7 @@ class IdentityCardSeriesController extends Controller
             
             $data = $this->getData($request);
             
-            identityCardSeries::create($data);
+            IdentityCardSeries::create($data);
 
             return redirect()->route('identity_card_series.identity_card_series.index')
                              ->with('success_message', 'Identity Card Series was successfully added!');
@@ -68,7 +68,7 @@ class IdentityCardSeriesController extends Controller
      */
     public function show($id)
     {
-        $identityCardSeries = identityCardSeries::findOrFail($id);
+        $identityCardSeries = IdentityCardSeries::findOrFail($id);
 
         return view('identity_card_series.show', compact('identityCardSeries'));
     }
@@ -82,7 +82,7 @@ class IdentityCardSeriesController extends Controller
      */
     public function edit($id)
     {
-        $identityCardSeries = identityCardSeries::findOrFail($id);
+        $identityCardSeries = IdentityCardSeries::findOrFail($id);
         
 
         return view('identity_card_series.edit', compact('identityCardSeries'));
@@ -102,7 +102,7 @@ class IdentityCardSeriesController extends Controller
             
             $data = $this->getData($request);
             
-            $identityCardSeries = identityCardSeries::findOrFail($id);
+            $identityCardSeries = IdentityCardSeries::findOrFail($id);
             $identityCardSeries->update($data);
 
             return redirect()->route('identity_card_series.identity_card_series.index')
@@ -125,7 +125,7 @@ class IdentityCardSeriesController extends Controller
     public function destroy($id)
     {
         try {
-            $identityCardSeries = identityCardSeries::findOrFail($id);
+            $identityCardSeries = IdentityCardSeries::findOrFail($id);
             $identityCardSeries->delete();
 
             return redirect()->route('identity_card_series.identity_card_series.index')

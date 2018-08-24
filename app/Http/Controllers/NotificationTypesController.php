@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\notificationType;
+use App\Models\NotificationType;
 use App\Http\Controllers\Controller;
 use Exception;
 
@@ -17,7 +17,7 @@ class NotificationTypesController extends Controller
      */
     public function index()
     {
-        $notificationTypes = notificationType::paginate(25);
+        $notificationTypes = NotificationType::paginate(25);
 
         return view('notification_types.index', compact('notificationTypes'));
     }
@@ -47,7 +47,7 @@ class NotificationTypesController extends Controller
             
             $data = $this->getData($request);
             
-            notificationType::create($data);
+            NotificationType::create($data);
 
             return redirect()->route('notification_types.notification_type.index')
                              ->with('success_message', 'Notification Type was successfully added!');
@@ -68,7 +68,7 @@ class NotificationTypesController extends Controller
      */
     public function show($id)
     {
-        $notificationType = notificationType::findOrFail($id);
+        $notificationType = NotificationType::findOrFail($id);
 
         return view('notification_types.show', compact('notificationType'));
     }
@@ -82,7 +82,7 @@ class NotificationTypesController extends Controller
      */
     public function edit($id)
     {
-        $notificationType = notificationType::findOrFail($id);
+        $notificationType = NotificationType::findOrFail($id);
         
 
         return view('notification_types.edit', compact('notificationType'));
@@ -102,7 +102,7 @@ class NotificationTypesController extends Controller
             
             $data = $this->getData($request);
             
-            $notificationType = notificationType::findOrFail($id);
+            $notificationType = NotificationType::findOrFail($id);
             $notificationType->update($data);
 
             return redirect()->route('notification_types.notification_type.index')
@@ -125,7 +125,7 @@ class NotificationTypesController extends Controller
     public function destroy($id)
     {
         try {
-            $notificationType = notificationType::findOrFail($id);
+            $notificationType = NotificationType::findOrFail($id);
             $notificationType->delete();
 
             return redirect()->route('notification_types.notification_type.index')

@@ -41,8 +41,8 @@
         <dl class="dl-horizontal">
             <dt>Quantity</dt>
             <dd>{{ $order->quantity}}</dd>
-            <dt>User</dt>
-            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->first_name }}</a></dd>
+            <dt>Buyer</dt>
+            <dd><a href="{{ url('/buyers/show/' . optional($order->getBuyer)->id) }}">{{ optional($order->getBuyer)->first_name }}</a></dd>
             <dt>Product Type</dt>
             <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->name }}</a></dd>
             <dt>Created At</dt>

@@ -1,60 +1,66 @@
 [
     {
-        "model-name": "city",
+        "model-name": "BuyerNotification",
+        "resource-file": "buyer_notifications.json",
+        "table-name": "buyer_notifications",
+        "with-migration": true
+    },
+    {
+        "model-name": "Buyer",
+        "resource-file": "buyers.json",
+        "table-name": "buyers",
+        "with-migration": true
+    },
+    {
+        "model-name": "City",
         "resource-file": "cities.json",
         "table-name": "cities",
         "with-migration": true
     },
     {
-        "model-name": "county",
+        "model-name": "County",
         "resource-file": "counties.json",
         "table-name": "counties",
         "with-migration": true
     },
     {
-        "model-name": "identityCardSeries",
+        "model-name": "IdentityCardSeries",
         "resource-file": "identity_card_series.json",
         "table-name": "identity_card_series",
         "with-migration": true
     },
     {
-        "model-name": "identityCardType",
+        "model-name": "IdentityCardType",
         "resource-file": "identity_card_types.json",
         "table-name": "identity_card_types",
         "with-migration": true
     },
     {
-        "model-name": "notificationType",
+        "model-name": "NotificationType",
         "resource-file": "notification_types.json",
         "table-name": "notification_types",
         "with-migration": true
     },
     {
-        "model-name": "order",
+        "model-name": "Order",
         "resource-file": "orders.json",
         "table-name": "orders",
         "with-migration": true
     },
     {
-        "model-name": "productType",
+        "model-name": "ProductType",
         "resource-file": "product_types.json",
         "table-name": "product_types",
         "with-migration": true
     },
     {
-        "model-name": "transport",
+        "model-name": "Transport",
         "resource-file": "transports.json",
         "table-name": "transports",
         "with-migration": true
     },
     {
-        "model-name": "userNotification",
-        "resource-file": "user_notifications.json",
-        "table-name": "user_notifications",
-        "with-migration": true
-    },
-    {
-        "model-name": "user",
+        "model-name": "User",
         "resource-file": "users.json",
         "table-name": "users",
         "with-migration": true

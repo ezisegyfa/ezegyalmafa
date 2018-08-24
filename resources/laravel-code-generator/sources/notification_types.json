@@ -73,10 +73,10 @@
     ],
     "relations": [
         {
-            "name": "getUserNotification",
+            "name": "getBuyerNotification",
             "type": "hasOne",
             "params": [
-                "App\\Models\\UserNotification",
+                "App\\Models\\BuyerNotification",
                 "type",
                 "id"
             ],

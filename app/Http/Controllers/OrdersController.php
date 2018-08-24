@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\order;
+use App\Models\Order;
+use App\Models\Buyer;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +19,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = order::with('getuser','getproducttype')->paginate(25);
+        $orders = Order::with('getbuyer','getproducttype')->paginate(25);
 
         return view('orders.index', compact('orders'));
     }
@@ -31,10 +31,10 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        $getUsers = User::pluck('first_name','id')->all();
+        $getBuyers = Buyer::pluck('first_name','id')->all();
 $getProductTypes = ProductType::pluck('name','id')->all();
         
-        return view('orders.create', compact('getUsers','getProductTypes'));
+        return view('orders.create', compact('getBuyers','getProductTypes'));
     }
 
     /**
@@ -50,7 +50,7 @@ $getProductTypes = ProductType::pluck('name','id')->all();
             
             $data = $this->getData($request);
             
-            order::create($data);
+            Order::create($data);
 
             return redirect()->route('orders.order.index')
                              ->with('success_message', 'Order was successfully added!');
@@ -71,7 +71,7 @@ $getProductTypes = ProductType::pluck('name','id')->all();
      */
     public function show($id)
     {
-        $order = order::with('getuser','getproducttype')->findOrFail($id);
+        $order = Order::with('getbuyer','getproducttype')->findOrFail($id);
 
         return view('orders.show', compact('order'));
     }
@@ -85,11 +85,11 @@ $getProductTypes = ProductType::pluck('name','id')->all();
      */
     public function edit($id)
     {
-        $order = order::findOrFail($id);
-        $getUsers = User::pluck('first_name','id')->all();
+        $order = Order::findOrFail($id);
+        $getBuyers = Buyer::pluck('first_name','id')->all();
 $getProductTypes = ProductType::pluck('name','id')->all();
 
-        return view('orders.edit', compact('order','getUsers','getProductTypes'));
+        return view('orders.edit', compact('order','getBuyers','getProductTypes'));
     }
 
     /**
@@ -106,7 +106,7 @@ $getProductTypes = ProductType::pluck('name','id')->all();
             
             $data = $this->getData($request);
             
-            $order = order::findOrFail($id);
+            $order = Order::findOrFail($id);
             $order->update($data);
 
             return redirect()->route('orders.order.index')
@@ -129,7 +129,7 @@ $getProductTypes = ProductType::pluck('name','id')->all();
     public function destroy($id)
     {
         try {
-            $order = order::findOrFail($id);
+            $order = Order::findOrFail($id);
             $order->delete();
 
             return redirect()->route('orders.order.index')
@@ -153,7 +153,7 @@ $getProductTypes = ProductType::pluck('name','id')->all();
     {
         $rules = [
             'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'user' => 'required',
+            'buyer' => 'required',
             'product_type' => 'required',
      
         ];

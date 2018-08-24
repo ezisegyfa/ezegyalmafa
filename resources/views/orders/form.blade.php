@@ -7,19 +7,19 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('user') ? 'has-error' : '' }}">
-    <label for="user" class="col-md-2 control-label">User</label>
+<div class="form-group {{ $errors->has('buyer') ? 'has-error' : '' }}">
+    <label for="buyer" class="col-md-2 control-label">Buyer</label>
     <div class="col-md-10">
-        <select class="form-control" id="user" name="user" required="true">
-        	    <option value="" style="display: none;" {{ old('user', optional($order)->user ?: '') == '' ? 'selected' : '' }} disabled selected>Enter user here...</option>
-        	@foreach ($getUsers as $key => $getUser)
-			    <option value="{{ $key }}" {{ old('user', optional($order)->user) == $key ? 'selected' : '' }}>
-			    	{{ $getUser }}
+        <select class="form-control" id="buyer" name="buyer" required="true">
+        	    <option value="" style="display: none;" {{ old('buyer', optional($order)->buyer ?: '') == '' ? 'selected' : '' }} disabled selected>Enter buyer here...</option>
+        	@foreach ($getBuyers as $key => $getBuyer)
+			    <option value="{{ $key }}" {{ old('buyer', optional($order)->buyer) == $key ? 'selected' : '' }}>
+			    	{{ $getBuyer }}
 			    </option>
 			@endforeach
         </select>
         
-        {!! $errors->first('user', '<p class="help-block">:message</p>') !!}
+        {!! $errors->first('buyer', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

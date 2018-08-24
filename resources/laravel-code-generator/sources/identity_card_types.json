@@ -73,10 +73,10 @@
     ],
     "relations": [
         {
-            "name": "getUser",
+            "name": "getBuyer",
             "type": "hasOne",
             "params": [
-                "App\\Models\\User",
+                "App\\Models\\Buyer",
                 "identity_card_type",
                 "id"
             ],

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\county;
+use App\Models\County;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception;
@@ -17,7 +17,7 @@ class CountiesController extends Controller
      */
     public function index()
     {
-        $counties = county::paginate(25);
+        $counties = County::paginate(25);
 
         return view('counties.index', compact('counties'));
     }
@@ -47,7 +47,7 @@ class CountiesController extends Controller
             
             $data = $this->getData($request);
             
-            county::create($data);
+            County::create($data);
 
             return redirect()->route('counties.county.index')
                              ->with('success_message', 'County was successfully added!');
@@ -68,7 +68,7 @@ class CountiesController extends Controller
      */
     public function show($id)
     {
-        $county = county::findOrFail($id);
+        $county = County::findOrFail($id);
 
         return view('counties.show', compact('county'));
     }
@@ -82,7 +82,7 @@ class CountiesController extends Controller
      */
     public function edit($id)
     {
-        $county = county::findOrFail($id);
+        $county = County::findOrFail($id);
         
 
         return view('counties.edit', compact('county'));
@@ -102,7 +102,7 @@ class CountiesController extends Controller
             
             $data = $this->getData($request);
             
-            $county = county::findOrFail($id);
+            $county = County::findOrFail($id);
             $county->update($data);
 
             return redirect()->route('counties.county.index')
@@ -125,7 +125,7 @@ class CountiesController extends Controller
     public function destroy($id)
     {
         try {
-            $county = county::findOrFail($id);
+            $county = County::findOrFail($id);
             $county->delete();
 
             return redirect()->route('counties.county.index')

@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user;
-use App\Models\City;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\IdentityCardType;
-use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
 use Exception;
 
@@ -20,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = user::paginate(25);
+        $users = User::paginate(25);
 
         return view('users.index', compact('users'));
     }
@@ -32,11 +29,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $getCities = City::pluck('name','id')->all();
-$getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
-$getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
         
-        return view('users.create', compact('getCities','getIdentityCardSeries','getIdentityCardTypes'));
+        
+        return view('users.create');
     }
 
     /**
@@ -52,7 +47,7 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
             
             $data = $this->getData($request);
             
-            user::create($data);
+            User::create($data);
 
             return redirect()->route('users.user.index')
                              ->with('success_message', 'User was successfully added!');
@@ -73,7 +68,7 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
      */
     public function show($id)
     {
-        $user = user::with('getcity','getidentitycardseries','getidentitycardtype')->findOrFail($id);
+        $user = User::findOrFail($id);
 
         return view('users.show', compact('user'));
     }
@@ -87,12 +82,10 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
      */
     public function edit($id)
     {
-        $user = user::findOrFail($id);
-        $getCities = City::pluck('name','id')->all();
-$getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
-$getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
+        $user = User::findOrFail($id);
+        
 
-        return view('users.edit', compact('user','getCities','getIdentityCardSeries','getIdentityCardTypes'));
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -109,7 +102,7 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
             
             $data = $this->getData($request);
             
-            $user = user::findOrFail($id);
+            $user = User::findOrFail($id);
             $user->update($data);
 
             return redirect()->route('users.user.index')
@@ -132,7 +125,7 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
     public function destroy($id)
     {
         try {
-            $user = user::findOrFail($id);
+            $user = User::findOrFail($id);
             $user->delete();
 
             return redirect()->route('users.user.index')
@@ -155,16 +148,9 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
     protected function getData(Request $request)
     {
         $rules = [
-            'first_name' => 'required|string|min:1|max:255',
-            'last_name' => 'required|string|min:1|max:255',
-            'email' => 'nullable|string|min:0|max:255',
-            'phone_number' => 'required|numeric|string|min:1|max:15',
-            'adress' => 'required',
-            'cnp' => 'required|string|min:1|max:10',
-            'seria_nr' => 'required|string|min:1|max:10',
-            'city' => 'required',
-            'seria' => 'required',
-            'identity_card_type' => 'required',
+            'name' => 'required|string|min:1|max:255',
+            'email' => 'required|string|min:1|max:255',
+            'password' => 'required|string|min:1|max:255',
      
         ];
 

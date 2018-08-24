@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\identityCardType;
+use App\Models\IdentityCardType;
 use App\Http\Controllers\Controller;
 use Exception;
 
@@ -17,7 +17,7 @@ class IdentityCardTypesController extends Controller
      */
     public function index()
     {
-        $identityCardTypes = identityCardType::paginate(25);
+        $identityCardTypes = IdentityCardType::paginate(25);
 
         return view('identity_card_types.index', compact('identityCardTypes'));
     }
@@ -47,7 +47,7 @@ class IdentityCardTypesController extends Controller
             
             $data = $this->getData($request);
             
-            identityCardType::create($data);
+            IdentityCardType::create($data);
 
             return redirect()->route('identity_card_types.identity_card_type.index')
                              ->with('success_message', 'Identity Card Type was successfully added!');
@@ -68,7 +68,7 @@ class IdentityCardTypesController extends Controller
      */
     public function show($id)
     {
-        $identityCardType = identityCardType::findOrFail($id);
+        $identityCardType = IdentityCardType::findOrFail($id);
 
         return view('identity_card_types.show', compact('identityCardType'));
     }
@@ -82,7 +82,7 @@ class IdentityCardTypesController extends Controller
      */
     public function edit($id)
     {
-        $identityCardType = identityCardType::findOrFail($id);
+        $identityCardType = IdentityCardType::findOrFail($id);
         
 
         return view('identity_card_types.edit', compact('identityCardType'));
@@ -102,7 +102,7 @@ class IdentityCardTypesController extends Controller
             
             $data = $this->getData($request);
             
-            $identityCardType = identityCardType::findOrFail($id);
+            $identityCardType = IdentityCardType::findOrFail($id);
             $identityCardType->update($data);
 
             return redirect()->route('identity_card_types.identity_card_type.index')
@@ -125,7 +125,7 @@ class IdentityCardTypesController extends Controller
     public function destroy($id)
     {
         try {
-            $identityCardType = identityCardType::findOrFail($id);
+            $identityCardType = IdentityCardType::findOrFail($id);
             $identityCardType->delete();
 
             return redirect()->route('identity_card_types.identity_card_type.index')
