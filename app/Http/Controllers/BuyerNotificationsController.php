@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buyer;
-use Illuminate\Http\Request;
 use App\Models\NotificationType;
 use App\Models\BuyerNotification;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BuyerNotificationsFormRequest;
 use Exception;
 
 class BuyerNotificationsController extends Controller
@@ -40,15 +40,15 @@ $getBuyers = Buyer::pluck('first_name','id')->all();
     /**
      * Store a new buyer notification in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\BuyerNotificationsFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(BuyerNotificationsFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             BuyerNotification::create($data);
 
@@ -96,15 +96,15 @@ $getBuyers = Buyer::pluck('first_name','id')->all();
      * Update the specified buyer notification in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\BuyerNotificationsFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, BuyerNotificationsFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $buyerNotification = BuyerNotification::findOrFail($id);
             $buyerNotification->update($data);
@@ -142,30 +142,6 @@ $getBuyers = Buyer::pluck('first_name','id')->all();
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'text' => 'required',
-            'score' => 'required|string|min:1',
-            'type' => 'required',
-            'buyer' => 'required',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

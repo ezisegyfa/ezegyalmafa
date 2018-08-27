@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\IdentityCardType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IdentityCardTypesFormRequest;
 use Exception;
 
 class IdentityCardTypesController extends Controller
@@ -37,15 +37,15 @@ class IdentityCardTypesController extends Controller
     /**
      * Store a new identity card type in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\IdentityCardTypesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(IdentityCardTypesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             IdentityCardType::create($data);
 
@@ -92,15 +92,15 @@ class IdentityCardTypesController extends Controller
      * Update the specified identity card type in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\IdentityCardTypesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, IdentityCardTypesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $identityCardType = IdentityCardType::findOrFail($id);
             $identityCardType->update($data);
@@ -138,27 +138,6 @@ class IdentityCardTypesController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:10',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

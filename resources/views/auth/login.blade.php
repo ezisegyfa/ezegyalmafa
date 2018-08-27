@@ -51,14 +51,14 @@
 </div>
 @endsection
 
-@include('postDataFunctions')
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#login-form').on('submit', function(e){
+        var form = $('#login-form')
+        form.on('submit', function(e){
             e.preventDefault()
 
-            postData = getCurrentLoginPostData()
+            postData = form.serializeArray()
             ajaxPostWithLog({
                 url : '/login',
                 data : postData,

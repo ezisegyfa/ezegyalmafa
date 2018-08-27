@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductType;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductTypesFormRequest;
 use Exception;
 
 class ProductTypesController extends Controller
@@ -37,15 +37,15 @@ class ProductTypesController extends Controller
     /**
      * Store a new product type in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\ProductTypesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(ProductTypesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             ProductType::create($data);
 
@@ -92,15 +92,15 @@ class ProductTypesController extends Controller
      * Update the specified product type in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\ProductTypesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, ProductTypesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $productType = ProductType::findOrFail($id);
             $productType->update($data);
@@ -138,27 +138,6 @@ class ProductTypesController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

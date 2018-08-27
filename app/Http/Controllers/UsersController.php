@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsersFormRequest;
 use Exception;
 
 class UsersController extends Controller
@@ -37,15 +37,15 @@ class UsersController extends Controller
     /**
      * Store a new user in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\UsersFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(UsersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             User::create($data);
 
@@ -92,15 +92,15 @@ class UsersController extends Controller
      * Update the specified user in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\UsersFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, UsersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $user = User::findOrFail($id);
             $user->update($data);
@@ -138,29 +138,6 @@ class UsersController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-            'email' => 'required|string|min:1|max:255',
-            'password' => 'required|string|min:1|max:255',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

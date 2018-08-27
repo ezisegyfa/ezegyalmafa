@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Buyer;
-use Illuminate\Http\Request;
 use App\Models\IdentityCardType;
 use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BuyersFormRequest;
 use Exception;
 
 class BuyersController extends Controller
@@ -42,15 +42,15 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
     /**
      * Store a new buyer in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\BuyersFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(BuyersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             Buyer::create($data);
 
@@ -99,15 +99,15 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
      * Update the specified buyer in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\BuyersFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, BuyersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $buyer = Buyer::findOrFail($id);
             $buyer->update($data);
@@ -145,36 +145,6 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'first_name' => 'required|string|min:1|max:255',
-            'last_name' => 'required|string|min:1|max:255',
-            'email' => 'nullable|string|min:0|max:255',
-            'phone_number' => 'required|numeric|string|min:1|max:15',
-            'adress' => 'required',
-            'cnp' => 'required|string|min:1|max:10',
-            'seria_nr' => 'required|string|min:1|max:10',
-            'city' => 'required',
-            'seria' => 'required',
-            'identity_card_type' => 'required',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

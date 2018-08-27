@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\NotificationType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NotificationTypesFormRequest;
 use Exception;
 
 class NotificationTypesController extends Controller
@@ -37,15 +37,15 @@ class NotificationTypesController extends Controller
     /**
      * Store a new notification type in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\NotificationTypesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(NotificationTypesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             NotificationType::create($data);
 
@@ -92,15 +92,15 @@ class NotificationTypesController extends Controller
      * Update the specified notification type in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\NotificationTypesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, NotificationTypesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $notificationType = NotificationType::findOrFail($id);
             $notificationType->update($data);
@@ -138,27 +138,6 @@ class NotificationTypesController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

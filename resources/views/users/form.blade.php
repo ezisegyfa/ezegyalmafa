@@ -23,3 +23,11 @@
     </div>
 </div>
 
+<div class="form-group {{ $errors->has('remember_token') ? 'has-error' : '' }}">
+    <label for="remember_token" class="col-md-2 control-label">Remember Token</label>
+    <div class="col-md-10">
+        <input class="form-control" name="remember_token" type="text" id="remember_token" value="{{ old('remember_token', optional($user)->remember_token) }}" maxlength="100" placeholder="Enter remember token here...">
+        {!! $errors->first('remember_token', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IdentityCardSeriesFormRequest;
 use Exception;
 
 class IdentityCardSeriesController extends Controller
@@ -37,15 +37,15 @@ class IdentityCardSeriesController extends Controller
     /**
      * Store a new identity card series in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\IdentityCardSeriesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(IdentityCardSeriesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             IdentityCardSeries::create($data);
 
@@ -92,15 +92,15 @@ class IdentityCardSeriesController extends Controller
      * Update the specified identity card series in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\IdentityCardSeriesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, IdentityCardSeriesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $identityCardSeries = IdentityCardSeries::findOrFail($id);
             $identityCardSeries->update($data);
@@ -138,27 +138,6 @@ class IdentityCardSeriesController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:10',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

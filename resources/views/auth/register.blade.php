@@ -63,10 +63,11 @@
 <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#register-form').on('submit', function(e){
+        var form = $('#register-form')
+        form.on('submit', function(e){
             e.preventDefault()
 
-            var postData = getCurrentRegisterPostData()
+            var postData = form.serializeArray()
 
             ajaxPostWithLog({
                 url : '/register',

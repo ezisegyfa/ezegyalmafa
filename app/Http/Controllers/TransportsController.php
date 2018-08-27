@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Transport;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TransportsFormRequest;
 use Exception;
 
 class TransportsController extends Controller
@@ -38,15 +38,15 @@ class TransportsController extends Controller
     /**
      * Store a new transport in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\TransportsFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(TransportsFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             Transport::create($data);
 
@@ -93,15 +93,15 @@ class TransportsController extends Controller
      * Update the specified transport in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\TransportsFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, TransportsFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $transport = Transport::findOrFail($id);
             $transport->update($data);
@@ -139,28 +139,6 @@ class TransportsController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'order' => 'required',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

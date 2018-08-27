@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Buyer;
 use App\Models\ProductType;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrdersFormRequest;
 use Exception;
 
 class OrdersController extends Controller
@@ -40,15 +40,15 @@ $getProductTypes = ProductType::pluck('name','id')->all();
     /**
      * Store a new order in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\OrdersFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(OrdersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             Order::create($data);
 
@@ -96,15 +96,15 @@ $getProductTypes = ProductType::pluck('name','id')->all();
      * Update the specified order in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\OrdersFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, OrdersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $order = Order::findOrFail($id);
             $order->update($data);
@@ -142,29 +142,6 @@ $getProductTypes = ProductType::pluck('name','id')->all();
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'buyer' => 'required',
-            'product_type' => 'required',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

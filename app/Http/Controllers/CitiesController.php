@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\County;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CitiesFormRequest;
 use Exception;
 
 class CitiesController extends Controller
@@ -38,15 +38,15 @@ class CitiesController extends Controller
     /**
      * Store a new city in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\CitiesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(CitiesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             City::create($data);
 
@@ -93,15 +93,15 @@ class CitiesController extends Controller
      * Update the specified city in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\CitiesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, CitiesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $city = City::findOrFail($id);
             $city->update($data);
@@ -139,28 +139,6 @@ class CitiesController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-            'county' => 'required|numeric|min:-2147483648|max:2147483647',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

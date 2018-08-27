@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\County;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CountiesFormRequest;
 use Exception;
 
 class CountiesController extends Controller
@@ -37,15 +37,15 @@ class CountiesController extends Controller
     /**
      * Store a new county in the storage.
      *
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\CountiesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(CountiesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             County::create($data);
 
@@ -92,15 +92,15 @@ class CountiesController extends Controller
      * Update the specified county in the storage.
      *
      * @param  int $id
-     * @param Illuminate\Http\Request $request
+     * @param App\Http\Requests\CountiesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, CountiesFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $county = County::findOrFail($id);
             $county->update($data);
@@ -138,27 +138,6 @@ class CountiesController extends Controller
         }
     }
 
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-     
-        ];
 
-        
-        $data = $request->validate($rules);
-
-
-
-
-        return $data;
-    }
 
 }

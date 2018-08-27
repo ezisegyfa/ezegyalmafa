@@ -45,6 +45,8 @@
             <dd>{{ $user->email}}</dd>
             <dt>Password</dt>
             <dd>{{ $user->password}}</dd>
+            <dt>Remember Token</dt>
+            <dd>{{ $user->remember_token}}</dd>
             <dt>Created At</dt>
             <dd>{{ $user->created_at}}</dd>
             <dt>Updated At</dt>

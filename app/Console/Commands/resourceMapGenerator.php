@@ -48,10 +48,11 @@ class resourceMapGenerator extends Command
         foreach (getDatabaseTableNames() as $tableName) {
             $modelName = str_singular(camel_case($tableName));
             array_push($resources, (object)[
-                'model-name' => ucfirst($modelName),
-                'table-name' => $tableName,
-                'table-exists' => true,
-                'with-migration' => true
+                'model-name'        => ucfirst($modelName),
+                'table-name'        => $tableName,
+                'table-exists'      => true,
+                'with-migration'    => true,
+                'with-form-request' => true
             ]);
         }
         return json_encode($resources, JSON_PRETTY_PRINT);
