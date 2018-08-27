@@ -52,6 +52,10 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'access_code' => ['required', function($attribute, $value, $fail) {
+                if (md5($value) !== env('ACCESS_CODE')) 
+                    return $fail('Access code is invalid.');
+            }]
         ]);
     }
 

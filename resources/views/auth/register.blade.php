@@ -43,6 +43,13 @@
                         ])
                         @endcomponent
 
+                        @component('layouts.components.formInputTextRow',[
+                            'name' => 'access_code',
+                            'labelTextLanguageTitle' => 'Access code',
+                            'errors' => $errors
+                        ])
+                        @endcomponent
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -58,7 +65,7 @@
 </div>
 @endsection
 
-@include('PostDataFunctions')
+@include('postDataFunctions')
 @section('scripts')
 <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
 <script type="text/javascript">
@@ -66,9 +73,8 @@
         var form = $('#register-form')
         form.on('submit', function(e){
             e.preventDefault()
-
-            var postData = form.serializeArray()
-
+            
+            var postData = getFormData(form)
             ajaxPostWithLog({
                 url : '/register',
                 data : postData,
