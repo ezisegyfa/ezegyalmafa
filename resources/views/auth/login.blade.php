@@ -51,6 +51,7 @@
 </div>
 @endsection
 
+@include('postDataFunctions')
 @section('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
@@ -58,7 +59,7 @@
         form.on('submit', function(e){
             e.preventDefault()
 
-            postData = form.serializeArray()
+            postData = getFormData(form)
             ajaxPostWithLog({
                 url : '/login',
                 data : postData,

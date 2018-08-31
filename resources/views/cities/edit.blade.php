@@ -4,6 +4,12 @@
 
     <div class="panel panel-default">
   
+        <div class="btn-group btn-group-sm pull-right" role="group">
+            <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back to menu</span>
+            </a>
+        </div>
+
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
@@ -51,6 +57,7 @@
 
 @endsection
 
+@include('postDataFunctions')
 @section('scripts')
 <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
 <script type="text/javascript">
@@ -59,7 +66,7 @@
         form.on('submit', function(e){
             e.preventDefault()
 
-            var postData = form.serializeArray()
+            var postData = getFormData(form)
             var redirectUrl = '{!! route('cities.city.update', $city->id) !!}'
 
             ajaxPostWithLog({

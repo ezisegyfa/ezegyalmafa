@@ -20,6 +20,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/menu', 'HomeController@showMenu')->name('menu');
+
     Route::group(
     [
         'prefix' => 'buyer_notifications',
@@ -265,6 +267,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/', 'OrdersController@store')
              ->name('orders.order.store');
+
+        Route::post('/saveWithBuyer', 'OrdersController@storeWithBuyer')
+             ->name('orders.order.storeWithBuyer');
                    
         Route::put('order/{order}', 'OrdersController@update')
              ->name('orders.order.update')

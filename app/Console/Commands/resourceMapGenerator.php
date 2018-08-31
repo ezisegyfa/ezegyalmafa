@@ -51,7 +51,7 @@ class resourceMapGenerator extends Command
                 'model-name'        => ucfirst($modelName),
                 'table-name'        => $tableName,
                 'table-exists'      => true,
-                'with-migration'    => true,
+                //'with-migration'    => true,
                 'with-form-request' => true
             ]);
         }

@@ -3,6 +3,13 @@
 @section('content')
 
 <div class="panel panel-default">
+
+    <div class="btn-group btn-group-sm pull-right" role="group">
+        <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back to menu</span>
+        </a>
+    </div>
+
     <div class="panel-heading clearfix">
 
         <span class="pull-left">

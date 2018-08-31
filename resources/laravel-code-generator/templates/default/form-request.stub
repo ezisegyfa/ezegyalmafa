@@ -14,7 +14,7 @@ class [% form_request_class %] extends FormRequest
      */
     public function authorize()
     {
-        return [% autherized_boolean %];
+        return true;
     }
 
     /**
