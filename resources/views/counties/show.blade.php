@@ -2,6 +2,14 @@
 
 @section('content')
 
+@if ($errors->any())
+    <ul class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
 <div class="panel panel-default">
 
     <div class="btn-group btn-group-sm pull-right" role="group">
@@ -23,19 +31,19 @@
             {{ csrf_field() }}
                 <div class="btn-group btn-group-sm" role="group">
                     <a href="{{ route('counties.county.index') }}" class="btn btn-primary" title="Show All County">
-                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-th-list" aria-hidden="true">Show all</span>
                     </a>
 
                     <a href="{{ route('counties.county.create') }}" class="btn btn-success" title="Create New County">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                     </a>
                     
                     <a href="{{ route('counties.county.edit', $county->id ) }}" class="btn btn-primary" title="Edit County">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                     </a>
 
                     <button type="submit" class="btn btn-danger" title="Delete County" onclick="return confirm(&quot;Delete County??&quot;)">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
                     </button>
                 </div>
             </form>

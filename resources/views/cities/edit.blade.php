@@ -38,7 +38,7 @@
                 </ul>
             @endif
 
-            <form method="POST" id="edit_city_form" name="edit_city_form" accept-charset="UTF-8" class="form-horizontal">
+            <form id="edit_city_form" name="edit_city_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
             @include ('cities.form', [

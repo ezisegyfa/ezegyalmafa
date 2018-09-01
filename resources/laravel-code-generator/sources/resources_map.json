@@ -36,6 +36,12 @@
         "with-migration": true
     },
     {
+        "model-name": "Migration",
+        "resource-file": "migrations.json",
+        "table-name": "migrations",
+        "with-migration": true
+    },
+    {
         "model-name": "NotificationType",
         "resource-file": "notification_types.json",
         "table-name": "notification_types",

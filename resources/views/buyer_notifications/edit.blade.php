@@ -38,7 +38,7 @@
                 </ul>
             @endif
 
-            <form method="POST" id="edit_buyer_notification_form" name="edit_buyer_notification_form" accept-charset="UTF-8" class="form-horizontal">
+            <form id="edit_buyer_notification_form" name="edit_buyer_notification_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
             @include ('buyer_notifications.form', [

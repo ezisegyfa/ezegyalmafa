@@ -1,9 +1,5 @@
-<div class="form-group row">
-    <?php 
-        $id = $id ?? $name;
-        $hasError = ($errors and $errors->has($name));
-    ?>
-    <label for="{{ $id }}" class="col-sm-4 col-form-label text-md-right">{{ $labelText }}</label>
+<div class="form-group {{ $errors->has('text') ? 'has-error' : '' }}">
+    <label for="{{ $name }}" class="col-md-2 control-label">{{ $title ?? $name }}</label>
 
     <div class="col-md-6">
         <div class="col-sm-3">

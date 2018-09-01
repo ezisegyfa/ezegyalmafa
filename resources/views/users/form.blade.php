@@ -1,33 +1,65 @@
 
-<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-    <label for="name" class="col-md-2 control-label">Name</label>
-    <div class="col-md-10">
-        <input class="form-control" name="name" type="text" id="name" value="{{ old('name', optional($user)->name) }}" minlength="1" maxlength="255" required="true" placeholder="Enter name here...">
-        {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+@component('layouts.components.formInputTextRow', [
+        'title' => 'Name',
+	'cssClass' => '',
+	'name' => 'name',
+	'type' => 'text',
+	'value' =>  old('name', optional($user)->name) ,
+	'minLength' => ' minlength="1"',
+	'maxLength' => ' maxlength="191"',
+	'minValue' => '',
+	'maxValue' => '',
+	'required' => ' required="true"',
+	'placeholder' => ' placeholder="Enter name here..."',
+	'step' => ''
+])
+@endcomponent
 
-<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-    <label for="email" class="col-md-2 control-label">Email</label>
-    <div class="col-md-10">
-        <input class="form-control" name="email" type="text" id="email" value="{{ old('email', optional($user)->email) }}" minlength="1" maxlength="255" required="true" placeholder="Enter email here...">
-        {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+@component('layouts.components.formInputTextRow', [
+        'title' => 'Email',
+	'cssClass' => '',
+	'name' => 'email',
+	'type' => 'text',
+	'value' =>  old('email', optional($user)->email) ,
+	'minLength' => ' minlength="1"',
+	'maxLength' => ' maxlength="191"',
+	'minValue' => '',
+	'maxValue' => '',
+	'required' => ' required="true"',
+	'placeholder' => ' placeholder="Enter email here..."',
+	'step' => ''
+])
+@endcomponent
 
-<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-    <label for="password" class="col-md-2 control-label">Password</label>
-    <div class="col-md-10">
-        <input class="form-control" name="password" type="text" id="password" value="{{ old('password', optional($user)->password) }}" minlength="1" maxlength="255" required="true" placeholder="Enter password here...">
-        {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+@component('layouts.components.formInputTextRow', [
+        'title' => 'Password',
+	'cssClass' => '',
+	'name' => 'password',
+	'type' => 'text',
+	'value' =>  old('password', optional($user)->password) ,
+	'minLength' => ' minlength="1"',
+	'maxLength' => ' maxlength="191"',
+	'minValue' => '',
+	'maxValue' => '',
+	'required' => ' required="true"',
+	'placeholder' => ' placeholder="Enter password here..."',
+	'step' => ''
+])
+@endcomponent
 
-<div class="form-group {{ $errors->has('remember_token') ? 'has-error' : '' }}">
-    <label for="remember_token" class="col-md-2 control-label">Remember Token</label>
-    <div class="col-md-10">
-        <input class="form-control" name="remember_token" type="text" id="remember_token" value="{{ old('remember_token', optional($user)->remember_token) }}" maxlength="100" placeholder="Enter remember token here...">
-        {!! $errors->first('remember_token', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+@component('layouts.components.formInputTextRow', [
+        'title' => 'Remember Token',
+	'cssClass' => '',
+	'name' => 'remember_token',
+	'type' => 'text',
+	'value' =>  old('remember_token', optional($user)->remember_token) ,
+	'minLength' => ' minlength="1"',
+	'maxLength' => ' maxlength="100"',
+	'minValue' => '',
+	'maxValue' => '',
+	'required' => ' required="true"',
+	'placeholder' => ' placeholder="Enter remember token here..."',
+	'step' => ''
+])
+@endcomponent
 

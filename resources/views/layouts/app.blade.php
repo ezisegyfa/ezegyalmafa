@@ -10,11 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -46,6 +41,11 @@
             </div>
         </div>
     </div>
+    
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

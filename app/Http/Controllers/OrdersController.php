@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Buyer;
 use App\Models\ProductType;
+use App\Models\IdentityCardType;
+use App\Models\IdentityCardSeries;
+use App\Models\City;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrdersFormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Exception;
 
 class OrdersController extends Controller
@@ -63,40 +67,44 @@ class OrdersController extends Controller
         }
     }
 
+    public function createWithBuyer()
+    {
+        $getProductTypes = ProductType::pluck('name','id')->all();
+        $getCities = City::pluck('name','id')->all();
+        $getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
+        $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
+        $storedData = json_decode(Cookie::get('buyer'));
+
+        return view('orders.createWithBuyerForm', compact('getProductTypes', 'getCities', 'getIdentityCardSeries', 'getIdentityCardTypes', 'storedData'));
+    }
+
     public function storeWithBuyer(Request $request)
     {
-        try {
+        $request->validate([
+            'buyer.first_name' => 'required|string|min:1|max:255',
+            'buyer.last_name' => 'required|string|min:1|max:255',
+            'buyer.email' => 'nullable|string|min:0|max:255',
+            'buyer.phone_number' => 'required|numeric|string|min:1',
+            'buyer.adress' => 'required',
+            'buyer.cnp' => 'required|string|min:1|max:10',
+            'buyer.seria_nr' => 'required|string|min:1|max:10',
+            'buyer.city' => 'required',
+            'buyer.seria' => 'required',
+            'buyer.identity_card_type' => 'required',
+            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
+            'product_type' => 'required',
+        ]);
 
-            $request->validate([
-                'buyer.first_name' => 'required|string|min:1|max:255',
-                'buyer.last_name' => 'required|string|min:1|max:255',
-                'buyer.email' => 'nullable|string|min:0|max:255',
-                'buyer.phone_number' => 'required|numeric|string|min:1|max:15',
-                'buyer.adress' => 'required',
-                'buyer.cnp' => 'required|string|min:1|max:10',
-                'buyer.seria_nr' => 'required|string|min:1|max:10',
-                'buyer.city' => 'required',
-                'buyer.seria' => 'required',
-                'buyer.identity_card_type' => 'required',
-                'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-                'product_type' => 'required',
-            ]);
-            
-            $data = $request->getData();
-            
+        $data = $request->all();
+        $buyer = Buyer::firstOrCreate($data['buyer'], ['cnp' => $data['buyer']['cnp']]);
+        $data['buyer'] = $buyer->id;
+        Order::create($data);
 
-            $buyer = Buyer::firstOrCreate($data->buyer);
-            $data->order->buyer = $buyer->id;
-            Order::create($data->order);
-
-            return redirect()->route('orders.order.index')
-                             ->with('success_message', 'Order was successfully added!');
-
-        } catch (Exception $exception) {
-
-            return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }
+        $response = redirect()->route('orders.order.index')
+                         ->with('success_message', 'Order was successfully added!');
+        if (array_key_exists('remember_me', $data))
+            $response = $response->withCookie(Cookie::forever('buyer', json_encode($data['buyer'])));
+        return $response;
     }
 
     /**

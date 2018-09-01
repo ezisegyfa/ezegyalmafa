@@ -257,6 +257,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create','OrdersController@create')
              ->name('orders.order.create');
 
+        Route::get('/createWithBuyer', 'OrdersController@createWithBuyer');
+
         Route::get('/show/{order}','OrdersController@show')
              ->name('orders.order.show')
              ->where('id', '[0-9]+');

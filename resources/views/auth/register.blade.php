@@ -14,7 +14,7 @@
                         @component('layouts.components.formInputTextRow',[
                             'name' => 'name',
                             'labelTextLanguageTitle' => 'Name',
-                            'oldValue' => 'name',
+                            'value' => old('name') ?? '',
                             'errors' => $errors
                         ])
                         @endcomponent
@@ -22,7 +22,7 @@
                         @component('layouts.components.formInputTextRow',[
                             'name' => 'email',
                             'labelTextLanguageTitle' => 'E-Mail Address',
-                            'oldValue' => 'email',
+                            'value' => old('email') ?? '',
                             'errors' => $errors
                         ])
                         @endcomponent
@@ -30,7 +30,8 @@
                         @component('layouts.components.formInputTextRow',[
                             'name' => 'password',
                             'labelTextLanguageTitle' => 'Password',
-                            'errors' => $errors
+                            'errors' => $errors,
+                            'value' => old('password') ?? ''
                         ])
                         @endcomponent
 
@@ -39,7 +40,8 @@
                             'id' => 'password-confirm',
                             'labelTextLanguageTitle' => 'Password confirmation',
                             'type' => 'password',
-                            'errors' => $errors
+                            'errors' => $errors,
+                            'value' => old('password_confirmation') ?? ''
                         ])
                         @endcomponent
 

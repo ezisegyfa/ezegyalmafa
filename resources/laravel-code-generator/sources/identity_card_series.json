@@ -51,7 +51,7 @@
             ],
             "data-value": null,
             "is-index": false,
-            "is-unique": false,
+            "is-unique": true,
             "is-primary": false,
             "comment": null,
             "is-nullable": false,

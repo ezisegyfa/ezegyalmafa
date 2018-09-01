@@ -15,14 +15,15 @@
                             'name' => 'email',
                             'labelTextLanguageTitle' => 'E-Mail Address',
                             'errors' => $errors,
-                            'oldValue' => 'email'
+                            'value' => old('email') ?? ''
                         ])
                         @endcomponent
 
                         @component('layouts.components.formInputTextRow',[
                             'name' => 'password',
                             'labelTextLanguageTitle' => 'Password',
-                            'errors' => $errors
+                            'errors' => $errors,
+                            'value' => old('password') ?? ''
                         ])
                         @endcomponent
 

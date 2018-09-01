@@ -26,7 +26,7 @@ class BuyerNotificationsFormRequest extends FormRequest
     {
         $rules = [
             'text' => 'required',
-            'score' => 'required|string|min:1',
+            'score' => 'required|numeric|min:-2147483648|max:2147483647',
             'type' => 'required',
             'buyer' => 'required',
     

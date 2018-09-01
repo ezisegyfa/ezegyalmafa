@@ -41,13 +41,13 @@
             "css-class": "",
             "options": {},
             "html-value": null,
-            "validation": "required|string|min:1|max:255",
+            "validation": "required|string|min:1|max:191",
             "is-on-index": true,
             "is-on-show": true,
             "is-on-form": true,
             "data-type": "string",
             "data-type-params": [
-                255
+                191
             ],
             "data-value": null,
             "is-index": false,
@@ -83,11 +83,11 @@
             "is-on-form": true,
             "data-type": "string",
             "data-type-params": [
-                255
+                191
             ],
             "data-value": null,
             "is-index": false,
-            "is-unique": false,
+            "is-unique": true,
             "is-primary": false,
             "comment": null,
             "is-nullable": false,
@@ -119,7 +119,7 @@
             "is-on-form": true,
             "data-type": "string",
             "data-type-params": [
-                255
+                191
             ],
             "data-value": null,
             "is-index": false,
@@ -149,7 +149,7 @@
             "css-class": "",
             "options": {},
             "html-value": null,
-            "validation": "nullable|string|min:0|max:100",
+            "validation": "required|string|min:1|max:100",
             "is-on-index": true,
             "is-on-show": true,
             "is-on-form": true,
@@ -162,7 +162,7 @@
             "is-unique": false,
             "is-primary": false,
             "comment": null,
-            "is-nullable": true,
+            "is-nullable": false,
             "is-header": false,
             "is-unsigned": false,
             "is-auto-increment": false,
@@ -189,7 +189,7 @@
             "is-on-index": false,
             "is-on-show": true,
             "is-on-form": false,
-            "data-type": "string",
+            "data-type": "timestamp",
             "data-type-params": [],
             "data-value": null,
             "is-index": false,
@@ -223,7 +223,7 @@
             "is-on-index": false,
             "is-on-show": true,
             "is-on-form": false,
-            "data-type": "string",
+            "data-type": "timestamp",
             "data-type-params": [],
             "data-value": null,
             "is-index": false,
