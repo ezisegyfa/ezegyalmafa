@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form id="login-form" aria-label="{{ __('Login') }}">
+                    <form id="login-form" method="POST" action="/login" aria-label="{{ __('Login') }}">
                         @csrf
 
                         @component('layouts.components.formInputTextRow',[
@@ -50,29 +50,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@include('postDataFunctions')
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function(){
-        var form = $('#login-form')
-        form.on('submit', function(e){
-            e.preventDefault()
-
-            postData = getFormData(form)
-            ajaxPostWithLog({
-                url : '/login',
-                data : postData,
-                success : function(e) {
-                    get('/home')
-                },
-                error : function(jqXhr, json, errorThrown) {
-                    postData.errors = jqXhr.errors
-                    post('/login', postData)
-                }
-            })
-        })
-    })
-</script>
 @endsection

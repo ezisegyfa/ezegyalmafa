@@ -55,16 +55,17 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-
+                            <th>Text</th>
+                            <th>Buyer</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($buyerNotifications as $buyerNotification)
                         <tr>
-
+                            <td> <a href="{{ url('/buyers/show/' . optional($buyerNotification->getBuyer)->id) }}">{{ optional($buyerNotification->getBuyer)->first_name . ' ' . optional($buyerNotification->getBuyer)->last_name }}</a> </td>
+                            <td> {{ $buyerNotification->text}} </td>
                             <td>
-
                                 <form method="POST" action="{!! route('buyer_notifications.buyer_notification.destroy', $buyerNotification->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}

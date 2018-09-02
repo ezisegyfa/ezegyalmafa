@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
+	.js('resources/assets/js/jquery.redirect.js', 'public/js')
 	.babel([
 		'resources/assets/js/helperFunctions.js',
 		'resources/assets/js/routeFunctions.js'

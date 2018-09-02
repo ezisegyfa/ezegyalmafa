@@ -36,12 +36,6 @@
                 <h4 class="mt-5 mb-5">Users</h4>
             </div>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('users.user.create') }}" class="btn btn-success" title="Create New User">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
-                </a>
-            </div>
-
         </div>
         
         @if(count($users) == 0)
@@ -80,9 +74,6 @@
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('users.user.show', $user->id ) }}" class="btn btn-info" title="Show User">
                                             <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
-                                        </a>
-                                        <a href="{{ route('users.user.edit', $user->id ) }}" class="btn btn-primary" title="Edit User">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete User" onclick="return confirm(&quot;Delete User?&quot;)">

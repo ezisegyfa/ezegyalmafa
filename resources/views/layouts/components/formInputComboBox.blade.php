@@ -3,9 +3,9 @@
 
     <div class="col-md-6">
         <div class="col-sm-3">
-            <select class="selectpicker">
-                @foreach($menuItems as $menuItem)
-                    <option>{{ $menuItem }}</option>
+            <select name="{{ $name }}" class="selectpicker">
+                @foreach($selectableItems as $item)
+                    <option>{{ $item }}</option>
                 @endforeach
             </select>
         </div>

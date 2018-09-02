@@ -6,7 +6,7 @@
 	'type' => 'text',
 	'value' =>  old('name', optional($notificationType)->name) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="255"',
+	'maxLength' => ' maxlength="191"',
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',

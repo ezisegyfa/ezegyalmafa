@@ -19,32 +19,32 @@
 </head>
 <body>
     <div id="app">
-        <div class="container col-12">
-            <div class="w-100">
+            <div class="row w-100">
                 @include('layouts.header')
             </div>
 
             <main class="row mt-3 mb-3">
-                <div class="col-2">
-                    @include('layouts.leftBar')
-                </div>
-                <div class="col-8"> 
-                    @yield('content')
-                </div>
-                <div class="col-2">
-                    @include('layouts.rightBar')
+                <div class="container w-100">
+                    <div class="col-2">
+                        @include('layouts.leftBar')
+                    </div>
+                    <div class="col-8"> 
+                        @yield('content')
+                    </div>
+                    <div class="col-2">
+                        @include('layouts.rightBar')
+                    </div>
                 </div>
             </main>
 
-            <div class="w-100 fixed-bottom">
+            <div class="row w-100 fixed-bottom">
                 @include('layouts.footer')
             </div>
-        </div>
     </div>
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.redirect.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
     @yield('scripts')
 </body>

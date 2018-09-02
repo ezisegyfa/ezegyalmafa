@@ -65,7 +65,7 @@
                     @foreach($transports as $transport)
                         <tr>
                             <td> {{ $transport->quantity}} </td>
-                            <td> <a href="{{ url('/orders/show/' . optional($transport->getOrder)->id) }}">{{ optional($transport->getOrder)->quantity }}</a> </td>
+                            <td> <a href="{{ url('/orders/show/' . optional($transport->getOrder)->id) }}">{{ optional($transport->getOrder)->getIdenitifier() }}</a> </td>
 
                             <td>
 

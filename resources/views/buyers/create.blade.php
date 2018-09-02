@@ -34,7 +34,7 @@
                 </ul>
             @endif
 
-            <form method="POST" accept-charset="UTF-8" id="create_buyer_form" name="create_buyer_form" class="form-horizontal">
+            <form method="POST" action="{{ route('buyers.buyer.store') }}" accept-charset="UTF-8" id="create_buyer_form" name="create_buyer_form" class="form-horizontal">
             {{ csrf_field() }}
             @include ('buyers.form', [
                                         'buyer' => null,
@@ -50,33 +50,4 @@
 
         </div>
     </div>
-
-@endsection
-
-@include('postDataFunctions')
-@section('scripts')
-<script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var form = $('#create_buyer_form')
-        form.on('submit', function(e){
-            e.preventDefault()
-
-            var postData = getFormData(form)
-            var redirectUrl = '{!! route('buyers.buyer.store') !!}'
-
-            ajaxPostWithLog({
-                url : redirectUrl,
-                data : postData,
-                success : function(e){
-                    get('/home')
-                },
-                error : function(jqXhr, json, errorThrown){
-                    postData.errors = jqXhr.errors
-                    post(redirectUrl, postData)
-                }
-            })
-        })
-    })
-</script>
 @endsection

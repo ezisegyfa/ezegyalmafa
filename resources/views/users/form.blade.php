@@ -53,11 +53,11 @@
 	'name' => 'remember_token',
 	'type' => 'text',
 	'value' =>  old('remember_token', optional($user)->remember_token) ,
-	'minLength' => ' minlength="1"',
+	'minLength' => '',
 	'maxLength' => ' maxlength="100"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
+	'required' => '',
 	'placeholder' => ' placeholder="Enter remember token here..."',
 	'step' => ''
 ])

@@ -57,7 +57,7 @@
             <dt>Quantity</dt>
             <dd>{{ $transport->quantity}}</dd>
             <dt>Order</dt>
-            <dd><a href="{{ url('/orders/show/' . optional($transport->getOrder)->id) }}">{{ optional($transport->getOrder)->quantity }}</a></dd>
+            <dd><a href="{{ url('/orders/show/' . optional($transport->getOrder)->id) }}">{{ optional($transport->getOrder)->getIdenitifier() }}</a></dd>
             <dt>Created At</dt>
             <dd>{{ $transport->created_at}}</dd>
             <dt>Updated At</dt>

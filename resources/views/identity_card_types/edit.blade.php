@@ -38,7 +38,7 @@
                 </ul>
             @endif
 
-            <form id="edit_identity_card_type_form" name="edit_identity_card_type_form" accept-charset="UTF-8" class="form-horizontal">
+            <form method="POST" action="{{ route('identity_card_types.identity_card_type.update', $identityCardType->id) }}" id="edit_identity_card_type_form" name="edit_identity_card_type_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
             @include ('identity_card_types.form', [
@@ -54,33 +54,4 @@
 
         </div>
     </div>
-
-@endsection
-
-@include('postDataFunctions')
-@section('scripts')
-<script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var form = $('#edit_identity_card_type_form')
-        form.on('submit', function(e){
-            e.preventDefault()
-
-            var postData = getFormData(form)
-            var redirectUrl = '{!! route('identity_card_types.identity_card_type.update', $identityCardType->id) !!}'
-
-            ajaxPostWithLog({
-                url : redirectUrl,
-                data : postData,
-                success : function(e){
-                    get('/home')
-                },
-                error : function(jqXhr, json, errorThrown){
-                    postData.errors = jqXhr.errors
-                    post(redirectUrl, postData)
-                }
-            })
-        })
-    })
-</script>
 @endsection

@@ -96,4 +96,9 @@ class Order extends Model
 
     }
 
+    public function getIdenitifier()
+    {
+        $buyer = $this->getBuyer;
+        return $buyer->first_name . ' ' . $buyer->last_name . ': ' . $this->created_at; 
+    }
 }

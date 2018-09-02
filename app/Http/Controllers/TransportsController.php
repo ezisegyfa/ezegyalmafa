@@ -30,8 +30,9 @@ class TransportsController extends Controller
      */
     public function create()
     {
-        $getOrders = Order::pluck('quantity','id')->all();
-        
+        $getOrders = collect(Order::all())->map(function($order){ 
+            return $order->getIdenitifier();
+        })->toArray();
         return view('transports.create', compact('getOrders'));
     }
 

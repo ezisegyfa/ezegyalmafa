@@ -32,7 +32,7 @@ class BuyerNotificationsController extends Controller
     public function create()
     {
         $getNotificationTypes = NotificationType::pluck('name','id')->all();
-$getBuyers = Buyer::pluck('first_name','id')->all();
+        $getBuyers = Buyer::pluck('first_name','id')->all();
         
         return view('buyer_notifications.create', compact('getNotificationTypes','getBuyers'));
     }

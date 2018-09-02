@@ -34,7 +34,7 @@
                 </ul>
             @endif
 
-            <form method="POST" accept-charset="UTF-8" id="create_order_form" name="create_order_form" class="form-horizontal">
+            <form method="POST" action="{{ route('orders.order.store') }}" accept-charset="UTF-8" id="create_order_form" name="create_order_form" class="form-horizontal">
             {{ csrf_field() }}
             @include ('orders.form', [
                                         'order' => null,
@@ -50,33 +50,4 @@
 
         </div>
     </div>
-
-@endsection
-
-@include('postDataFunctions')
-@section('scripts')
-<script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var form = $('#create_order_form')
-        form.on('submit', function(e){
-            e.preventDefault()
-
-            var postData = getFormData(form)
-            var redirectUrl = '{!! route('orders.order.store') !!}'
-
-            ajaxPostWithLog({
-                url : redirectUrl,
-                data : postData,
-                success : function(e){
-                    get('/home')
-                },
-                error : function(jqXhr, json, errorThrown){
-                    postData.errors = jqXhr.errors
-                    post(redirectUrl, postData)
-                }
-            })
-        })
-    })
-</script>
 @endsection
