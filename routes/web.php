@@ -336,6 +336,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/', 'TransportsController@store')
              ->name('transports.transport.store');
+
+        Route::get('/completeOrder/{order}', 'TransportsController@completeOrder')
+             ->name('transports.transport.completeOrder')
+             ->where('id', '[0-9]+');
                    
         Route::put('transport/{transport}', 'TransportsController@update')
              ->name('transports.transport.update')
@@ -364,4 +368,228 @@ Route::middleware(['auth'])->group(function () {
              ->where('id', '[0-9]+');
 
     });
+});
+
+Route::group(
+[
+    'prefix' => 'buyer_observations',
+], function () {
+
+    Route::get('/', 'BuyerObservationsController@index')
+         ->name('buyer_observations.buyer_observation.index');
+
+    Route::get('/create','BuyerObservationsController@create')
+         ->name('buyer_observations.buyer_observation.create');
+
+    Route::get('/show/{buyerObservation}','BuyerObservationsController@show')
+         ->name('buyer_observations.buyer_observation.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{buyerObservation}/edit','BuyerObservationsController@edit')
+         ->name('buyer_observations.buyer_observation.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'BuyerObservationsController@store')
+         ->name('buyer_observations.buyer_observation.store');
+               
+    Route::put('buyer_observation/{buyerObservation}', 'BuyerObservationsController@update')
+         ->name('buyer_observations.buyer_observation.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/buyer_observation/{buyerObservation}','BuyerObservationsController@destroy')
+         ->name('buyer_observations.buyer_observation.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+Route::group(
+[
+    'prefix' => 'car_types',
+], function () {
+
+    Route::get('/', 'CarTypesController@index')
+         ->name('car_types.car_type.index');
+
+    Route::get('/create','CarTypesController@create')
+         ->name('car_types.car_type.create');
+
+    Route::get('/show/{carType}','CarTypesController@show')
+         ->name('car_types.car_type.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{carType}/edit','CarTypesController@edit')
+         ->name('car_types.car_type.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'CarTypesController@store')
+         ->name('car_types.car_type.store');
+               
+    Route::put('car_type/{carType}', 'CarTypesController@update')
+         ->name('car_types.car_type.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/car_type/{carType}','CarTypesController@destroy')
+         ->name('car_types.car_type.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+Route::group(
+[
+    'prefix' => 'cars',
+], function () {
+
+    Route::get('/', 'CarsController@index')
+         ->name('cars.car.index');
+
+    Route::get('/create','CarsController@create')
+         ->name('cars.car.create');
+
+    Route::get('/show/{car}','CarsController@show')
+         ->name('cars.car.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{car}/edit','CarsController@edit')
+         ->name('cars.car.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'CarsController@store')
+         ->name('cars.car.store');
+               
+    Route::put('car/{car}', 'CarsController@update')
+         ->name('cars.car.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/car/{car}','CarsController@destroy')
+         ->name('cars.car.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+Route::group(
+[
+    'prefix' => 'drivers',
+], function () {
+
+    Route::get('/', 'DriversController@index')
+         ->name('drivers.driver.index');
+
+    Route::get('/create','DriversController@create')
+         ->name('drivers.driver.create');
+
+    Route::get('/show/{driver}','DriversController@show')
+         ->name('drivers.driver.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{driver}/edit','DriversController@edit')
+         ->name('drivers.driver.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'DriversController@store')
+         ->name('drivers.driver.store');
+               
+    Route::put('driver/{driver}', 'DriversController@update')
+         ->name('drivers.driver.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/driver/{driver}','DriversController@destroy')
+         ->name('drivers.driver.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+Route::group(
+[
+    'prefix' => 'observation_types',
+], function () {
+
+    Route::get('/', 'ObservationTypesController@index')
+         ->name('observation_types.observation_type.index');
+
+    Route::get('/create','ObservationTypesController@create')
+         ->name('observation_types.observation_type.create');
+
+    Route::get('/show/{observationType}','ObservationTypesController@show')
+         ->name('observation_types.observation_type.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{observationType}/edit','ObservationTypesController@edit')
+         ->name('observation_types.observation_type.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'ObservationTypesController@store')
+         ->name('observation_types.observation_type.store');
+               
+    Route::put('observation_type/{observationType}', 'ObservationTypesController@update')
+         ->name('observation_types.observation_type.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/observation_type/{observationType}','ObservationTypesController@destroy')
+         ->name('observation_types.observation_type.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+Route::group(
+[
+    'prefix' => 'migrations',
+], function () {
+
+    Route::get('/', 'MigrationsController@index')
+         ->name('migrations.migration.index');
+
+    Route::get('/create','MigrationsController@create')
+         ->name('migrations.migration.create');
+
+    Route::get('/show/{migration}','MigrationsController@show')
+         ->name('migrations.migration.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{migration}/edit','MigrationsController@edit')
+         ->name('migrations.migration.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'MigrationsController@store')
+         ->name('migrations.migration.store');
+               
+    Route::put('migration/{migration}', 'MigrationsController@update')
+         ->name('migrations.migration.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/migration/{migration}','MigrationsController@destroy')
+         ->name('migrations.migration.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+Route::group(
+[
+    'prefix' => 'settlements',
+], function () {
+
+    Route::get('/', 'SettlementsController@index')
+         ->name('settlements.settlement.index');
+
+    Route::get('/create','SettlementsController@create')
+         ->name('settlements.settlement.create');
+
+    Route::get('/show/{settlement}','SettlementsController@show')
+         ->name('settlements.settlement.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{settlement}/edit','SettlementsController@edit')
+         ->name('settlements.settlement.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'SettlementsController@store')
+         ->name('settlements.settlement.store');
+               
+    Route::put('settlement/{settlement}', 'SettlementsController@update')
+         ->name('settlements.settlement.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/settlement/{settlement}','SettlementsController@destroy')
+         ->name('settlements.settlement.destroy')
+         ->where('id', '[0-9]+');
+
 });

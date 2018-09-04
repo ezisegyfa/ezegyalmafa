@@ -39,16 +39,30 @@ class recreateResources extends Command
     public function handle()
     {
         $this->deleteCodeGeneratorJsonFiles();
+        $this->deleteControllerFiles();
+        $this->deleteRequestFiles();
+        $this->deleteModelFiles();
         $this->call('make:resources-map');
         $this->call('create:mapped-resources', ['--force' => true]);
     }
 
     public function deleteCodeGeneratorJsonFiles()
     {
-        $fileUrls = glob(base_path() . '\\resources\\laravel-code-generator\\sources\\*.json');
-        foreach ($fileUrls as $url) {
-            chmod($url, 0775);
-            unlink($url);
-        }
+        deleteFilesFromFolder(base_path() . '\\resources\\laravel-code-generator\\sources', 'json');
+    }
+
+    public function deleteControllerFiles()
+    {
+        deleteFilesFromFolder(base_path() . '\\app\\Http\\Controllers', 'php');
+    }
+
+    protected function deleteRequestFiles()
+    {
+        deleteFilesFromFolder(base_path() . '\\app\\Http\\Requests', 'php');
+    }
+
+    protected function deleteModelFiles()
+    {
+        deleteFilesFromFolder(base_path() . '\\app\\Models', 'php');
     }
 }

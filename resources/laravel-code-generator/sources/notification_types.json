@@ -73,14 +73,14 @@
     ],
     "relations": [
         {
-            "name": "getBuyerNotification",
+            "name": "getBuyer",
             "type": "hasOne",
             "params": [
-                "App\\Models\\BuyerNotification",
-                "type",
+                "App\\Models\\Buyer",
+                "notification_type",
                 "id"
             ],
-            "field": "text"
+            "field": "first_name"
         }
     ],
     "indexes": [],

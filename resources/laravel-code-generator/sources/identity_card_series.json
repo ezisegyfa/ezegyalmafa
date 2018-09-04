@@ -77,7 +77,7 @@
             "type": "hasOne",
             "params": [
                 "App\\Models\\Buyer",
-                "seria",
+                "identity_seria_type",
                 "id"
             ],
             "field": "first_name"

@@ -29,7 +29,8 @@ class Transport extends Model
      */
     protected $fillable = [
                   'quantity',
-                  'order'
+                  'order',
+                  'uploader'
               ];
 
     /**
@@ -52,6 +53,14 @@ class Transport extends Model
     public function getOrder()
     {
         return $this->belongsTo('App\Models\Order','order','id');
+    }
+
+    /**
+     * Get the getUser for this model.
+     */
+    public function getUser()
+    {
+        return $this->belongsTo('App\User','uploader','id');
     }
 
 

@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Name',
+    'title' => __('view.Name'),
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
@@ -10,7 +10,6 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter name here..."',
 	'step' => ''
 ])
 @endcomponent

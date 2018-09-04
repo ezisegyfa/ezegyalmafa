@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Name',
+    'title' => __('view.Name'),
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
@@ -10,13 +10,12 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter name here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Email',
+    'title' => __('view.Email'),
 	'cssClass' => '',
 	'name' => 'email',
 	'type' => 'text',
@@ -26,13 +25,12 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter email here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Password',
+    'title' => __('view.Password'),
 	'cssClass' => '',
 	'name' => 'password',
 	'type' => 'text',
@@ -42,13 +40,12 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter password here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Remember Token',
+    'title' => __('view.Remember Token'),
 	'cssClass' => '',
 	'name' => 'remember_token',
 	'type' => 'text',
@@ -58,7 +55,6 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => '',
-	'placeholder' => ' placeholder="Enter remember token here..."',
 	'step' => ''
 ])
 @endcomponent

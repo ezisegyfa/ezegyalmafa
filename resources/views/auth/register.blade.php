@@ -10,45 +10,38 @@
 
                 @component('layouts.components.formInputTextRow',[
                     'name' => 'name',
-                    'labelTextLanguageTitle' => 'Name',
-                    'value' => old('name') ?? '',
+                    'title' => 'Name',
                     'errors' => $errors
                 ])
                 @endcomponent
 
                 @component('layouts.components.formInputTextRow',[
                     'name' => 'email',
-                    'labelTextLanguageTitle' => 'E-Mail Address',
-                    'value' => old('email') ?? '',
+                    'title' => 'E-Mail Address',
                     'errors' => $errors
                 ])
                 @endcomponent
 
                 @component('layouts.components.formInputTextRow',[
                     'name' => 'password',
-                    'labelTextLanguageTitle' => 'Password',
-                    'errors' => $errors,
-                    'value' => old('password') ?? ''
+                    'title' => 'Password',
+                    'errors' => $errors
                 ])
                 @endcomponent
 
                 @component('layouts.components.formInputTextRow',[
                     'title' => 'password confirmation',
                     'name' => 'password_confirmation',
-                    'id' => 'password-confirm',
-                    'labelTextLanguageTitle' => 'Password confirmation',
+                    'title' => 'Password confirmation',
                     'type' => 'password',
-                    'errors' => $errors,
-                    'value' => old('password_confirmation') ?? ''
+                    'errors' => $errors
                 ])
                 @endcomponent
 
                 @component('layouts.components.formInputTextRow',[
-                    'title' => 'access code',
+                    'title' => 'Access code',
                     'name' => 'access_code',
-                    'labelTextLanguageTitle' => 'Access code',
-                    'errors' => $errors,
-                    'value' => old('access_code') ?? ''
+                    'errors' => $errors
                 ])
                 @endcomponent
 

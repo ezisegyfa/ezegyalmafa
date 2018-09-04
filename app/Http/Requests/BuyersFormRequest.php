@@ -28,13 +28,15 @@ class BuyersFormRequest extends FormRequest
             'first_name' => 'required|string|min:1|max:255',
             'last_name' => 'required|string|min:1|max:255',
             'email' => 'nullable|string|min:0|max:255',
-            'phone_number' => 'required|numeric|string|min:1',
-            'adress' => 'required',
-            'cnp' => 'required|string|numeric|min:1',
-            'seria_nr' => 'required|string|numeric|min:1',
-            'city' => 'required',
-            'seria' => 'required',
-            'identity_card_type' => 'required',
+            'phone_number' => 'nullable|numeric|string|digits:10',
+            'adress' => 'nullable',
+            'cnp' => 'nullable|string|numeric|digits:10',
+            'identity_seria_nr' => 'nullable|string|numeric|digits:6',
+            'settlement' => 'required',
+            'identity_seria_type' => 'nullable',
+            'identity_card_type' => 'nullable',
+            'uploader' => 'required',
+            'notification_type' => 'nullable',
     
         ];
 
@@ -49,7 +51,7 @@ class BuyersFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['first_name','last_name','email','phone_number','adress','cnp','seria_nr','city','seria','identity_card_type']);
+        $data = $this->only(['first_name','last_name','email','phone_number','adress','cnp','identity_seria_nr','settlement','identity_seria_type','identity_card_type','uploader','notification_type']);
 
 
 

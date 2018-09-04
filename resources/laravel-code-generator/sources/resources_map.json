@@ -1,8 +1,8 @@
 [
     {
-        "model-name": "BuyerNotification",
-        "resource-file": "buyer_notifications.json",
-        "table-name": "buyer_notifications",
+        "model-name": "BuyerObservation",
+        "resource-file": "buyer_observations.json",
+        "table-name": "buyer_observations",
         "with-migration": true
     },
     {
@@ -12,15 +12,27 @@
         "with-migration": true
     },
     {
-        "model-name": "City",
-        "resource-file": "cities.json",
-        "table-name": "cities",
+        "model-name": "CarType",
+        "resource-file": "car_types.json",
+        "table-name": "car_types",
+        "with-migration": true
+    },
+    {
+        "model-name": "Car",
+        "resource-file": "cars.json",
+        "table-name": "cars",
         "with-migration": true
     },
     {
         "model-name": "County",
         "resource-file": "counties.json",
         "table-name": "counties",
+        "with-migration": true
+    },
+    {
+        "model-name": "Driver",
+        "resource-file": "drivers.json",
+        "table-name": "drivers",
         "with-migration": true
     },
     {
@@ -48,6 +60,12 @@
         "with-migration": true
     },
     {
+        "model-name": "ObservationType",
+        "resource-file": "observation_types.json",
+        "table-name": "observation_types",
+        "with-migration": true
+    },
+    {
         "model-name": "Order",
         "resource-file": "orders.json",
         "table-name": "orders",
@@ -57,6 +75,12 @@
         "model-name": "ProductType",
         "resource-file": "product_types.json",
         "table-name": "product_types",
+        "with-migration": true
+    },
+    {
+        "model-name": "Settlement",
+        "resource-file": "settlements.json",
+        "table-name": "settlements",
         "with-migration": true
     },
     {

@@ -51,11 +51,11 @@ class NotificationType extends Model
     protected $casts = [];
     
     /**
-     * Get the getBuyerNotification for this model.
+     * Get the getBuyer for this model.
      */
-    public function getBuyerNotification()
+    public function getBuyer()
     {
-        return $this->hasOne('App\Models\BuyerNotification','type','id');
+        return $this->hasOne('App\Models\Buyer','notification_type','id');
     }
 
 

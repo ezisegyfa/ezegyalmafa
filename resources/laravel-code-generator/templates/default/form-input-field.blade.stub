@@ -1,5 +1,5 @@
 @component('layouts.components.formInputTextRow', [
-        'title' => '[% field_title %]',
+    'title' => __('view.[% field_title %]'),
 	'cssClass' => '[% css_class %]',
 	'name' => '[% field_name %]',
 	'type' => '[% field_type %]',
@@ -9,7 +9,6 @@
 	'minValue' => '[% min_value %]',
 	'maxValue' => '[% max_value %]',
 	'required' => '[% required_field %]',
-	'placeholder' => '[% placeholder %]',
 	'step' => '[% step %]'
 ])
 @endcomponent

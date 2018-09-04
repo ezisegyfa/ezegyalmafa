@@ -1,2 +1,2 @@
-            <dt>[% field_title %]</dt>
+            <dt>@lang('view.[% field_title %]')</dt>
             <dd>[% field_value %]</dd>

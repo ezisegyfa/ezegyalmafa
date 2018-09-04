@@ -7,12 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Buyer extends Model
 {
     
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+
     /**
      * The database table used by the model.
      *
@@ -39,10 +34,12 @@ class Buyer extends Model
                   'phone_number',
                   'adress',
                   'cnp',
-                  'seria_nr',
-                  'city',
-                  'seria',
-                  'identity_card_type'
+                  'identity_seria_nr',
+                  'settlement',
+                  'identity_seria_type',
+                  'identity_card_type',
+                  'uploader',
+                  'notification_type'
               ];
 
     /**
@@ -60,11 +57,11 @@ class Buyer extends Model
     protected $casts = [];
     
     /**
-     * Get the getCity for this model.
+     * Get the getSettlement for this model.
      */
-    public function getCity()
+    public function getSettlement()
     {
-        return $this->belongsTo('App\Models\City','city','id');
+        return $this->belongsTo('App\Models\Settlement','settlement','id');
     }
 
     /**
@@ -72,7 +69,7 @@ class Buyer extends Model
      */
     public function getIdentityCardSeries()
     {
-        return $this->belongsTo('App\Models\IdentityCardSeries','seria','id');
+        return $this->belongsTo('App\Models\IdentityCardSeries','identity_seria_type','id');
     }
 
     /**
@@ -84,11 +81,27 @@ class Buyer extends Model
     }
 
     /**
-     * Get the getBuyerNotification for this model.
+     * Get the getUser for this model.
      */
-    public function getBuyerNotification()
+    public function getUser()
     {
-        return $this->hasOne('App\Models\BuyerNotification','buyer','id');
+        return $this->belongsTo('App\User','uploader','id');
+    }
+
+    /**
+     * Get the getNotificationType for this model.
+     */
+    public function getNotificationType()
+    {
+        return $this->belongsTo('App\Models\NotificationType','notification_type','id');
+    }
+
+    /**
+     * Get the getBuyerObservation for this model.
+     */
+    public function getBuyerObservation()
+    {
+        return $this->hasOne('App\Models\BuyerObservation','buyer','id');
     }
 
     /**
@@ -100,5 +113,28 @@ class Buyer extends Model
     }
 
 
+    /**
+     * Get created_at in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function CreatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
+
+    }
+
+    /**
+     * Get updated_at in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function UpdatedAtAttribute($value)
+    {
+        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
+
+    }
 
 }

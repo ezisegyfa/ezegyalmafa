@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Quantity',
+    'title' => __('view.Quantity'),
 	'cssClass' => '',
 	'name' => 'quantity',
 	'type' => 'number',
@@ -10,20 +10,29 @@
 	'minValue' => ' min="-2147483648"',
 	'maxValue' => ' max="2147483647"',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter quantity here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => 'Order',
+    'title' => __('view.Order'),
     'cssClass' => '',
     'name' => 'order',
+	'value' =>  old('order', optional($transport)->order) ,
     'multiple' => '',
     'required' => ' required="true"',
-    'placeholder' => 'Enter order here...',
-    'fieldItems' => $getOrders,
-    'value' => old('order', optional($transport)->order ?: '$key')
+    'fieldItems' => $getOrders
+])
+@endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Uploader'),
+    'cssClass' => '',
+    'name' => 'uploader',
+	'value' =>  old('uploader', optional($transport)->uploader) ,
+    'multiple' => '',
+    'required' => ' required="true"',
+    'fieldItems' => $getUsers
 ])
 @endcomponent
 

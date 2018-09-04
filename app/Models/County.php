@@ -51,11 +51,11 @@ class County extends Model
     protected $casts = [];
     
     /**
-     * Get the getCity for this model.
+     * Get the getSettlement for this model.
      */
-    public function getCity()
+    public function getSettlement()
     {
-        return $this->hasOne('App\Models\City','county','id');
+        return $this->hasOne('App\Models\Settlement','county','id');
     }
 
 

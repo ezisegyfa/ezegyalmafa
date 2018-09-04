@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use App\User;
 use App\Models\Order;
 use App\Models\Buyer;
+use App\Models\Driver;
+use App\Models\Settlement;
 use App\Models\ProductType;
-use App\Models\IdentityCardType;
-use App\Models\IdentityCardSeries;
-use App\Models\City;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrdersFormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Exception;
 
@@ -24,7 +24,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('getbuyer','getproducttype')->paginate(25);
+        $orders = Order::with('getbuyer','getproducttype','getuser','getsettlement','getcar','getdriver')->paginate(25);
 
         return view('orders.index', compact('orders'));
     }
@@ -36,10 +36,14 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        $getBuyers = Buyer::pluck('first_name','id')->all();
-        $getProductTypes = ProductType::pluck('name','id')->all();
+        $getBuyers = Buyer::pluck('email','id')->all();
+$getProductTypes = ProductType::pluck('name','id')->all();
+$getUsers = User::pluck('email','id')->all();
+$getSettlements = Settlement::pluck('name','id')->all();
+$getCars = Car::pluck('license_plate_number','id')->all();
+$getDrivers = $this->getDriverIdentifiers();
         
-        return view('orders.create', compact('getBuyers','getProductTypes'));
+        return view('orders.create', compact('getBuyers','getProductTypes','getUsers','getSettlements','getCars','getDrivers'));
     }
 
     /**
@@ -116,7 +120,7 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        $order = Order::with('getbuyer','getproducttype')->findOrFail($id);
+        $order = Order::with('getbuyer','getproducttype','getuser','getsettlement','getcar','getdriver')->findOrFail($id);
 
         return view('orders.show', compact('order'));
     }
@@ -131,10 +135,14 @@ class OrdersController extends Controller
     public function edit($id)
     {
         $order = Order::findOrFail($id);
-        $getBuyers = Buyer::pluck('first_name','id')->all();
-        $getProductTypes = ProductType::pluck('name','id')->all();
+        $getBuyers = Buyer::pluck('email','id')->all();
+$getProductTypes = ProductType::pluck('name','id')->all();
+$getUsers = User::pluck('email','id')->all();
+$getSettlements = Settlement::pluck('name','id')->all();
+$getCars = Car::pluck('license_plate_number','id')->all();
+$getDrivers = $this->getDriverIdentifiers();
 
-        return view('orders.edit', compact('order','getBuyers','getProductTypes'));
+        return view('orders.edit', compact('order','getBuyers','getProductTypes','getUsers','getSettlements','getCars','getDrivers'));
     }
 
     /**
@@ -185,5 +193,14 @@ class OrdersController extends Controller
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
+    }
+
+    public function getDriverIdentifiers()
+    {
+        $driverIdentifiers = array();
+        collect(Driver::all())->each(function($driver, $key) use(&$driverIdentifiers){ 
+            $driverIdentifiers[$driver->id] = $driver->getIdentifier();
+        });
+        return $driverIdentifiers;
     }
 }

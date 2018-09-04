@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'First Name',
+    'title' => __('view.First Name'),
 	'cssClass' => '',
 	'name' => 'first_name',
 	'type' => 'text',
@@ -10,13 +10,12 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter first name here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Last Name',
+    'title' => __('view.Last Name'),
 	'cssClass' => '',
 	'name' => 'last_name',
 	'type' => 'text',
@@ -26,13 +25,12 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter last name here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Email',
+    'title' => __('view.Email'),
 	'cssClass' => '',
 	'name' => 'email',
 	'type' => 'text',
@@ -42,106 +40,120 @@
 	'minValue' => '',
 	'maxValue' => '',
 	'required' => '',
-	'placeholder' => ' placeholder="Enter email here..."',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Phone Number',
+    'title' => __('view.Phone Number'),
 	'cssClass' => '',
 	'name' => 'phone_number',
 	'type' => 'text',
 	'value' =>  old('phone_number', optional($buyer)->phone_number) ,
 	'minLength' => '',
 	'maxLength' => '',
-	'minValue' => ' min="1"',
-	'maxValue' => ' max="15"',
-	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter phone number here..."',
+	'minValue' => ' min="0"',
+	'maxValue' => ' max="10"',
+	'required' => '',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextAreaField', [
-    'title' => 'Adress',
+    'title' => __('view.Adress'),
 	'cssClass' => '',
 	'name' => 'adress',
+	'value' =>  old('adress', optional($buyer)->adress) ,
 	'minLength' => '',
 	'maxLength' => '',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter adress here..."',
-	'value' =>  old('adress', optional($buyer)->adress) 
+	'required' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Cnp',
+    'title' => __('view.Cnp'),
 	'cssClass' => '',
 	'name' => 'cnp',
 	'type' => 'text',
 	'value' =>  old('cnp', optional($buyer)->cnp) ,
-	'minLength' => ' minlength="1"',
+	'minLength' => '',
 	'maxLength' => ' maxlength="10"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter cnp here..."',
+	'required' => '',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-        'title' => 'Seria Nr',
+    'title' => __('view.Identity Seria Nr'),
 	'cssClass' => '',
-	'name' => 'seria_nr',
+	'name' => 'identity_seria_nr',
 	'type' => 'text',
-	'value' =>  old('seria_nr', optional($buyer)->seria_nr) ,
-	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="10"',
+	'value' =>  old('identity_seria_nr', optional($buyer)->identity_seria_nr) ,
+	'minLength' => '',
+	'maxLength' => ' maxlength="6"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
-	'placeholder' => ' placeholder="Enter seria nr here..."',
+	'required' => '',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => 'City',
+    'title' => __('view.Settlement'),
     'cssClass' => '',
-    'name' => 'city',
+    'name' => 'settlement',
+	'value' =>  old('settlement', optional($buyer)->settlement) ,
     'multiple' => '',
     'required' => ' required="true"',
-    'placeholder' => 'Enter city here...',
-    'fieldItems' => $getCities,
-    'value' => old('city', optional($buyer)->city ?: '$key')
+    'fieldItems' => $getSettlements
 ])
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => 'Seria',
+    'title' => __('view.Identity Seria Type'),
     'cssClass' => '',
-    'name' => 'seria',
+    'name' => 'identity_seria_type',
+	'value' =>  old('identity_seria_type', optional($buyer)->identity_seria_type) ,
     'multiple' => '',
-    'required' => ' required="true"',
-    'placeholder' => 'Enter seria here...',
-    'fieldItems' => $getIdentityCardSeries,
-    'value' => old('seria', optional($buyer)->seria ?: '$key')
+    'required' => '',
+    'fieldItems' => $getIdentityCardSeries
 ])
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => 'Identity Card Type',
+    'title' => __('view.Identity Card Type'),
     'cssClass' => '',
     'name' => 'identity_card_type',
+	'value' =>  old('identity_card_type', optional($buyer)->identity_card_type) ,
+    'multiple' => '',
+    'required' => '',
+    'fieldItems' => $getIdentityCardTypes
+])
+@endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Uploader'),
+    'cssClass' => '',
+    'name' => 'uploader',
+	'value' =>  old('uploader', optional($buyer)->uploader) ,
     'multiple' => '',
     'required' => ' required="true"',
-    'placeholder' => 'Enter identity card type here...',
-    'fieldItems' => $getIdentityCardTypes,
-    'value' => old('identity_card_type', optional($buyer)->identity_card_type ?: '$key')
+    'fieldItems' => $getUsers
+])
+@endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Notification Type'),
+    'cssClass' => '',
+    'name' => 'notification_type',
+	'value' =>  old('notification_type', optional($buyer)->notification_type) ,
+    'multiple' => '',
+    'required' => '',
+    'fieldItems' => $getNotificationTypes
 ])
 @endcomponent
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Models\Order;
 use App\Models\Transport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransportsFormRequest;
+use Auth;
 use Exception;
 
 class TransportsController extends Controller
@@ -18,9 +20,10 @@ class TransportsController extends Controller
      */
     public function index()
     {
-        $transports = Transport::with('getorder')->paginate(25);
+        $transports = Transport::with('getorder','getuser')->paginate(25);
+        $orders = Order::with('getbuyer','getproducttype','getuser','getsettlement','getcar','getdriver')->paginate(25);
 
-        return view('transports.index', compact('transports'));
+        return view('transports.index', compact('transports', 'orders'));
     }
 
     /**
@@ -30,10 +33,10 @@ class TransportsController extends Controller
      */
     public function create()
     {
-        $getOrders = collect(Order::all())->map(function($order){ 
-            return $order->getIdenitifier();
-        })->toArray();
-        return view('transports.create', compact('getOrders'));
+        $getOrders = $this->getOrderIdentifiers();
+        $getUsers = User::pluck('email','id')->all();
+        
+        return view('transports.create', compact('getOrders','getUsers'));
     }
 
     /**
@@ -55,10 +58,23 @@ class TransportsController extends Controller
                              ->with('success_message', 'Transport was successfully added!');
 
         } catch (Exception $exception) {
-
+            dd($exception->getMessage());
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
+    }
+
+    public function completeOrder($id)
+    {
+        $orderToComplete = Order::findOrFail($id);
+        $newTransportRawData = [
+            'quantity' => $orderToComplete->quantity,
+            'order' => $orderToComplete->id,
+            'uploader' => Auth::user()->id,
+        ];
+        Transport::create($newTransportRawData);
+        return redirect()->route('transports.transport.index')
+                             ->with('success_message', 'Transport was successfully added!');
     }
 
     /**
@@ -70,7 +86,7 @@ class TransportsController extends Controller
      */
     public function show($id)
     {
-        $transport = Transport::with('getorder')->findOrFail($id);
+        $transport = Transport::with('getorder','getuser')->findOrFail($id);
 
         return view('transports.show', compact('transport'));
     }
@@ -85,9 +101,10 @@ class TransportsController extends Controller
     public function edit($id)
     {
         $transport = Transport::findOrFail($id);
-        $getOrders = Order::pluck('quantity','id')->all();
+        $getOrders = $this->getOrderIdentifiers();
+$getUsers = User::pluck('email','id')->all();
 
-        return view('transports.edit', compact('transport','getOrders'));
+        return view('transports.edit', compact('transport','getOrders','getUsers'));
     }
 
     /**
@@ -140,6 +157,12 @@ class TransportsController extends Controller
         }
     }
 
-
-
+    public function getOrderIdentifiers()
+    {
+        $orderIdentifiers = array();
+        collect(Order::all())->each(function($order, $key) use(&$orderIdentifiers){ 
+            $orderIdentifiers[$order->id] = $order->getIdenitifier();
+        });
+        return $orderIdentifiers;
+    }
 }

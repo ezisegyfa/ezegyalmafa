@@ -26,21 +26,22 @@
 
         <div class="btn-group btn-group-sm pull-right" role="group">
             <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back to menu</span>
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.BackToMenu')</span>
             </a>
         </div>
 
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">Users</h4>
+                <h4 class="mt-3 mb-3">@lang('view.Users')</h4>
+            </div>
             </div>
 
         </div>
         
         @if(count($users) == 0)
             <div class="panel-body text-center">
-                <h4>No Users Available!</h4>
+                <h4>@lang('view.No Users available!')</h4>
             </div>
         @else
         <div class="panel-body panel-body-with-table">
@@ -49,10 +50,10 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Remember Token</th>
+                            <th>@lang('view.Name')</th>
+                            <th>@lang('view.Email')</th>
+                            <th>@lang('view.Password')</th>
+                            <th>@lang('view.Remember Token')</th>
 
                             <th></th>
                         </tr>
@@ -73,11 +74,11 @@
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('users.user.show', $user->id ) }}" class="btn btn-info" title="Show User">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">@lang('view.Show')</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete User" onclick="return confirm(&quot;Delete User?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">@lang('view.Delete')</span>
                                         </button>
                                     </div>
 

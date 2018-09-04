@@ -73,14 +73,14 @@
     ],
     "relations": [
         {
-            "name": "getCity",
+            "name": "getSettlement",
             "type": "hasOne",
             "params": [
-                "App\\Models\\City",
+                "App\\Models\\Settlement",
                 "county",
                 "id"
             ],
-            "field": "name"
+            "field": "id"
         }
     ],
     "indexes": [],

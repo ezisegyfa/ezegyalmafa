@@ -6,23 +6,24 @@
   
         <div class="btn-group btn-group-sm pull-right" role="group">
             <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back to menu</span>
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.BackToMenu')</span>
             </a>
         </div>
 
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">{{ !empty($title) ? $title : 'Transport' }}</h4>
+                <h4 class="mt-3 mb-3">@lang('view.Transport')</h4>
             </div>
-            <div class="btn-group btn-group-sm pull-right" role="group">
+
+            <div class="btn-group btn-group-sm pull-right mb-3" role="group">
 
                 <a href="{{ route('transports.transport.index') }}" class="btn btn-primary" title="Show All Transport">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">Show all</span>
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.ShowAll')</span>
                 </a>
 
                 <a href="{{ route('transports.transport.create') }}" class="btn btn-success" title="Create New Transport">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">@lang('view.Create')</span>
                 </a>
 
             </div>
@@ -47,7 +48,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Update">
+                        <input class="btn btn-primary" type="submit" value="@lang('view.Update')">
                     </div>
                 </div>
             </form>

@@ -49,6 +49,53 @@ class User extends Authenticatable
      */
     protected $casts = [];
     
+    /**
+     * Get the getBuyerObservation for this model.
+     */
+    public function getBuyerObservation()
+    {
+        return $this->hasOne('App\Models\BuyerObservation','uploader','id');
+    }
+
+    /**
+     * Get the getBuyer for this model.
+     */
+    public function getBuyer()
+    {
+        return $this->hasOne('App\Models\Buyer','uploader','id');
+    }
+
+    /**
+     * Get the getCar for this model.
+     */
+    public function getCar()
+    {
+        return $this->hasOne('App\Models\Car','uploader','id');
+    }
+
+    /**
+     * Get the getDriver for this model.
+     */
+    public function getDriver()
+    {
+        return $this->hasOne('App\Models\Driver','uploader','id');
+    }
+
+    /**
+     * Get the getOrder for this model.
+     */
+    public function getOrder()
+    {
+        return $this->hasOne('App\Models\Order','uploader','id');
+    }
+
+    /**
+     * Get the getTransport for this model.
+     */
+    public function getTransport()
+    {
+        return $this->hasOne('App\Models\Transport','uploader','id');
+    }
 
 
     /**

@@ -1,7 +1,4 @@
-<?php
-    $hasError = ($errors and $errors->has($name));
-?>
-@if ($hasError)
+@if ($errors && $errors->has($name))
     <span class="invalid-feedback">
         <strong>{{ $errors->first($name) }}</strong>
     </span>

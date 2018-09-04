@@ -30,7 +30,12 @@ class Order extends Model
     protected $fillable = [
                   'quantity',
                   'buyer',
-                  'product_type'
+                  'product_type',
+                  'uploader',
+                  'city',
+                  'price',
+                  'car',
+                  'driver'
               ];
 
     /**
@@ -61,6 +66,38 @@ class Order extends Model
     public function getProductType()
     {
         return $this->belongsTo('App\Models\ProductType','product_type','id');
+    }
+
+    /**
+     * Get the getUser for this model.
+     */
+    public function getUser()
+    {
+        return $this->belongsTo('App\User','uploader','id');
+    }
+
+    /**
+     * Get the getSettlement for this model.
+     */
+    public function getSettlement()
+    {
+        return $this->belongsTo('App\Models\Settlement','city','id');
+    }
+
+    /**
+     * Get the getCar for this model.
+     */
+    public function getCar()
+    {
+        return $this->belongsTo('App\Models\Car','car','id');
+    }
+
+    /**
+     * Get the getDriver for this model.
+     */
+    public function getDriver()
+    {
+        return $this->belongsTo('App\Models\Driver','driver','id');
     }
 
     /**

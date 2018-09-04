@@ -143,42 +143,6 @@
             "on-update": null
         },
         {
-            "name": "remember_token",
-            "labels": "Remember Token",
-            "html-type": "text",
-            "css-class": "",
-            "options": {},
-            "html-value": null,
-            "validation": "nullable|string|min:0|max:100",
-            "is-on-index": true,
-            "is-on-show": true,
-            "is-on-form": true,
-            "data-type": "string",
-            "data-type-params": [
-                100
-            ],
-            "data-value": null,
-            "is-index": false,
-            "is-unique": false,
-            "is-primary": false,
-            "comment": null,
-            "is-nullable": true,
-            "is-header": false,
-            "is-unsigned": false,
-            "is-auto-increment": false,
-            "is-inline-options": false,
-            "is-date": false,
-            "date-format": "",
-            "cast-as": "",
-            "placeholder": "Enter remember token here...",
-            "delimiter": "; ",
-            "range": [],
-            "foreign-relation": null,
-            "foreign-constraint": null,
-            "on-store": null,
-            "on-update": null
-        },
-        {
             "name": "created_at",
             "labels": "Created At",
             "html-type": "text",
@@ -245,9 +209,106 @@
             "foreign-constraint": null,
             "on-store": null,
             "on-update": null
+        },
+        {
+            "name": "remember_token",
+            "labels": "Remember Token",
+            "html-type": "text",
+            "css-class": "",
+            "options": {},
+            "html-value": null,
+            "validation": "nullable|string|min:0|max:100",
+            "is-on-index": true,
+            "is-on-show": true,
+            "is-on-form": true,
+            "data-type": "string",
+            "data-type-params": [
+                100
+            ],
+            "data-value": null,
+            "is-index": false,
+            "is-unique": false,
+            "is-primary": false,
+            "comment": null,
+            "is-nullable": true,
+            "is-header": false,
+            "is-unsigned": false,
+            "is-auto-increment": false,
+            "is-inline-options": false,
+            "is-date": false,
+            "date-format": "",
+            "cast-as": "",
+            "placeholder": "Enter remember token here...",
+            "delimiter": "; ",
+            "range": [],
+            "foreign-relation": null,
+            "foreign-constraint": null,
+            "on-store": null,
+            "on-update": null
         }
     ],
-    "relations": [],
+    "relations": [
+        {
+            "name": "getBuyerObservation",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\BuyerObservation",
+                "uploader",
+                "id"
+            ],
+            "field": "text"
+        },
+        {
+            "name": "getBuyer",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\Buyer",
+                "uploader",
+                "id"
+            ],
+            "field": "first_name"
+        },
+        {
+            "name": "getCar",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\Car",
+                "uploader",
+                "id"
+            ],
+            "field": "license_plate_number"
+        },
+        {
+            "name": "getDriver",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\Driver",
+                "uploader",
+                "id"
+            ],
+            "field": "first_name"
+        },
+        {
+            "name": "getOrder",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\Order",
+                "uploader",
+                "id"
+            ],
+            "field": "quantity"
+        },
+        {
+            "name": "getTransport",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\Transport",
+                "uploader",
+                "id"
+            ],
+            "field": "quantity"
+        }
+    ],
     "indexes": [],
     "auto-manage-created-and-updated-at": true,
     "table-name": "users",

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
+use App\User;
+
 use App\Models\Buyer;
+use App\Models\Settlement;
 use App\Models\IdentityCardType;
+use App\Models\NotificationType;
 use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BuyersFormRequest;
@@ -32,11 +35,13 @@ class BuyersController extends Controller
      */
     public function create()
     {
-        $getCities = City::pluck('name','id')->all();
+        $getSettlements = Settlement::pluck('name','id')->all();
 $getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
 $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
+$getUsers = User::pluck('email','id')->all();
+$getNotificationTypes = NotificationType::pluck('name','id')->all();
         
-        return view('buyers.create', compact('getCities','getIdentityCardSeries','getIdentityCardTypes'));
+        return view('buyers.create', compact('getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUsers','getNotificationTypes'));
     }
 
     /**
@@ -73,7 +78,7 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
      */
     public function show($id)
     {
-        $buyer = Buyer::with('getcity','getidentitycardseries','getidentitycardtype')->findOrFail($id);
+        $buyer = Buyer::with('getsettlement','getidentitycardseries','getidentitycardtype','getuser','getnotificationtype')->findOrFail($id);
 
         return view('buyers.show', compact('buyer'));
     }
@@ -88,11 +93,13 @@ $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
     public function edit($id)
     {
         $buyer = Buyer::findOrFail($id);
-        $getCities = City::pluck('name','id')->all();
+        $getSettlements = Settlement::pluck('name','id')->all();
 $getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
 $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
+$getUsers = User::pluck('email','id')->all();
+$getNotificationTypes = NotificationType::pluck('name','id')->all();
 
-        return view('buyers.edit', compact('buyer','getCities','getIdentityCardSeries','getIdentityCardTypes'));
+        return view('buyers.edit', compact('buyer','getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUsers','getNotificationTypes'));
     }
 
     /**

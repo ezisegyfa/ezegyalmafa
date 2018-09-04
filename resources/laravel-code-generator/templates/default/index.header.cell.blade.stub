@@ -1,1 +1,1 @@
-                            <th>[% field_title %]</th>
+                            <th>@lang('view.[% field_title %]')</th>

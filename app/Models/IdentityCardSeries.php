@@ -55,7 +55,7 @@ class IdentityCardSeries extends Model
      */
     public function getBuyer()
     {
-        return $this->hasOne('App\Models\Buyer','seria','id');
+        return $this->hasOne('App\Models\Buyer','identity_seria_type','id');
     }
 
 

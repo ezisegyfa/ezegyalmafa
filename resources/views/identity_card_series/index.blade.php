@@ -26,19 +26,19 @@
 
         <div class="btn-group btn-group-sm pull-right" role="group">
             <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true">Back to menu</span>
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.BackToMenu')</span>
             </a>
         </div>
 
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">Identity Card Series</h4>
+                <h4 class="mt-3 mb-3">@lang('view.Identity Card Series')</h4>
             </div>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
+            <div class="btn-group btn-group-sm pull-right mb-3" role="group">
                 <a href="{{ route('identity_card_series.identity_card_series.create') }}" class="btn btn-success" title="Create New Identity Card Series">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">@lang('view.Create')</span>
                 </a>
             </div>
 
@@ -46,7 +46,7 @@
         
         @if(count($identityCardSeriesObjects) == 0)
             <div class="panel-body text-center">
-                <h4>No Identity Card Series Available!</h4>
+                <h4>@lang('view.No Identity Card Series available!')</h4>
             </div>
         @else
         <div class="panel-body panel-body-with-table">
@@ -55,7 +55,7 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>@lang('view.Name')</th>
 
                             <th></th>
                         </tr>
@@ -73,14 +73,14 @@
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('identity_card_series.identity_card_series.show', $identityCardSeries->id ) }}" class="btn btn-info" title="Show Identity Card Series">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">@lang('view.Show')</span>
                                         </a>
                                         <a href="{{ route('identity_card_series.identity_card_series.edit', $identityCardSeries->id ) }}" class="btn btn-primary" title="Edit Identity Card Series">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">@lang('view.Edit')</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete Identity Card Series" onclick="return confirm(&quot;Delete Identity Card Series?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">@lang('view.Delete')</span>
                                         </button>
                                     </div>
 

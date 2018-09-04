@@ -11,25 +11,23 @@
                     <form id="login-form" method="POST" action="/login" aria-label="{{ __('Login') }}">
                         @csrf
 
-                        @component('layouts.components.formInputTextRow',[
+                        @component('layouts.components.formInputTextRow', [
                             'name' => 'email',
-                            'labelTextLanguageTitle' => 'E-Mail Address',
-                            'errors' => $errors,
-                            'value' => old('email') ?? ''
+                            'title' => 'E-Mail Address',
+                            'errors' => $errors
                         ])
                         @endcomponent
 
                         @component('layouts.components.formInputTextRow',[
                             'name' => 'password',
-                            'labelTextLanguageTitle' => 'Password',
-                            'errors' => $errors,
-                            'value' => old('password') ?? ''
+                            'title' => 'Password',
+                            'errors' => $errors
                         ])
                         @endcomponent
 
                         @component('layouts.components.formInputCheckbox',[
                             'name' => 'remember',
-                            'textLanguageTitle' => 'Remember Me'
+                            'title' => 'Remember Me'
                         ])
                         @endcomponent
 
