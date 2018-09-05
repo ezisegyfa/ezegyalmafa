@@ -12,6 +12,7 @@ use App\Models\ProductType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrdersFormRequest;
 use Illuminate\Support\Facades\Cookie;
+use Auth;
 use Exception;
 
 class OrdersController extends Controller
@@ -58,6 +59,7 @@ $getDrivers = $this->getDriverIdentifiers();
         try {
             
             $data = $request->getData();
+            $data['uploader'] = Auth::user()->id;
             
             Order::create($data);
 

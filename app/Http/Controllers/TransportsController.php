@@ -51,6 +51,7 @@ class TransportsController extends Controller
         try {
             
             $data = $request->getData();
+            $data['uploader'] = Auth::user()->id;
             
             Transport::create($data);
 

@@ -136,17 +136,6 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Uploader'),
-    'cssClass' => '',
-    'name' => 'uploader',
-	'value' =>  old('uploader', optional($buyer)->uploader) ,
-    'multiple' => '',
-    'required' => ' required="true"',
-    'fieldItems' => $getUsers
-])
-@endcomponent
-
-@component('layouts.components.formInputSelectMenuField', [
     'title' => __('view.Notification Type'),
     'cssClass' => '',
     'name' => 'notification_type',

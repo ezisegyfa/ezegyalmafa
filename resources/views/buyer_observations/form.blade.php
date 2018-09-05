@@ -48,15 +48,3 @@
     'fieldItems' => $getBuyers
 ])
 @endcomponent
-
-@component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Uploader'),
-    'cssClass' => '',
-    'name' => 'uploader',
-	'value' =>  old('uploader', optional($buyerObservation)->uploader) ,
-    'multiple' => '',
-    'required' => ' required="true"',
-    'fieldItems' => $getUsers
-])
-@endcomponent
-

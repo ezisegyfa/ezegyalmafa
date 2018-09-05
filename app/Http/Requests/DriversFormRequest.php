@@ -28,7 +28,6 @@ class DriversFormRequest extends FormRequest
             'first_name' => 'required|string|min:1|max:255',
             'last_name' => 'required|string|min:1|max:255',
             'cnp' => 'required|string|numeric|digits:10',
-            'uploader' => 'required',
     
         ];
 

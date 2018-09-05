@@ -37,17 +37,6 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Uploader'),
-    'cssClass' => '',
-    'name' => 'uploader',
-	'value' =>  old('uploader', optional($order)->uploader) ,
-    'multiple' => '',
-    'required' => ' required="true"',
-    'fieldItems' => $getUsers
-])
-@endcomponent
-
-@component('layouts.components.formInputSelectMenuField', [
     'title' => __('view.City'),
     'cssClass' => '',
     'name' => 'city',

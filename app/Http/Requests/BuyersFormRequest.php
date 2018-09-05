@@ -35,7 +35,6 @@ class BuyersFormRequest extends FormRequest
             'settlement' => 'required',
             'identity_seria_type' => 'nullable',
             'identity_card_type' => 'nullable',
-            'uploader' => 'required',
             'notification_type' => 'nullable',
     
         ];

@@ -29,7 +29,6 @@ class BuyerObservationsFormRequest extends FormRequest
             'score' => 'required|numeric|min:-2147483648|max:2147483647',
             'type' => 'required',
             'buyer' => 'required',
-            'uploader' => 'required',
     
         ];
 

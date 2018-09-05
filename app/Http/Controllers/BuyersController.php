@@ -11,6 +11,7 @@ use App\Models\NotificationType;
 use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BuyersFormRequest;
+use Auth;
 use Exception;
 
 class BuyersController extends Controller
@@ -56,6 +57,7 @@ $getNotificationTypes = NotificationType::pluck('name','id')->all();
         try {
             
             $data = $request->getData();
+            $data['uploader'] = Auth::user()->id;
             
             Buyer::create($data);
 

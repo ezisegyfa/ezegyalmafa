@@ -8,6 +8,7 @@ use App\Models\ObservationType;
 use App\Models\BuyerObservation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BuyerObservationsFormRequest;
+use Auth;
 use Exception;
 
 class BuyerObservationsController extends Controller
@@ -51,7 +52,8 @@ class BuyerObservationsController extends Controller
         try {
             
             $data = $request->getData();
-            
+            $data['uploader'] = Auth::user()->id;
+
             BuyerObservation::create($data);
 
             return redirect()->route('buyer_observations.buyer_observation.index')

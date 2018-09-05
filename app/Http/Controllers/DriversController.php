@@ -6,6 +6,7 @@ use App\User;
 use App\Models\Driver;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DriversFormRequest;
+use Auth;
 use Exception;
 
 class DriversController extends Controller
@@ -47,6 +48,7 @@ class DriversController extends Controller
         try {
             
             $data = $request->getData();
+            $data['uploader'] = Auth::user()->id;
             
             Driver::create($data);
 

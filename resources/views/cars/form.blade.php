@@ -24,15 +24,3 @@
     'fieldItems' => $getCarTypes
 ])
 @endcomponent
-
-@component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Uploader'),
-    'cssClass' => '',
-    'name' => 'uploader',
-	'value' =>  old('uploader', optional($car)->uploader) ,
-    'multiple' => '',
-    'required' => ' required="true"',
-    'fieldItems' => $getUsers
-])
-@endcomponent
-

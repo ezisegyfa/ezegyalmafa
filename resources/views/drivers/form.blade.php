@@ -43,15 +43,3 @@
 	'step' => ''
 ])
 @endcomponent
-
-@component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Uploader'),
-    'cssClass' => '',
-    'name' => 'uploader',
-	'value' =>  old('uploader', optional($driver)->uploader) ,
-    'multiple' => '',
-    'required' => ' required="true"',
-    'fieldItems' => $getUsers
-])
-@endcomponent
-

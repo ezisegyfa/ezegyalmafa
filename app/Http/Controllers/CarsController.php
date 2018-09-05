@@ -7,6 +7,7 @@ use App\User;
 use App\Models\CarType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CarsFormRequest;
+use Auth;
 use Exception;
 
 class CarsController extends Controller
@@ -49,6 +50,7 @@ $getUsers = User::pluck('email','id')->all();
         try {
             
             $data = $request->getData();
+            $data['uploader'] = Auth::user()->id;
             
             Car::create($data);
 

@@ -19,27 +19,27 @@
 </head>
 <body>
     <div id="app">
-            <div class="row w-100">
+        <div class="container-fluid">
+            <div class="row">
                 @include('layouts.header')
             </div>
 
-            <main class="row mt-3 mb-3">
-                <div class="container w-100">
-                    <div class="col-2">
-                        @include('layouts.leftBar')
-                    </div>
-                    <div class="col-8"> 
-                        @yield('content')
-                    </div>
-                    <div class="col-2">
-                        @include('layouts.rightBar')
-                    </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-2">
+                    @include('layouts.leftBar')
                 </div>
-            </main>
+                <div class="col-8"> 
+                    @yield('content')
+                </div>
+                <div class="col-2">
+                    @include('layouts.rightBar')
+                </div>
+            </div>
 
-            <div class="row w-100 fixed-bottom">
+            <div class="row fixed-bottom">
                 @include('layouts.footer')
             </div>
+        </div>
     </div>
     
     <!-- Scripts -->
