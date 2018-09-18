@@ -4,12 +4,11 @@
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
-	'value' =>  old('name', optional($carType)->name) ,
+	'value' => $name ??  old('name', optional($carType)->name) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="191"',
+	'maxLength' => ' maxlength="255"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent

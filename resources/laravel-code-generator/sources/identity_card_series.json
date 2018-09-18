@@ -73,7 +73,7 @@
     ],
     "relations": [
         {
-            "name": "getBuyer",
+            "name": "buyer",
             "type": "hasOne",
             "params": [
                 "App\\Models\\Buyer",

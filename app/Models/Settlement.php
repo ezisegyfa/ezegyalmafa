@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class Settlement extends Model
 {
+    use ModelHelperMethods;
     
     /**
      * Indicates if the model should be timestamped.
@@ -13,6 +16,9 @@ class Settlement extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static $renderColumnNames = ['name'];
+
     /**
      * The database table used by the model.
      *
@@ -34,7 +40,8 @@ class Settlement extends Model
      */
     protected $fillable = [
                   'name',
-                  'county'
+                  'region',
+                  'post_code'
               ];
 
     /**
@@ -52,27 +59,27 @@ class Settlement extends Model
     protected $casts = [];
     
     /**
-     * Get the getCounty for this model.
+     * Get the getRegion for this model.
      */
-    public function getCounty()
+    public function getRegion()
     {
-        return $this->belongsTo('App\Models\County','county','id');
+        return $this->belongsTo('App\Models\Region','region','id');
     }
 
     /**
-     * Get the getBuyer for this model.
+     * Get the buyer for this model.
      */
-    public function getBuyer()
+    public function buyer()
     {
         return $this->hasOne('App\Models\Buyer','settlement','id');
     }
 
     /**
-     * Get the getOrder for this model.
+     * Get the order for this model.
      */
-    public function getOrder()
+    public function order()
     {
-        return $this->hasOne('App\Models\Order','city','id');
+        return $this->hasOne('App\Models\Order','settlement','id');
     }
 
 

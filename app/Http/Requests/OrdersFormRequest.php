@@ -28,10 +28,9 @@ class OrdersFormRequest extends FormRequest
             'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
             'buyer' => 'required',
             'product_type' => 'required',
-            'city' => 'required',
+            'uploader' => 'nullable',
+            'settlement' => 'required',
             'price' => 'required|numeric|min:-2147483648|max:2147483647',
-            'car' => 'required',
-            'driver' => 'required',
     
         ];
 
@@ -46,7 +45,7 @@ class OrdersFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['quantity','buyer','product_type','uploader','city','price','car','driver']);
+        $data = $this->only(['quantity','buyer','product_type','uploader','settlement','price']);
 
 
 

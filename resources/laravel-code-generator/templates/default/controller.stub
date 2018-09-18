@@ -2,6 +2,8 @@
 
 namespace [% namespace %];
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 [% use_command_placeholder %]
 use Exception;
 
@@ -15,9 +17,14 @@ class [% controller_name %] [% controller_extends %]
      */
     public function index()
     {
-        $[% model_name_plural_variable %] = [% model_name_class %]::[% with_relations_for_index %]paginate([% models_per_page %]);
+        $columnNames = [% model_name_class %]::getColumnNames();
 
-        return view('[% index_view_name %]'[% view_variables_for_index %]);
+        return view('[% index_view_name %]', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return [% model_name_class %]::getDataTableQuery();
     }
 
     /**

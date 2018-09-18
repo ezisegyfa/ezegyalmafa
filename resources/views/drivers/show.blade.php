@@ -61,7 +61,7 @@
             <dt>@lang('view.Cnp')</dt>
             <dd>{{ $driver->cnp}}</dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($driver->getUser)->id) }}">{{ optional($driver->getUser)->email }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($driver->getUser)->id) }}">{{ optional($driver->getUser)->id }}</a></dd>
             <dt>@lang('view.Created At')</dt>
             <dd>{{ $driver->created_at}}</dd>
             <dt>@lang('view.Updated At')</dt>

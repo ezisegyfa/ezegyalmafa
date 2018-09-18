@@ -27,6 +27,10 @@ class TransportsFormRequest extends FormRequest
         $rules = [
             'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
             'order' => 'required',
+            'uploader' => 'required',
+            'car' => 'required',
+            'driver' => 'required',
+            'stock' => 'required',
     
         ];
 
@@ -41,7 +45,7 @@ class TransportsFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['quantity','order','uploader']);
+        $data = $this->only(['quantity','order','uploader','car','driver','stock']);
 
 
 

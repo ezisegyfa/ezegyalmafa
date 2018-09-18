@@ -2,9 +2,8 @@
     'title' => __('view.[% field_title %]'),
     'cssClass' => '[% css_class %]',
     'name' => '[% field_name %]',
-	'value' => [% field_value %],
+	'value' => $[% field_name %] ?? [% field_value %],
     'multiple' => '[% field_multiple %]',
-    'required' => '[% required_field %]',
     'fieldItems' => [% field_items %]
 ])
 @endcomponent

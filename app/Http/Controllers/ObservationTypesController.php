@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\ObservationType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ObservationTypesFormRequest;
@@ -17,9 +19,14 @@ class ObservationTypesController extends Controller
      */
     public function index()
     {
-        $observationTypes = ObservationType::paginate(25);
+        $columnNames = ObservationType::getColumnNames();
 
-        return view('observation_types.index', compact('observationTypes'));
+        return view('observation_types.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return ObservationType::getDataTableQuery();
     }
 
     /**

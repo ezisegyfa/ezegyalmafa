@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\NotificationType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotificationTypesFormRequest;
@@ -17,9 +19,14 @@ class NotificationTypesController extends Controller
      */
     public function index()
     {
-        $notificationTypes = NotificationType::paginate(25);
+        $columnNames = NotificationType::getColumnNames();
 
-        return view('notification_types.index', compact('notificationTypes'));
+        return view('notification_types.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return NotificationType::getDataTableQuery();
     }
 
     /**

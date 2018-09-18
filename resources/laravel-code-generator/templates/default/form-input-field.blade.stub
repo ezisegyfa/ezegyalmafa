@@ -3,12 +3,11 @@
 	'cssClass' => '[% css_class %]',
 	'name' => '[% field_name %]',
 	'type' => '[% field_type %]',
-	'value' => [% field_value %],
+	'value' => $[% field_name %] ?? [% field_value %],
 	'minLength' => '[% min_length %]',
 	'maxLength' => '[% max_length %]',
 	'minValue' => '[% min_value %]',
 	'maxValue' => '[% max_value %]',
-	'required' => '[% required_field %]',
 	'step' => '[% step %]'
 ])
 @endcomponent

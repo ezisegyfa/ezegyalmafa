@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\User;
 use App\Models\Buyer;
 use App\Models\ObservationType;
@@ -21,9 +23,14 @@ class BuyerObservationsController extends Controller
      */
     public function index()
     {
-        $buyerObservations = BuyerObservation::paginate(25);
+        $columnNames = BuyerObservation::getColumnNames();
 
-        return view('buyer_observations.index', compact('buyerObservations'));
+        return view('buyer_observations.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return BuyerObservation::getDataTableQuery();
     }
 
     /**
@@ -33,9 +40,9 @@ class BuyerObservationsController extends Controller
      */
     public function create()
     {
-        $getObservationTypes = ObservationType::pluck('name','id')->all();
-        $getBuyers = Buyer::pluck('email','id')->all();
-        $getUsers = User::pluck('email','id')->all();
+        $getObservationTypes = getRenderValues("ObservationType");
+$getBuyers = getRenderValues("Buyer");
+$getUsers = getRenderValues("User");
         
         return view('buyer_observations.create', compact('getObservationTypes','getBuyers','getUsers'));
     }
@@ -90,9 +97,9 @@ class BuyerObservationsController extends Controller
     public function edit($id)
     {
         $buyerObservation = BuyerObservation::findOrFail($id);
-        $getObservationTypes = ObservationType::pluck('name','id')->all();
-$getBuyers = Buyer::pluck('email','id')->all();
-$getUsers = User::pluck('email','id')->all();
+        $getObservationTypes = getRenderValues("ObservationType");
+$getBuyers = getRenderValues("Buyer");
+$getUsers = getRenderValues("User");
 
         return view('buyer_observations.edit', compact('buyerObservation','getObservationTypes','getBuyers','getUsers'));
     }

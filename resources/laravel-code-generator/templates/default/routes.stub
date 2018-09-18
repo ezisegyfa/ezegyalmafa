@@ -2,6 +2,11 @@
     Route::get('/', '[% controller_name %]@index')
          ->name('[% index_route_name %]');
 
+    Route::get('/getQuery', '[% controller_name %]@getQuery');     
+
+    Route::post('/filter', '[% controller_name %]@filter')
+         ->name('[% index_route_name %].filter');
+
     Route::get('/create','[% controller_name %]@create')
          ->name('[% create_route_name %]');
 
@@ -16,10 +21,10 @@
     Route::post('/', '[% controller_name %]@store')
          ->name('[% store_route_name %]');
                
-    Route::put('[% model_name_snake %]/{[% model_name_singular_variable %]}', '[% controller_name %]@update')
+    Route::put('/{[% model_name_singular_variable %]}', '[% controller_name %]@update')
          ->name('[% update_route_name %]')
          ->where('id', '[0-9]+');
 
-    Route::delete('/[% model_name_snake %]/{[% model_name_singular_variable %]}','[% controller_name %]@destroy')
+    Route::delete('/{[% model_name_singular_variable %]}','[% controller_name %]@destroy')
          ->name('[% destroy_route_name %]')
          ->where('id', '[0-9]+');

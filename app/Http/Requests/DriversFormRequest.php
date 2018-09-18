@@ -27,7 +27,8 @@ class DriversFormRequest extends FormRequest
         $rules = [
             'first_name' => 'required|string|min:1|max:255',
             'last_name' => 'required|string|min:1|max:255',
-            'cnp' => 'required|string|numeric|digits:10',
+            'cnp' => 'required|string|min:1|max:13',
+            'uploader' => 'required',
     
         ];
 

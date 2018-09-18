@@ -26,7 +26,8 @@ class SettlementsFormRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|min:1|max:255',
-            'county' => 'required|numeric|min:-2147483648|max:2147483647',
+            'region' => 'required',
+            'post_code' => 'required|numeric|min:-2147483648|max:2147483647',
     
         ];
 
@@ -41,7 +42,7 @@ class SettlementsFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['name','county']);
+        $data = $this->only(['name','region','post_code']);
 
 
 

@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class Car extends Model
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['license_plate_number'];
 
     /**
      * The database table used by the model.
@@ -64,11 +70,19 @@ class Car extends Model
     }
 
     /**
-     * Get the getOrder for this model.
+     * Get the driverCar for this model.
      */
-    public function getOrder()
+    public function driverCar()
     {
-        return $this->hasOne('App\Models\Order','car','id');
+        return $this->hasOne('App\Models\DriverCar','car','id');
+    }
+
+    /**
+     * Get the transport for this model.
+     */
+    public function transport()
+    {
+        return $this->hasOne('App\Models\Transport','car','id');
     }
 
 

@@ -4,24 +4,36 @@
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
-	'value' =>  old('name', optional($settlement)->name) ,
+	'value' => $name ??  old('name', optional($settlement)->name) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="191"',
+	'maxLength' => ' maxlength="255"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.County'),
+    'title' => __('view.Region'),
     'cssClass' => '',
-    'name' => 'county',
-	'value' =>  old('county', optional($settlement)->county) ,
+    'name' => 'region',
+	'value' => $region ??  old('region', optional($settlement)->region) ,
     'multiple' => '',
-    'required' => ' required="true"',
-    'fieldItems' => $getCounties
+    'fieldItems' => $getRegions
+])
+@endcomponent
+
+@component('layouts.components.formInputTextRow', [
+    'title' => __('view.Post Code'),
+	'cssClass' => '',
+	'name' => 'post_code',
+	'type' => 'number',
+	'value' => $post_code ??  old('post_code', optional($settlement)->post_code) ,
+	'minLength' => '',
+	'maxLength' => '',
+	'minValue' => ' min="-2147483648"',
+	'maxValue' => ' max="2147483647"',
+	'step' => ''
 ])
 @endcomponent
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\County;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
+use App\Models\Region;
 use App\Models\Settlement;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettlementsFormRequest;
@@ -18,9 +20,14 @@ class SettlementsController extends Controller
      */
     public function index()
     {
-        $settlements = Settlement::with('getcounty')->paginate(25);
+        $columnNames = Settlement::getColumnNames();
 
-        return view('settlements.index', compact('settlements'));
+        return view('settlements.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return Settlement::getDataTableQuery();
     }
 
     /**
@@ -30,9 +37,9 @@ class SettlementsController extends Controller
      */
     public function create()
     {
-        $getCounties = County::pluck('name','id')->all();
+        $getRegions = getRenderValues("Region");
         
-        return view('settlements.create', compact('getCounties'));
+        return view('settlements.create', compact('getRegions'));
     }
 
     /**
@@ -69,7 +76,7 @@ class SettlementsController extends Controller
      */
     public function show($id)
     {
-        $settlement = Settlement::with('getcounty')->findOrFail($id);
+        $settlement = Settlement::with('getregion')->findOrFail($id);
 
         return view('settlements.show', compact('settlement'));
     }
@@ -84,9 +91,9 @@ class SettlementsController extends Controller
     public function edit($id)
     {
         $settlement = Settlement::findOrFail($id);
-        $getCounties = County::pluck('name','id')->all();
+        $getRegions = getRenderValues("Region");
 
-        return view('settlements.edit', compact('settlement','getCounties'));
+        return view('settlements.edit', compact('settlement','getRegions'));
     }
 
     /**

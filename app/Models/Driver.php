@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class Driver extends Model
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['last_name', 'first_name'];
 
     /**
      * The database table used by the model.
@@ -57,11 +63,19 @@ class Driver extends Model
     }
 
     /**
-     * Get the getOrder for this model.
+     * Get the driverCar for this model.
      */
-    public function getOrder()
+    public function driverCar()
     {
-        return $this->hasOne('App\Models\Order','driver','id');
+        return $this->hasOne('App\Models\DriverCar','driver','id');
+    }
+
+    /**
+     * Get the transport for this model.
+     */
+    public function transport()
+    {
+        return $this->hasOne('App\Models\Transport','driver','id');
     }
 
 
@@ -87,11 +101,6 @@ class Driver extends Model
     {
         return \DateTime::createFromFormat('j/n/Y g:i A', $value);
 
-    }
-
-    public function getIdentifier()
-    {
-        return $this->first_name . ' ' . $this->last_name;
     }
 
 }

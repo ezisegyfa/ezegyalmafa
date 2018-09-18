@@ -4,12 +4,11 @@
 	'cssClass' => '',
 	'name' => 'first_name',
 	'type' => 'text',
-	'value' =>  old('first_name', optional($driver)->first_name) ,
+	'value' => $first_name ??  old('first_name', optional($driver)->first_name) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="191"',
+	'maxLength' => ' maxlength="255"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent
@@ -19,12 +18,11 @@
 	'cssClass' => '',
 	'name' => 'last_name',
 	'type' => 'text',
-	'value' =>  old('last_name', optional($driver)->last_name) ,
+	'value' => $last_name ??  old('last_name', optional($driver)->last_name) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="191"',
+	'maxLength' => ' maxlength="255"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent
@@ -34,12 +32,22 @@
 	'cssClass' => '',
 	'name' => 'cnp',
 	'type' => 'text',
-	'value' =>  old('cnp', optional($driver)->cnp) ,
+	'value' => $cnp ??  old('cnp', optional($driver)->cnp) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="10"',
+	'maxLength' => ' maxlength="13"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Uploader'),
+    'cssClass' => '',
+    'name' => 'uploader',
+	'value' => $uploader ??  old('uploader', optional($driver)->uploader) ,
+    'multiple' => '',
+    'fieldItems' => $getUsers
+])
+@endcomponent
+

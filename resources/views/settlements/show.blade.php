@@ -56,8 +56,10 @@
         <dl class="dl-horizontal">
             <dt>@lang('view.Name')</dt>
             <dd>{{ $settlement->name}}</dd>
-            <dt>@lang('view.County')</dt>
-            <dd><a href="{{ url('/counties/show/' . optional($settlement->getCounty)->id) }}">{{ optional($settlement->getCounty)->name }}</a></dd>
+            <dt>@lang('view.Region')</dt>
+            <dd><a href="{{ url('/regions/show/' . optional($settlement->getRegion)->id) }}">{{ optional($settlement->getRegion)->name }}</a></dd>
+            <dt>@lang('view.Post Code')</dt>
+            <dd>{{ $settlement->post_code}}</dd>
 
         </dl>
 

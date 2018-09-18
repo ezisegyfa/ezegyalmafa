@@ -4,12 +4,11 @@
 	'cssClass' => '',
 	'name' => 'quantity',
 	'type' => 'number',
-	'value' =>  old('quantity', optional($transport)->quantity) ,
+	'value' => $quantity ??  old('quantity', optional($transport)->quantity) ,
 	'minLength' => '',
 	'maxLength' => '',
 	'minValue' => ' min="-2147483648"',
 	'maxValue' => ' max="2147483647"',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent
@@ -18,9 +17,49 @@
     'title' => __('view.Order'),
     'cssClass' => '',
     'name' => 'order',
-	'value' =>  old('order', optional($transport)->order) ,
+	'value' => $order ??  old('order', optional($transport)->order) ,
     'multiple' => '',
-    'required' => ' required="true"',
     'fieldItems' => $getOrders
 ])
 @endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Uploader'),
+    'cssClass' => '',
+    'name' => 'uploader',
+	'value' => $uploader ??  old('uploader', optional($transport)->uploader) ,
+    'multiple' => '',
+    'fieldItems' => $getUsers
+])
+@endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Car'),
+    'cssClass' => '',
+    'name' => 'car',
+	'value' => $car ??  old('car', optional($transport)->car) ,
+    'multiple' => '',
+    'fieldItems' => $getCars
+])
+@endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Driver'),
+    'cssClass' => '',
+    'name' => 'driver',
+	'value' => $driver ??  old('driver', optional($transport)->driver) ,
+    'multiple' => '',
+    'fieldItems' => $getDrivers
+])
+@endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Stock'),
+    'cssClass' => '',
+    'name' => 'stock',
+	'value' => $stock ??  old('stock', optional($transport)->stock) ,
+    'multiple' => '',
+    'fieldItems' => $getStockTransports
+])
+@endcomponent
+

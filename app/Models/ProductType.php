@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class ProductType extends Model
 {
+    use ModelHelperMethods;
     
     /**
      * Indicates if the model should be timestamped.
@@ -13,6 +16,9 @@ class ProductType extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static $renderColumnNames = ['material_type', 'process_type'];
+
     /**
      * The database table used by the model.
      *
@@ -33,7 +39,9 @@ class ProductType extends Model
      * @var array
      */
     protected $fillable = [
-                  'name'
+                  'image',
+                  'material_type',
+                  'process_type'
               ];
 
     /**
@@ -51,11 +59,35 @@ class ProductType extends Model
     protected $casts = [];
     
     /**
-     * Get the getOrder for this model.
+     * Get the getMaterialType for this model.
      */
-    public function getOrder()
+    public function getMaterialType()
+    {
+        return $this->belongsTo('App\Models\MaterialType','material_type','id');
+    }
+
+    /**
+     * Get the getProcessType for this model.
+     */
+    public function getProcessType()
+    {
+        return $this->belongsTo('App\Models\ProcessType','process_type','id');
+    }
+
+    /**
+     * Get the order for this model.
+     */
+    public function order()
     {
         return $this->hasOne('App\Models\Order','product_type','id');
+    }
+
+    /**
+     * Get the stockTransport for this model.
+     */
+    public function stockTransport()
+    {
+        return $this->hasOne('App\Models\StockTransport','product_type','id');
     }
 
 

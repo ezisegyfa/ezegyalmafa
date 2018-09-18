@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class BuyerObservation extends Model
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['buyer', 'created_at'];
 
     /**
      * The database table used by the model.

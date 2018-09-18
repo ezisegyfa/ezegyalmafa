@@ -1,6 +1,6 @@
 @extends('layouts.components.formInputComponent')
 @section('inputContent')
-	<select class="form-control" id="{{ $name }}" name="{{ $name }}"{{ $multiple }}{{ $required }} placeholder="@lang('view.SelectOption')">
+	<select class="form-control" id="{{ $name }}" name="{{ $name }}"{{ $multiple }} placeholder="@lang('view.SelectOption')">
 		@if (!isset($value) && !old($name))
 			<option value="" style="display: none;" disabled selected>@lang('view.SelectOption')</option>
 		@endif

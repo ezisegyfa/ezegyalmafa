@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\User;
-
 use App\Models\Buyer;
 use App\Models\Settlement;
 use App\Models\IdentityCardType;
@@ -24,9 +25,14 @@ class BuyersController extends Controller
      */
     public function index()
     {
-        $buyers = Buyer::paginate(25);
+        $columnNames = Buyer::getColumnNames();
 
-        return view('buyers.index', compact('buyers'));
+        return view('buyers.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return Buyer::getDataTableQuery();
     }
 
     /**
@@ -36,11 +42,11 @@ class BuyersController extends Controller
      */
     public function create()
     {
-        $getSettlements = Settlement::pluck('name','id')->all();
-$getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
-$getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
-$getUsers = User::pluck('email','id')->all();
-$getNotificationTypes = NotificationType::pluck('name','id')->all();
+        $getSettlements = getRenderValues("Settlement");
+$getIdentityCardSeries = getRenderValues("IdentityCardSeries");
+$getIdentityCardTypes = getRenderValues("IdentityCardType");
+$getUsers = getRenderValues("User");
+$getNotificationTypes = getRenderValues("NotificationType");
         
         return view('buyers.create', compact('getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUsers','getNotificationTypes'));
     }
@@ -95,11 +101,11 @@ $getNotificationTypes = NotificationType::pluck('name','id')->all();
     public function edit($id)
     {
         $buyer = Buyer::findOrFail($id);
-        $getSettlements = Settlement::pluck('name','id')->all();
-$getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
-$getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
-$getUsers = User::pluck('email','id')->all();
-$getNotificationTypes = NotificationType::pluck('name','id')->all();
+        $getSettlements = getRenderValues("Settlement");
+$getIdentityCardSeries = getRenderValues("IdentityCardSeries");
+$getIdentityCardTypes = getRenderValues("IdentityCardType");
+$getUsers = getRenderValues("User");
+$getNotificationTypes = getRenderValues("NotificationType");
 
         return view('buyers.edit', compact('buyer','getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUsers','getNotificationTypes'));
     }

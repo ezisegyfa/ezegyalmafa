@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\CarType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CarTypesFormRequest;
@@ -17,9 +19,14 @@ class CarTypesController extends Controller
      */
     public function index()
     {
-        $carTypes = CarType::paginate(25);
+        $columnNames = CarType::getColumnNames();
 
-        return view('car_types.index', compact('carTypes'));
+        return view('car_types.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return CarType::getDataTableQuery();
     }
 
     /**

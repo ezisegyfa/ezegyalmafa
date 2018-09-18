@@ -24,9 +24,9 @@
         "with-migration": true
     },
     {
-        "model-name": "County",
-        "resource-file": "counties.json",
-        "table-name": "counties",
+        "model-name": "DriverCar",
+        "resource-file": "driver_cars.json",
+        "table-name": "driver_cars",
         "with-migration": true
     },
     {
@@ -48,9 +48,9 @@
         "with-migration": true
     },
     {
-        "model-name": "Migration",
-        "resource-file": "migrations.json",
-        "table-name": "migrations",
+        "model-name": "MaterialType",
+        "resource-file": "material_types.json",
+        "table-name": "material_types",
         "with-migration": true
     },
     {
@@ -72,15 +72,33 @@
         "with-migration": true
     },
     {
+        "model-name": "ProcessType",
+        "resource-file": "process_types.json",
+        "table-name": "process_types",
+        "with-migration": true
+    },
+    {
         "model-name": "ProductType",
         "resource-file": "product_types.json",
         "table-name": "product_types",
         "with-migration": true
     },
     {
+        "model-name": "Region",
+        "resource-file": "regions.json",
+        "table-name": "regions",
+        "with-migration": true
+    },
+    {
         "model-name": "Settlement",
         "resource-file": "settlements.json",
         "table-name": "settlements",
+        "with-migration": true
+    },
+    {
+        "model-name": "StockTransport",
+        "resource-file": "stock_transports.json",
+        "table-name": "stock_transports",
         "with-migration": true
     },
     {

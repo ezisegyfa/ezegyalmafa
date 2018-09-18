@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\IdentityCardSeries;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IdentityCardSeriesFormRequest;
@@ -17,9 +19,14 @@ class IdentityCardSeriesController extends Controller
      */
     public function index()
     {
-        $identityCardSeriesObjects = IdentityCardSeries::paginate(25);
+        $columnNames = IdentityCardSeries::getColumnNames();
 
-        return view('identity_card_series.index', compact('identityCardSeriesObjects'));
+        return view('identity_card_series.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return IdentityCardSeries::getDataTableQuery();
     }
 
     /**

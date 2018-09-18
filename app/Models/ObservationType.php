@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class ObservationType extends Model
 {
+    use ModelHelperMethods;
     
     /**
      * Indicates if the model should be timestamped.
@@ -13,6 +16,9 @@ class ObservationType extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static $renderColumnNames = ['name'];
+
     /**
      * The database table used by the model.
      *
@@ -51,9 +57,9 @@ class ObservationType extends Model
     protected $casts = [];
     
     /**
-     * Get the getBuyerObservation for this model.
+     * Get the buyerObservation for this model.
      */
-    public function getBuyerObservation()
+    public function buyerObservation()
     {
         return $this->hasOne('App\Models\BuyerObservation','type','id');
     }

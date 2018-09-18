@@ -15,11 +15,13 @@ return [
     'Edit' => 'Edit',
     'Delete' => 'Delete',
     'Complete' => 'Complete',
+    'Filter' => 'Filter',
 
     /*
      * Model field texts
      */
 
+    'id' => 'id',
     'Name' => 'Name',
     'First Name' => 'First Name',
     'Last Name' => 'Last Name',
@@ -33,9 +35,14 @@ return [
     'Identity Seria Nr' => 'Identity Seria Nr',
 
     'Price' => 'Price',
+    'Average Price' => 'Average Price',
     'Quantity' => 'Quantity',
     'Product Type' => 'Product Type',
+    'Image' => 'Image',
     'Order city' => 'Order city',
+    
+    'Code' => 'Codul',
+    'Post Code' => 'Post Code',
 
     'License Plate Number' => 'License Plate Number',
     
@@ -43,6 +50,9 @@ return [
     'Score' => 'Score',
     'Type' => 'Type',
     'Uploader' => 'Uploader',
+
+    'Created At' => 'Created At',
+    'Updated At' => 'Updated At',
 
     /*
      * Model singular texts
@@ -62,12 +72,16 @@ return [
 
     'Settlement' => 'Settlement',
     'City' => 'City',
-    'County' => 'County',
+    'Region' => 'Region',
 
     'Order' => 'Order',
+    'Stock' => 'Stock',
     'Product Type' => 'Product Type',
+    'Material Type' => 'Material Type',
+    'Process Type' => 'Process Type',
 
     'Transport' => 'Transport',
+    'Stock Transport' => 'Stock Transport',
     'Driver' => 'Driver',
     'Car' => 'Car',
     'Car Type' => 'Car Type',
@@ -90,12 +104,16 @@ return [
 
     'Settlements' => 'Settlements',
     'Cities' => 'Cities',
-    'Counties' => 'Counties',
+    'Regions' => 'Regions',
 
     'Orders' => 'Orders',
-    'Product Types' => 'Product Types',
+    'Stocks' => 'Stocks',
+    'ProductTypes' => 'Product Types',
+    'MaterialTypes' => 'Material Types',
+    'ProcessTypes' => 'Process Types',
 
     'Transports' => 'Transports',
+    'Stock Transports' => 'Stock Transports',
     'Drivers' => 'Drivers',
     'Cars' => 'Cars',
     'Car Types' => 'Car Types',
@@ -118,12 +136,15 @@ return [
 
     'No Settlements available!' => 'No Settlements available!',
     'No Cities available!' => 'No Cities available!',
-    'No Counties available!' => 'No Counties available!',
+    'No Regions available!' => 'No Regions available!',
 
     'No Orders available!' => 'No Orders available!',
     'No Product Types available!' => 'No Product Types available!',
+    'No Material Types available!' => 'No Material Types available!',
+    'No Process Types available!' => 'No Process Types available!',
 
     'No Transports available!' => 'No Transports available!',
+    'No Stock Transports available!' => 'No Stock Transports available!',
     'No Drivers available!' => 'No Drivers available!',
     'No Cars available!' => 'No Cars available!',
     'No Car Types available!' => 'No Car Types available!',

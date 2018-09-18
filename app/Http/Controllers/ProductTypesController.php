@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\ProductType;
+use App\Models\ProcessType;
+use App\Models\MaterialType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductTypesFormRequest;
 use Exception;
@@ -17,9 +21,14 @@ class ProductTypesController extends Controller
      */
     public function index()
     {
-        $productTypes = ProductType::paginate(25);
+        $columnNames = ProductType::getColumnNames();
 
-        return view('product_types.index', compact('productTypes'));
+        return view('product_types.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return ProductType::getDataTableQuery();
     }
 
     /**
@@ -29,9 +38,10 @@ class ProductTypesController extends Controller
      */
     public function create()
     {
+        $getMaterialTypes = getRenderValues("MaterialType");
+$getProcessTypes = getRenderValues("ProcessType");
         
-        
-        return view('product_types.create');
+        return view('product_types.create', compact('getMaterialTypes','getProcessTypes'));
     }
 
     /**
@@ -68,7 +78,7 @@ class ProductTypesController extends Controller
      */
     public function show($id)
     {
-        $productType = ProductType::findOrFail($id);
+        $productType = ProductType::with('getmaterialtype','getprocesstype')->findOrFail($id);
 
         return view('product_types.show', compact('productType'));
     }
@@ -83,9 +93,10 @@ class ProductTypesController extends Controller
     public function edit($id)
     {
         $productType = ProductType::findOrFail($id);
-        
+        $getMaterialTypes = getRenderValues("MaterialType");
+$getProcessTypes = getRenderValues("ProcessType");
 
-        return view('product_types.edit', compact('productType'));
+        return view('product_types.edit', compact('productType','getMaterialTypes','getProcessTypes'));
     }
 
     /**

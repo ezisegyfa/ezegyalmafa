@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\IdentityCardType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IdentityCardTypesFormRequest;
@@ -17,9 +19,14 @@ class IdentityCardTypesController extends Controller
      */
     public function index()
     {
-        $identityCardTypes = IdentityCardType::paginate(25);
+        $columnNames = IdentityCardType::getColumnNames();
 
-        return view('identity_card_types.index', compact('identityCardTypes'));
+        return view('identity_card_types.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return IdentityCardType::getDataTableQuery();
     }
 
     /**

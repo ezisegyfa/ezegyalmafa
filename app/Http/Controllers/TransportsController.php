@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
+use App\Models\Car;
 use App\User;
 use App\Models\Order;
+use App\Models\Driver;
 use App\Models\Transport;
+use App\Models\StockTransport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransportsFormRequest;
 use Auth;
@@ -20,10 +25,14 @@ class TransportsController extends Controller
      */
     public function index()
     {
-        $transports = Transport::with('getorder','getuser')->paginate(25);
-        $orders = Order::with('getbuyer','getproducttype','getuser','getsettlement','getcar','getdriver')->paginate(25);
+        $columnNames = Transport::getColumnNames();
 
-        return view('transports.index', compact('transports', 'orders'));
+        return view('transports.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return Transport::getDataTableQuery();
     }
 
     /**
@@ -33,10 +42,13 @@ class TransportsController extends Controller
      */
     public function create()
     {
-        $getOrders = $this->getOrderIdentifiers();
-        $getUsers = User::pluck('email','id')->all();
+        $getOrders = getRenderValues("Order");
+$getUsers = getRenderValues("User");
+$getCars = getRenderValues("Car");
+$getDrivers = getRenderValues("Driver");
+$getStockTransports = getRenderValues("StockTransport");
         
-        return view('transports.create', compact('getOrders','getUsers'));
+        return view('transports.create', compact('getOrders','getUsers','getCars','getDrivers','getStockTransports'));
     }
 
     /**
@@ -59,23 +71,10 @@ class TransportsController extends Controller
                              ->with('success_message', 'Transport was successfully added!');
 
         } catch (Exception $exception) {
-            dd($exception->getMessage());
+
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
-    }
-
-    public function completeOrder($id)
-    {
-        $orderToComplete = Order::findOrFail($id);
-        $newTransportRawData = [
-            'quantity' => $orderToComplete->quantity,
-            'order' => $orderToComplete->id,
-            'uploader' => Auth::user()->id,
-        ];
-        Transport::create($newTransportRawData);
-        return redirect()->route('transports.transport.index')
-                             ->with('success_message', 'Transport was successfully added!');
     }
 
     /**
@@ -87,7 +86,7 @@ class TransportsController extends Controller
      */
     public function show($id)
     {
-        $transport = Transport::with('getorder','getuser')->findOrFail($id);
+        $transport = Transport::with('getorder','getuser','getcar','getdriver','getstocktransport')->findOrFail($id);
 
         return view('transports.show', compact('transport'));
     }
@@ -102,10 +101,13 @@ class TransportsController extends Controller
     public function edit($id)
     {
         $transport = Transport::findOrFail($id);
-        $getOrders = $this->getOrderIdentifiers();
-$getUsers = User::pluck('email','id')->all();
+        $getOrders = getRenderValues("Order");
+$getUsers = getRenderValues("User");
+$getCars = getRenderValues("Car");
+$getDrivers = getRenderValues("Driver");
+$getStockTransports = getRenderValues("StockTransport");
 
-        return view('transports.edit', compact('transport','getOrders','getUsers'));
+        return view('transports.edit', compact('transport','getOrders','getUsers','getCars','getDrivers','getStockTransports'));
     }
 
     /**
@@ -158,12 +160,6 @@ $getUsers = User::pluck('email','id')->all();
         }
     }
 
-    public function getOrderIdentifiers()
-    {
-        $orderIdentifiers = array();
-        collect(Order::all())->each(function($order, $key) use(&$orderIdentifiers){ 
-            $orderIdentifiers[$order->id] = $order->getIdenitifier();
-        });
-        return $orderIdentifiers;
-    }
+
+
 }

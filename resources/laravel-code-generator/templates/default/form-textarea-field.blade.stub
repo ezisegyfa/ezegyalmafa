@@ -2,11 +2,10 @@
     'title' => __('view.[% field_title %]'),
 	'cssClass' => '[% css_class %]',
 	'name' => '[% field_name %]',
-	'value' => [% field_value %],
+	'value' => $[% field_name %] ?? [% field_value %],
 	'minLength' => '[% min_length %]',
 	'maxLength' => '[% max_length %]',
 	'minValue' => '[% min_value %]',
-	'maxValue' => '[% max_value %]',
-	'required' => '[% required_field %]'
+	'maxValue' => '[% max_value %]'
 ])
 @endcomponent

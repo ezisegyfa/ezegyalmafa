@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 
 class Buyer extends Model
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['email'];
 
     /**
      * The database table used by the model.
@@ -97,17 +102,17 @@ class Buyer extends Model
     }
 
     /**
-     * Get the getBuyerObservation for this model.
+     * Get the buyerObservation for this model.
      */
-    public function getBuyerObservation()
+    public function buyerObservation()
     {
         return $this->hasOne('App\Models\BuyerObservation','buyer','id');
     }
 
     /**
-     * Get the getOrder for this model.
+     * Get the order for this model.
      */
-    public function getOrder()
+    public function order()
     {
         return $this->hasOne('App\Models\Order','buyer','id');
     }

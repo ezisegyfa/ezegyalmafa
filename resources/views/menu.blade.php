@@ -33,6 +33,10 @@
                         <a href="{{ route('transports.transport.index') }}" class="btn btn-success mr-2" title="Go to transports">
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Transports')</span>
                         </a>
+
+                        <a href="{{ route('stock_transports.stock_transport.index') }}" class="btn btn-success mr-2" title="Go to Stock Transports">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Stock Transports')</span>
+                        </a>
                     </div>
 
                     <div class="row mt-3">
@@ -40,8 +44,8 @@
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Settlements')</span>
                         </a>
 
-                        <a href="{{ route('counties.county.index') }}" class="btn btn-success mr-2" title="Go to counties">
-                            <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Counties')</span>
+                        <a href="{{ route('regions.region.index') }}" class="btn btn-success mr-2" title="Go to regions">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Region')</span>
                         </a>
 
                         <a href="{{ route('cars.car.index') }}" class="btn btn-success mr-2" title="Go to cars">
@@ -71,6 +75,14 @@
                     <div class="row mt-3">
                         <a href="{{ route('product_types.product_type.index') }}" class="btn btn-success mr-2" title="Go to product types">
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Product Types')</span>
+                        </a>
+
+                        <a href="{{ route('material_types.material_type.index') }}" class="btn btn-success mr-2" title="Go to material types">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Material Types')</span>
+                        </a>
+
+                        <a href="{{ route('process_types.process_type.index') }}" class="btn btn-success mr-2" title="Go to process types">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.Process Types')</span>
                         </a>
 
                         <a href="{{ route('car_types.car_type.index') }}" class="btn btn-success mr-2" title="Go to car types">

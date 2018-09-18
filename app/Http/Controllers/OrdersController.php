@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\User;
 use App\Models\Order;
 use App\Models\Buyer;
-use App\Models\Driver;
 use App\Models\Settlement;
 use App\Models\ProductType;
 use App\Http\Controllers\Controller;
@@ -25,9 +25,14 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('getbuyer','getproducttype','getuser','getsettlement','getcar','getdriver')->paginate(25);
+        $columnNames = Order::getColumnNames();
 
-        return view('orders.index', compact('orders'));
+        return view('orders.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return Order::getDataTableQuery();
     }
 
     /**
@@ -37,14 +42,12 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        $getBuyers = Buyer::pluck('email','id')->all();
-$getProductTypes = ProductType::pluck('name','id')->all();
-$getUsers = User::pluck('email','id')->all();
-$getSettlements = Settlement::pluck('name','id')->all();
-$getCars = Car::pluck('license_plate_number','id')->all();
-$getDrivers = $this->getDriverIdentifiers();
+        $getBuyers = getRenderValues("Buyer");
+$getProductTypes = getRenderValues("ProductType");
+$getUsers = getRenderValues("User");
+$getSettlements = getRenderValues("Settlement");
         
-        return view('orders.create', compact('getBuyers','getProductTypes','getUsers','getSettlements','getCars','getDrivers'));
+        return view('orders.create', compact('getBuyers','getProductTypes','getUsers','getSettlements'));
     }
 
     /**
@@ -122,7 +125,7 @@ $getDrivers = $this->getDriverIdentifiers();
      */
     public function show($id)
     {
-        $order = Order::with('getbuyer','getproducttype','getuser','getsettlement','getcar','getdriver')->findOrFail($id);
+        $order = Order::with('getbuyer','getproducttype','getuser','getsettlement')->findOrFail($id);
 
         return view('orders.show', compact('order'));
     }
@@ -137,14 +140,12 @@ $getDrivers = $this->getDriverIdentifiers();
     public function edit($id)
     {
         $order = Order::findOrFail($id);
-        $getBuyers = Buyer::pluck('email','id')->all();
-$getProductTypes = ProductType::pluck('name','id')->all();
-$getUsers = User::pluck('email','id')->all();
-$getSettlements = Settlement::pluck('name','id')->all();
-$getCars = Car::pluck('license_plate_number','id')->all();
-$getDrivers = $this->getDriverIdentifiers();
+        $getBuyers = getRenderValues("Buyer");
+$getProductTypes = getRenderValues("ProductType");
+$getUsers = getRenderValues("User");
+$getSettlements = getRenderValues("Settlement");
 
-        return view('orders.edit', compact('order','getBuyers','getProductTypes','getUsers','getSettlements','getCars','getDrivers'));
+        return view('orders.edit', compact('order','getBuyers','getProductTypes','getUsers','getSettlements'));
     }
 
     /**
@@ -197,12 +198,6 @@ $getDrivers = $this->getDriverIdentifiers();
         }
     }
 
-    public function getDriverIdentifiers()
-    {
-        $driverIdentifiers = array();
-        collect(Driver::all())->each(function($driver, $key) use(&$driverIdentifiers){ 
-            $driverIdentifiers[$driver->id] = $driver->getIdentifier();
-        });
-        return $driverIdentifiers;
-    }
+
+
 }

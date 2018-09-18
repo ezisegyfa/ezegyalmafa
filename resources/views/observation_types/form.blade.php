@@ -4,12 +4,11 @@
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
-	'value' =>  old('name', optional($observationType)->name) ,
+	'value' => $name ??  old('name', optional($observationType)->name) ,
 	'minLength' => ' minlength="1"',
-	'maxLength' => ' maxlength="191"',
+	'maxLength' => ' maxlength="255"',
 	'minValue' => '',
 	'maxValue' => '',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent

@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class Transport extends Model
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['order', 'created_at'];
 
     /**
      * The database table used by the model.
@@ -30,7 +36,10 @@ class Transport extends Model
     protected $fillable = [
                   'quantity',
                   'order',
-                  'uploader'
+                  'uploader',
+                  'car',
+                  'driver',
+                  'stock'
               ];
 
     /**
@@ -61,6 +70,30 @@ class Transport extends Model
     public function getUser()
     {
         return $this->belongsTo('App\User','uploader','id');
+    }
+
+    /**
+     * Get the getCar for this model.
+     */
+    public function getCar()
+    {
+        return $this->belongsTo('App\Models\Car','car','id');
+    }
+
+    /**
+     * Get the getDriver for this model.
+     */
+    public function getDriver()
+    {
+        return $this->belongsTo('App\Models\Driver','driver','id');
+    }
+
+    /**
+     * Get the getStockTransport for this model.
+     */
+    public function getStockTransport()
+    {
+        return $this->belongsTo('App\Models\StockTransport','stock','id');
     }
 
 

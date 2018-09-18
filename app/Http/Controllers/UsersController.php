@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersFormRequest;
@@ -17,9 +19,16 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(25);
+        $columnNames = User::getColumnNames();
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return User::getDataTableQuery();
+    }
+
     }
 
     /**

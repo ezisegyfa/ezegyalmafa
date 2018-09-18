@@ -4,12 +4,11 @@
 	'cssClass' => '',
 	'name' => 'license_plate_number',
 	'type' => 'text',
-	'value' =>  old('license_plate_number', optional($car)->license_plate_number) ,
+	'value' => $license_plate_number ??  old('license_plate_number', optional($car)->license_plate_number) ,
 	'minLength' => '',
 	'maxLength' => '',
 	'minValue' => ' min="1"',
 	'maxValue' => ' max="20"',
-	'required' => ' required="true"',
 	'step' => ''
 ])
 @endcomponent
@@ -18,9 +17,19 @@
     'title' => __('view.Type'),
     'cssClass' => '',
     'name' => 'type',
-	'value' =>  old('type', optional($car)->type) ,
+	'value' => $type ??  old('type', optional($car)->type) ,
     'multiple' => '',
-    'required' => ' required="true"',
     'fieldItems' => $getCarTypes
 ])
 @endcomponent
+
+@component('layouts.components.formInputSelectMenuField', [
+    'title' => __('view.Uploader'),
+    'cssClass' => '',
+    'name' => 'uploader',
+	'value' => $uploader ??  old('uploader', optional($car)->uploader) ,
+    'multiple' => '',
+    'fieldItems' => $getUsers
+])
+@endcomponent
+

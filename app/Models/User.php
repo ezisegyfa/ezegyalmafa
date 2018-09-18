@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 
 class User extends Authenticatable
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['email'];
 
     /**
      * The database table used by the model.
@@ -50,49 +55,57 @@ class User extends Authenticatable
     protected $casts = [];
     
     /**
-     * Get the getBuyerObservation for this model.
+     * Get the buyerObservation for this model.
      */
-    public function getBuyerObservation()
+    public function buyerObservation()
     {
         return $this->hasOne('App\Models\BuyerObservation','uploader','id');
     }
 
     /**
-     * Get the getBuyer for this model.
+     * Get the buyer for this model.
      */
-    public function getBuyer()
+    public function buyer()
     {
         return $this->hasOne('App\Models\Buyer','uploader','id');
     }
 
     /**
-     * Get the getCar for this model.
+     * Get the car for this model.
      */
-    public function getCar()
+    public function car()
     {
         return $this->hasOne('App\Models\Car','uploader','id');
     }
 
     /**
-     * Get the getDriver for this model.
+     * Get the driver for this model.
      */
-    public function getDriver()
+    public function driver()
     {
         return $this->hasOne('App\Models\Driver','uploader','id');
     }
 
     /**
-     * Get the getOrder for this model.
+     * Get the order for this model.
      */
-    public function getOrder()
+    public function order()
     {
         return $this->hasOne('App\Models\Order','uploader','id');
     }
 
     /**
-     * Get the getTransport for this model.
+     * Get the stockTransport for this model.
      */
-    public function getTransport()
+    public function stockTransport()
+    {
+        return $this->hasOne('App\Models\StockTransport','uploader','id');
+    }
+
+    /**
+     * Get the transport for this model.
+     */
+    public function transport()
     {
         return $this->hasOne('App\Models\Transport','uploader','id');
     }

@@ -15,12 +15,14 @@ return [
     'Edit' => 'Editați',
     'Delete' => 'Șterge',
     'Complete' => 'Completă',
+    'Filter' => 'Filtru',
 
     /*
      * Model field texts
      */
 
-    'Name' => 'Numele',
+    'id' => 'id',
+    'name' => 'Numele',
     'First Name' => 'Prenume',
     'Last Name' => 'Numele de familie',
     'Email' => 'Email',
@@ -33,9 +35,14 @@ return [
     'Identity Seria Nr' => 'Identifica Seria Nr',
 
     'Price' => 'Preț',
+    'Average Price' => 'Prețul mediu',
     'Quantity' => 'Cantitate',
     'Product Type' => 'Tip produs',
+    'Image' => 'Imagine',
     'Order city' => 'Punct de descărcare',
+    
+    'code' => 'Codul',
+    'Post Code' => 'Cod postal',
 
     'License Plate Number' => 'Numar de inmatriculare',
 
@@ -43,6 +50,9 @@ return [
     'Score' => 'Scor',
     'Type' => 'Tip',
     'Uploader' => 'Uploader utilizator',
+
+    'Created At' => 'Creat la',
+    'Updated At' => 'Actualizat la',
 
     /*
      * Model singular texts
@@ -62,12 +72,16 @@ return [
 
     'Settlement' => 'Așezare',
     'City' => 'Oras',
-    'County' => 'Județ',
+    'Region' => 'Județ',
 
     'Order' => 'Comenz',
+    'Stock' => 'Stoc',
     'Product Type' => 'Tip de produs',
+    'Material Type' => 'Tip de materie',
+    'Process Type' => 'Tip de proces',
 
     'Transport' => 'Transport',
+    'Stock Transport' => 'Transport de stoc',
     'Driver' => 'Conducător auto',
     'Car' => 'Mașină',
     'Car Type' => 'Tip de mașină',
@@ -90,12 +104,16 @@ return [
 
     'Settlements' => 'Asezarile',
     'Cities' => 'Orase',
-    'Counties' => 'Judeţele',
+    'Regions' => 'Judeţele',
 
     'Orders' => 'Comenzi',
-    'ProductTypes' => 'Tipuri de produse',
+    'Stocks' => 'Stocuri',
+    'Product Types' => 'Tipuri de produse',
+    'Material Types' => 'Tipuri de materie',
+    'Process Types' => 'Tipuri de proces',
 
     'Transports' => 'Transporturi',
+    'Stock Transports' => 'Transporturi de stoc',
     'Drivers' => 'Conducătorii auto',
     'Cars' => 'Mașini',
     'Car Types' => 'Tipuri de autovehicule',
@@ -104,29 +122,32 @@ return [
      * Model no available texts
      */
 
-    'No Users available!' => 'Nu există Users disponibile!',
+    'No Users available!' => 'Nu există users disponibile!',
 
-    'No Buyers available!' => 'Nu există Buyers disponibile!',
-    'No Identity Card Series available!' => 'Nu există Identity Card Series disponibile!',
-    'No Identity Card Types available!' => 'Nu există Identity Card Types disponibile!',
+    'No Buyers available!' => 'Nu există cumpărători disponibile!',
+    'No Identity Card Series available!' => 'Nu există serii de cărți de identitate disponibile!',
+    'No Identity Card Types available!' => 'Nu există tipuri cărții de identitate disponibile!',
 
-    'No Buyer Observations available!' => 'Nu există Buyer Observations disponibile!',
-    'No Observation Types available!' => 'Nu există Observation Types disponibile!',
+    'No Buyer Observations available!' => 'Nu există observații despre cumpărători disponibile!',
+    'No Observation Types available!' => 'Nu există tipuri de observații disponibile!',
 
-    'No Buyer Notifications available!' => 'Nu există Buyer Notifications disponibile!',
-    'No Notification Types available!' => 'Nu există Notification Types disponibile!',
+    'No Buyer Notifications available!' => 'Nu există notificări despre cumpărători disponibile!',
+    'No Notification Types available!' => 'Nu există tipuri de notificări disponibile!',
 
-    'No Settlements available!' => 'Nu există Settlements disponibile!',
-    'No Cities available!' => 'Nu există Cities disponibile!',
-    'No Counties available!' => 'Nu există Counties disponibile!',
+    'No Settlements available!' => 'Nu există asezarile disponibile!',
+    'No Cities available!' => 'Nu există orase disponibile!',
+    'No Regions available!' => 'Nu există judeţele disponibile!',
 
-    'No Orders available!' => 'Nu există Orders disponibile!',
-    'No Product Types available!' => 'Nu există Product Types disponibile!',
+    'No Orders available!' => 'Nu există comenzi disponibile!',
+    'No Product Types available!' => 'Nu există tipuri de produse disponibile!',
+    'No Material Types available!' => 'Nu există tipuri de materie disponibile!',
+    'No Process Types available!' => 'Nu există tipuri de proces disponibile!',
 
-    'No Transports available!' => 'Nu există Transports disponibile!',
-    'No Drivers available!' => 'Nu există Drivers disponibile!',
-    'No Cars available!' => 'Nu există Cars disponibile!',
-    'No Car Types available!' => 'Nu există Car Types disponibile!',
+    'No Transports available!' => 'Nu există transporturi disponibile!',
+    'No Stock Transports available!' => 'Nu există transporturi de stoc disponibile!',
+    'No Drivers available!' => 'Nu există conducătorii auto disponibile!',
+    'No Cars available!' => 'Nu există mașini disponibile!',
+    'No Car Types available!' => 'Nu există tipuri de autovehicule disponibile!',
 
     /*
      * Placeholders

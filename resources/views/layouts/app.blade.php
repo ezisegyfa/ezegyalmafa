@@ -16,6 +16,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('DataTables-1.10.18/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('DataTables-1.10.18/css/dataTables.jqueryui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('DataTables-1.10.18/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('DataTables-1.10.18/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('DataTables-1.10.18/css/dataTables.foundation.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('DataTables-1.10.18/css/dataTables.semanticui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dataTables.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -46,6 +54,17 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.redirect.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
+
+    <!-- dataTables -->
+    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.jqueryui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.foundation.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.semanticui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('dataTables.min.js') }}"></script>
+    @include('layouts.dataTableInitializer')
+
     @yield('scripts')
 </body>
 </html>

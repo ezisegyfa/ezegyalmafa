@@ -183,7 +183,7 @@
             "is-on-index": false,
             "is-on-show": true,
             "is-on-form": false,
-            "data-type": "timestamp",
+            "data-type": "string",
             "data-type-params": [],
             "data-value": null,
             "is-index": false,
@@ -217,7 +217,7 @@
             "is-on-index": false,
             "is-on-show": true,
             "is-on-form": false,
-            "data-type": "timestamp",
+            "data-type": "string",
             "data-type-params": [],
             "data-value": null,
             "is-index": false,
@@ -243,10 +243,20 @@
     ],
     "relations": [
         {
-            "name": "getOrder",
+            "name": "driverCar",
             "type": "hasOne",
             "params": [
-                "App\\Models\\Order",
+                "App\\Models\\DriverCar",
+                "car",
+                "id"
+            ],
+            "field": "id"
+        },
+        {
+            "name": "transport",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\Transport",
                 "car",
                 "id"
             ],

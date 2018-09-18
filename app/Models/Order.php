@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class Order extends Model
 {
+    use ModelHelperMethods;
     
+
+
+    public static $renderColumnNames = ['buyer', 'product_type', 'created_at'];
 
     /**
      * The database table used by the model.
@@ -32,10 +38,8 @@ class Order extends Model
                   'buyer',
                   'product_type',
                   'uploader',
-                  'city',
-                  'price',
-                  'car',
-                  'driver'
+                  'settlement',
+                  'price'
               ];
 
     /**
@@ -81,29 +85,13 @@ class Order extends Model
      */
     public function getSettlement()
     {
-        return $this->belongsTo('App\Models\Settlement','city','id');
+        return $this->belongsTo('App\Models\Settlement','settlement','id');
     }
 
     /**
-     * Get the getCar for this model.
+     * Get the transport for this model.
      */
-    public function getCar()
-    {
-        return $this->belongsTo('App\Models\Car','car','id');
-    }
-
-    /**
-     * Get the getDriver for this model.
-     */
-    public function getDriver()
-    {
-        return $this->belongsTo('App\Models\Driver','driver','id');
-    }
-
-    /**
-     * Get the getTransport for this model.
-     */
-    public function getTransport()
+    public function transport()
     {
         return $this->hasOne('App\Models\Transport','order','id');
     }
@@ -133,9 +121,4 @@ class Order extends Model
 
     }
 
-    public function getIdenitifier()
-    {
-        $buyer = $this->getBuyer;
-        return $buyer->first_name . ' ' . $buyer->last_name . ': ' . $this->created_at; 
-    }
 }

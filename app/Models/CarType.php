@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class CarType extends Model
 {
+    use ModelHelperMethods;
     
     /**
      * Indicates if the model should be timestamped.
@@ -13,6 +16,9 @@ class CarType extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static $renderColumnNames = ['name'];
+
     /**
      * The database table used by the model.
      *
@@ -51,9 +57,9 @@ class CarType extends Model
     protected $casts = [];
     
     /**
-     * Get the getCar for this model.
+     * Get the car for this model.
      */
-    public function getCar()
+    public function car()
     {
         return $this->hasOne('App\Models\Car','type','id');
     }

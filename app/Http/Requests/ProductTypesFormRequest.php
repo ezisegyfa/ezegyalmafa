@@ -25,7 +25,9 @@ class ProductTypesFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|string|min:1|max:255',
+            'image' => 'required|numeric|string|min:1|max:255',
+            'material_type' => 'required',
+            'process_type' => 'required',
     
         ];
 
@@ -40,7 +42,7 @@ class ProductTypesFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['name']);
+        $data = $this->only(['image','material_type','process_type']);
 
 
 

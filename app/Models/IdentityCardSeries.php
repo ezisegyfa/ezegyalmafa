@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 
 class IdentityCardSeries extends Model
 {
+    use ModelHelperMethods;
     
     /**
      * Indicates if the model should be timestamped.
@@ -13,6 +16,9 @@ class IdentityCardSeries extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public static $renderColumnNames = ['name'];
+
     /**
      * The database table used by the model.
      *
@@ -51,9 +57,9 @@ class IdentityCardSeries extends Model
     protected $casts = [];
     
     /**
-     * Get the getBuyer for this model.
+     * Get the buyer for this model.
      */
-    public function getBuyer()
+    public function buyer()
     {
         return $this->hasOne('App\Models\Buyer','identity_seria_type','id');
     }

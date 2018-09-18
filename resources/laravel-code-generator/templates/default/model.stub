@@ -3,11 +3,17 @@
 namespace [% namespace %];
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
+
 [% use_soft_delete %]
 class [% model_name_class %] extends Model
 {
+    use ModelHelperMethods;
     [% use_soft_delete_trait %]
 [% time_stamps %]
+
+    public static $renderColumnNames = [];
+
     /**
      * The database table used by the model.
      *

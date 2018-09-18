@@ -14,3 +14,11 @@ function mergeFunctions(...funcs){
 			notNullFuncs[i].apply(this, args)
 	}
 }
+
+function getCsrfToken() {
+	return $('meta[name=csrf-token]').attr('content')
+}
+
+function upperFirstLetter(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}

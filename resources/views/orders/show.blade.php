@@ -57,23 +57,19 @@
             <dt>@lang('view.Quantity')</dt>
             <dd>{{ $order->quantity}}</dd>
             <dt>@lang('view.Buyer')</dt>
-            <dd><a href="{{ url('/buyers/show/' . optional($order->getBuyer)->id) }}">{{ optional($order->getBuyer)->email }}</a></dd>
+            <dd><a href="{{ url('/buyers/show/' . optional($order->getBuyer)->id) }}">{{ optional($order->getBuyer)->first_name }}</a></dd>
+            <dt>@lang('view.Product Type')</dt>
+            <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->id }}</a></dd>
+            <dt>@lang('view.Uploader')</dt>
+            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->id }}</a></dd>
+            <dt>@lang('view.Settlement')</dt>
+            <dd><a href="{{ url('/settlements/show/' . optional($order->getSettlement)->id) }}">{{ optional($order->getSettlement)->id }}</a></dd>
+            <dt>@lang('view.Price')</dt>
+            <dd>{{ $order->price}}</dd>
             <dt>@lang('view.Created At')</dt>
             <dd>{{ $order->created_at}}</dd>
             <dt>@lang('view.Updated At')</dt>
             <dd>{{ $order->updated_at}}</dd>
-            <dt>@lang('view.Product Type')</dt>
-            <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->name }}</a></dd>
-            <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->email }}</a></dd>
-            <dt>@lang('view.Order city')</dt>
-            <dd><a href="{{ url('/settlements/show/' . optional($order->getSettlement)->id) }}">{{ optional($order->getSettlement)->name }}</a></dd>
-            <dt>@lang('view.Price')</dt>
-            <dd>{{ $order->price}}</dd>
-            <dt>@lang('view.Car')</dt>
-            <dd><a href="{{ url('/cars/show/' . optional($order->getCar)->id) }}">{{ optional($order->getCar)->license_plate_number }}</a></dd>
-            <dt>@lang('view.Driver')</dt>
-            <dd><a href="{{ url('/drivers/show/' . optional($order->getDriver)->id) }}">{{ optional($order->getDriver)->getIdentifier() }}</a></dd>
 
         </dl>
 

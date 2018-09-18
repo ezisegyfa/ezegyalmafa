@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\Models\Car;
 use App\User;
 use App\Models\CarType;
@@ -20,9 +22,14 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('getcartype','getuser')->paginate(25);
+        $columnNames = Car::getColumnNames();
 
-        return view('cars.index', compact('cars'));
+        return view('cars.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return Car::getDataTableQuery();
     }
 
     /**
@@ -32,8 +39,8 @@ class CarsController extends Controller
      */
     public function create()
     {
-        $getCarTypes = CarType::pluck('name','id')->all();
-$getUsers = User::pluck('email','id')->all();
+        $getCarTypes = getRenderValues("CarType");
+$getUsers = getRenderValues("User");
         
         return view('cars.create', compact('getCarTypes','getUsers'));
     }
@@ -88,8 +95,8 @@ $getUsers = User::pluck('email','id')->all();
     public function edit($id)
     {
         $car = Car::findOrFail($id);
-        $getCarTypes = CarType::pluck('name','id')->all();
-$getUsers = User::pluck('email','id')->all();
+        $getCarTypes = getRenderValues("CarType");
+$getUsers = getRenderValues("User");
 
         return view('cars.edit', compact('car','getCarTypes','getUsers'));
     }

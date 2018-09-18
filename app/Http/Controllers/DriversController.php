@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
 use App\User;
 use App\Models\Driver;
 use App\Http\Controllers\Controller;
@@ -19,9 +21,14 @@ class DriversController extends Controller
      */
     public function index()
     {
-        $drivers = Driver::with('getuser')->paginate(25);
+        $columnNames = Driver::getColumnNames();
 
-        return view('drivers.index', compact('drivers'));
+        return view('drivers.index', compact('columnNames'));
+    }
+
+    public function getQuery()
+    {
+        return Driver::getDataTableQuery();
     }
 
     /**
@@ -31,7 +38,7 @@ class DriversController extends Controller
      */
     public function create()
     {
-        $getUsers = User::pluck('email','id')->all();
+        $getUsers = getRenderValues("User");
         
         return view('drivers.create', compact('getUsers'));
     }
@@ -86,7 +93,7 @@ class DriversController extends Controller
     public function edit($id)
     {
         $driver = Driver::findOrFail($id);
-        $getUsers = User::pluck('email','id')->all();
+        $getUsers = getRenderValues("User");
 
         return view('drivers.edit', compact('driver','getUsers'));
     }
