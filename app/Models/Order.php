@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
+use Illuminate\Support\Facades\DB;
 
 
 class Order extends Model
@@ -73,9 +74,9 @@ class Order extends Model
     }
 
     /**
-     * Get the getUser for this model.
+     * Get the getUploader for this model.
      */
-    public function getUser()
+    public function getUploader()
     {
         return $this->belongsTo('App\User','uploader','id');
     }
@@ -91,9 +92,9 @@ class Order extends Model
     /**
      * Get the transport for this model.
      */
-    public function transport()
+    public function transports()
     {
-        return $this->hasOne('App\Models\Transport','order','id');
+        return $this->hasMany('App\Models\Transport','order','id');
     }
 
 
@@ -119,6 +120,24 @@ class Order extends Model
     {
         return \DateTime::createFromFormat('j/n/Y g:i A', $value);
 
+    }
+
+    public static function getUncomplitedOrdersQuery()
+    {
+        return static::leftJoin('transports', 'orders.id', '=', 'transports.order')
+            ->select(
+                'orders.id', 
+                DB::raw('IF(ISNULL(SUM(transports.quantity)), orders.quantity, orders.quantity - SUM(transports.quantity)) AS quantity'), 
+                'orders.buyer', 
+                'orders.product_type', 
+                'orders.uploader', 
+                'orders.settlement', 
+                'orders.price', 
+                'orders.created_at', 
+                'orders.updated_at'
+            )
+            ->groupBy('orders.id', 'orders.quantity', 'orders.buyer', 'orders.product_type', 'orders.uploader', 'orders.settlement', 'orders.price', 'orders.created_at', 'orders.updated_at')
+            ->havingRaw('ISNULL(SUM(transports.quantity)) OR orders.quantity > SUM(transports.quantity) ');
     }
 
 }

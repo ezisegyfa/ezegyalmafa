@@ -69,17 +69,17 @@ class Settlement extends Model
     /**
      * Get the buyer for this model.
      */
-    public function buyer()
+    public function buyers()
     {
-        return $this->hasOne('App\Models\Buyer','settlement','id');
+        return $this->hasMany('App\Models\Buyer','settlement','id');
     }
 
     /**
      * Get the order for this model.
      */
-    public function order()
+    public function orders()
     {
-        return $this->hasOne('App\Models\Order','settlement','id');
+        return $this->hasMany('App\Models\Order','settlement','id');
     }
 
 

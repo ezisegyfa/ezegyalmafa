@@ -5,6 +5,7 @@ namespace App\Helpers\ModelHelpers;
 use App\Helpers\ModelHelpers\ModelRecursiveMethods;
 use App\Helpers\ModelHelpers\ModelFilterMethods;
 use Yajra\DataTables\Datatables;
+use Illuminate\Database\Eloquent\Model;
 use Log;
 
 /**
@@ -32,20 +33,28 @@ trait ModelHelperMethods
         $modelTypeName = get_called_class();
         $renderValue = '';
         foreach ($modelTypeName::$renderColumnNames as $columnName) {
-            $columnValue = $this->$columnName;
-            if (gettype($columnValue) == 'object')
-                $renderValue .= $columnValue->getRenderValue();
-            else
-                $renderValue .= $columnValue;
+            $columnRelationship = static::getGetColumnRelationship($columnName);
+            if ($columnRelationship)
+                $renderValue .= $this->$columnRelationship->getRenderValue();
+            else {
+                $columnValue = $this->$columnName;
+                if ($columnValue instanceof Model)
+                    $renderValue .= $columnValue->getRenderValue();
+                else
+                    $renderValue .= $columnValue;
+            }
             $renderValue .= ' - ';
         }
         return substr($renderValue, 0, strlen($renderValue) - 3);
     }
 
-    public static function getDataTableQuery()
+    public static function getDataTableQuery($query = null)
     {
-        $query = Datatables::of(static::with(static::getRelationshipNames()));
-        $query = static::addRenderValuesToDatatableQuery($query);
+        if ($query)
+            $query = $query->with(static::getRelationshipNames());
+        else
+            $query = static::with(static::getRelationshipNames());
+        $query = static::addRenderValuesToDatatableQuery(Datatables::of($query));
         return $query->make(true);
     }
 

@@ -25,10 +25,9 @@ class StockTransportsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'product_type' => 'required',
-            'average_price' => 'required|numeric|min:-2147483648|max:2147483647',
-            'uploader' => 'required',
+            'quantity' => 'required|integer',
+            'product_type' => 'required|integer',
+            'average_price' => 'required|integer'
     
         ];
 

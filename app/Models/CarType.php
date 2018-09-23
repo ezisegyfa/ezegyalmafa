@@ -59,9 +59,9 @@ class CarType extends Model
     /**
      * Get the car for this model.
      */
-    public function car()
+    public function cars()
     {
-        return $this->hasOne('App\Models\Car','type','id');
+        return $this->hasMany('App\Models\Car','type','id');
     }
 
 

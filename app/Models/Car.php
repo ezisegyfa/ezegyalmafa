@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
-
+use Illuminate\Support\Facades\DB;
 
 class Car extends Model
 {
@@ -62,9 +62,9 @@ class Car extends Model
     }
 
     /**
-     * Get the getUser for this model.
+     * Get the getUploader for this model.
      */
-    public function getUser()
+    public function getUploader()
     {
         return $this->belongsTo('App\User','uploader','id');
     }
@@ -72,19 +72,25 @@ class Car extends Model
     /**
      * Get the driverCar for this model.
      */
-    public function driverCar()
+    public function drivers()
     {
-        return $this->hasOne('App\Models\DriverCar','car','id');
+        return $this->belongsToMany('App\Models\Driver');
     }
 
     /**
      * Get the transport for this model.
      */
-    public function transport()
+    public function transports()
     {
-        return $this->hasOne('App\Models\Transport','car','id');
+        return $this->hasMany('App\Models\Transport','car','id');
     }
 
+    public static function getWithCarsQuery()
+    {
+        return Car::join('driver_cars', 'driver_cars.car', '=', 'cars.id')
+        ->join('drivers', 'drivers.id', '=', 'driver_cars.driver')
+        ->select(DB::raw('cars.*'));
+    }
 
     /**
      * Get created_at in array format

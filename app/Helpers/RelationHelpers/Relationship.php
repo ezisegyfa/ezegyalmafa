@@ -25,6 +25,11 @@ class Relationship
     	return strtolower(snake_case($this->modelTypeName . '_id'));
     }
 
+    public function getNameWithoutGetSuffix()
+    {
+        return lcfirst(removeGetSuffix($this->name));
+    }
+
     public function getNameInCamelFormat()
     {
     	return camel_case($this->name);

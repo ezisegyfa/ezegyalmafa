@@ -25,14 +25,21 @@ class TransportsController extends Controller
      */
     public function index()
     {
-        $columnNames = Transport::getColumnNames();
+        Order::getUncomplitedOrdersQuery()->get();
+        $transportColumnNames = Transport::getColumnNames();
+        $orderColumnNames = Order::getColumnNames();
 
-        return view('transports.index', compact('columnNames'));
+        return view('transports.index', compact('transportColumnNames', 'orderColumnNames'));
     }
 
     public function getQuery()
     {
         return Transport::getDataTableQuery();
+    }
+
+    public function getByDriverQuery()
+    {
+        return Transport::getDataTableQuery(Transport::where('driver'));
     }
 
     /**
@@ -43,12 +50,29 @@ class TransportsController extends Controller
     public function create()
     {
         $getOrders = getRenderValues("Order");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 $getCars = getRenderValues("Car");
 $getDrivers = getRenderValues("Driver");
 $getStockTransports = getRenderValues("StockTransport");
         
-        return view('transports.create', compact('getOrders','getUsers','getCars','getDrivers','getStockTransports'));
+        return view('transports.create', compact('getOrders','getUploaders','getCars','getDrivers','getStockTransports'));
+    }
+
+    /**
+     * Show the form for creating a new transport.
+     *
+     * @return Illuminate\View\View
+     */
+    public function createByOrder($orderId)
+    {
+        $order = $orderId;
+        $getOrders = getRenderValues("Order");
+$getUploaders = getRenderValues("User");
+$getCars = getRenderValues("Car");
+$getDrivers = getRenderValues("Driver");
+$getStockTransports = getRenderValues("StockTransport");
+        
+        return view('transports.create', compact('getOrders','getUploaders','getCars','getDrivers','getStockTransports', 'order'));
     }
 
     /**
@@ -86,7 +110,7 @@ $getStockTransports = getRenderValues("StockTransport");
      */
     public function show($id)
     {
-        $transport = Transport::with('getorder','getuser','getcar','getdriver','getstocktransport')->findOrFail($id);
+        $transport = Transport::with('getorder','getUploader','getcar','getdriver','getstocktransport')->findOrFail($id);
 
         return view('transports.show', compact('transport'));
     }
@@ -102,12 +126,12 @@ $getStockTransports = getRenderValues("StockTransport");
     {
         $transport = Transport::findOrFail($id);
         $getOrders = getRenderValues("Order");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 $getCars = getRenderValues("Car");
 $getDrivers = getRenderValues("Driver");
 $getStockTransports = getRenderValues("StockTransport");
 
-        return view('transports.edit', compact('transport','getOrders','getUsers','getCars','getDrivers','getStockTransports'));
+        return view('transports.edit', compact('transport','getOrders','getUploaders','getCars','getDrivers','getStockTransports'));
     }
 
     /**

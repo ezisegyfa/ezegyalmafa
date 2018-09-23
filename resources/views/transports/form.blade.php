@@ -24,16 +24,6 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Uploader'),
-    'cssClass' => '',
-    'name' => 'uploader',
-	'value' => $uploader ??  old('uploader', optional($transport)->uploader) ,
-    'multiple' => '',
-    'fieldItems' => $getUsers
-])
-@endcomponent
-
-@component('layouts.components.formInputSelectMenuField', [
     'title' => __('view.Car'),
     'cssClass' => '',
     'name' => 'car',

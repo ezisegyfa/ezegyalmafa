@@ -57,9 +57,9 @@
             <dt>@lang('view.Image')</dt>
             <dd>{{ $productType->image}}</dd>
             <dt>@lang('view.Material Type')</dt>
-            <dd><a href="{{ url('/materialTypes/show/' . optional($productType->getMaterialType)->id) }}">{{ optional($productType->getMaterialType)->name }}</a></dd>
+            <dd><a href="{{ url('/materialTypes/show/' . optional($productType->getMaterialType)->id) }}">{{ optional($productType->getMaterialType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Process Type')</dt>
-            <dd><a href="{{ url('/processTypes/show/' . optional($productType->getProcessType)->id) }}">{{ optional($productType->getProcessType)->name }}</a></dd>
+            <dd><a href="{{ url('/processTypes/show/' . optional($productType->getProcessType)->id) }}">{{ optional($productType->getProcessType)->getRenderValue() }}</a></dd>
 
         </dl>
 

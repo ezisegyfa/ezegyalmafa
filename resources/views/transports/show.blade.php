@@ -61,15 +61,15 @@
             <dt>@lang('view.Updated At')</dt>
             <dd>{{ $transport->updated_at}}</dd>
             <dt>@lang('view.Order')</dt>
-            <dd><a href="{{ url('/orders/show/' . optional($transport->getOrder)->id) }}">{{ optional($transport->getOrder)->quantity }}</a></dd>
+            <dd><a href="{{ url('/orders/show/' . optional($transport->getOrder)->id) }}">{{ optional($transport->getOrder)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($transport->getUser)->id) }}">{{ optional($transport->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($transport->getUser)->id) }}">{{ optional($transport->getUser)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Car')</dt>
-            <dd><a href="{{ url('/cars/show/' . optional($transport->getCar)->id) }}">{{ optional($transport->getCar)->license_plate_number }}</a></dd>
+            <dd><a href="{{ url('/cars/show/' . optional($transport->getCar)->id) }}">{{ optional($transport->getCar)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Driver')</dt>
-            <dd><a href="{{ url('/drivers/show/' . optional($transport->getDriver)->id) }}">{{ optional($transport->getDriver)->first_name }}</a></dd>
+            <dd><a href="{{ url('/drivers/show/' . optional($transport->getDriver)->id) }}">{{ optional($transport->getDriver)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Stock')</dt>
-            <dd><a href="{{ url('/stockTransports/show/' . optional($transport->getStockTransport)->id) }}">{{ optional($transport->getStockTransport)->quantity }}</a></dd>
+            <dd><a href="{{ url('/stockTransports/show/' . optional($transport->getStockTransport)->id) }}">{{ optional($transport->getStockTransport)->getRenderValue() }}</a></dd>
 
         </dl>
 

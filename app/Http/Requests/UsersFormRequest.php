@@ -26,7 +26,7 @@ class UsersFormRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|min:1|max:255',
-            'email' => 'required|string|min:1|max:255',
+            'email' => 'required|email|min:1|max:255',
             'password' => 'required|string|min:1|max:255',
             'remember_token' => 'nullable|string|min:0|max:100',
     

@@ -27,16 +27,16 @@ class BuyersFormRequest extends FormRequest
         $rules = [
             'first_name' => 'nullable|string|min:0|max:255',
             'last_name' => 'nullable|string|min:0|max:255',
-            'email' => 'nullable|string|min:0|max:255',
-            'phone_number' => 'nullable|numeric|string|min:0|max:10',
-            'adress' => 'nullable',
-            'cnp' => 'nullable|string|min:0|max:13',
-            'identity_seria_nr' => 'nullable|string|min:0|max:6',
-            'settlement' => 'nullable',
-            'identity_seria_type' => 'nullable',
-            'identity_card_type' => 'nullable',
-            'uploader' => 'nullable',
-            'notification_type' => 'nullable',
+            'email' => 'nullable|email|min:0|max:255',
+            'phone_number' => 'nullable|numeric|string|digits:10',
+            'adress' => 'nullable|string',
+            'cnp' => 'nullable|string|numeric|digits:13',
+            'identity_seria_nr' => 'nullable|string|numeric|digits:6',
+            'settlement' => 'nullable|integer',
+            'identity_seria_type' => 'nullable|integer',
+            'identity_card_type' => 'nullable|integer',
+            'uploader' => 'nullable|integer',
+            'notification_type' => 'nullable|integer',
     
         ];
 

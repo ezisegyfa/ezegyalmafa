@@ -77,17 +77,17 @@ class ProductType extends Model
     /**
      * Get the order for this model.
      */
-    public function order()
+    public function orders()
     {
-        return $this->hasOne('App\Models\Order','product_type','id');
+        return $this->hasMany('App\Models\Order','product_type','id');
     }
 
     /**
      * Get the stockTransport for this model.
      */
-    public function stockTransport()
+    public function stockTransports()
     {
-        return $this->hasOne('App\Models\StockTransport','product_type','id');
+        return $this->hasMany('App\Models\StockTransport','product_type','id');
     }
 
 

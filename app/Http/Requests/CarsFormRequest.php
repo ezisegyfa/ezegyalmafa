@@ -25,10 +25,8 @@ class CarsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'license_plate_number' => 'required|numeric|string|min:1|max:20',
-            'type' => 'required',
-            'uploader' => 'required',
-    
+            'license_plate_number' => 'required|string|min:1|max:20',
+            'type' => 'required|integer'
         ];
 
         return $rules;

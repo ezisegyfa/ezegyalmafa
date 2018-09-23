@@ -57,9 +57,9 @@
             <dt>@lang('view.License Plate Number')</dt>
             <dd>{{ $car->license_plate_number}}</dd>
             <dt>@lang('view.Type')</dt>
-            <dd><a href="{{ url('/carTypes/show/' . optional($car->getCarType)->id) }}">{{ optional($car->getCarType)->name }}</a></dd>
+            <dd><a href="{{ url('/carTypes/show/' . optional($car->getCarType)->id) }}">{{ optional($car->getCarType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($car->getUser)->id) }}">{{ optional($car->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($car->getUser)->id) }}">{{ optional($car->getUser)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Created At')</dt>
             <dd>{{ $car->created_at}}</dd>
             <dt>@lang('view.Updated At')</dt>

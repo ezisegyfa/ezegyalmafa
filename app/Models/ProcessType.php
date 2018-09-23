@@ -59,9 +59,9 @@ class ProcessType extends Model
     /**
      * Get the productType for this model.
      */
-    public function productType()
+    public function productTypes()
     {
-        return $this->hasOne('App\Models\ProductType','process_type','id');
+        return $this->hasMany('App\Models\ProductType','process_type','id');
     }
 
 

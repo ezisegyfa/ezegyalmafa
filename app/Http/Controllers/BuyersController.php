@@ -10,6 +10,8 @@ use App\Models\Settlement;
 use App\Models\IdentityCardType;
 use App\Models\NotificationType;
 use App\Models\IdentityCardSeries;
+use App\Models\BuyerObservation;
+use App\Models\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BuyersFormRequest;
 use Auth;
@@ -45,10 +47,10 @@ class BuyersController extends Controller
         $getSettlements = getRenderValues("Settlement");
 $getIdentityCardSeries = getRenderValues("IdentityCardSeries");
 $getIdentityCardTypes = getRenderValues("IdentityCardType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 $getNotificationTypes = getRenderValues("NotificationType");
         
-        return view('buyers.create', compact('getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUsers','getNotificationTypes'));
+        return view('buyers.create', compact('getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUploaders','getNotificationTypes'));
     }
 
     /**
@@ -86,9 +88,11 @@ $getNotificationTypes = getRenderValues("NotificationType");
      */
     public function show($id)
     {
-        $buyer = Buyer::with('getsettlement','getidentitycardseries','getidentitycardtype','getuser','getnotificationtype')->findOrFail($id);
+        $buyerObservationColumnNames = BuyerObservation::getColumnNames();
+        $orderColumnNames = Order::getColumnNames();
+        $buyer = Buyer::with('getsettlement','getIdentitySeriaType','getIdentityCardType','getUploader','getnotificationtype')->findOrFail($id);
 
-        return view('buyers.show', compact('buyer'));
+        return view('buyers.show', compact('buyer', 'buyerObservationColumnNames', 'orderColumnNames'));
     }
 
     /**
@@ -104,10 +108,10 @@ $getNotificationTypes = getRenderValues("NotificationType");
         $getSettlements = getRenderValues("Settlement");
 $getIdentityCardSeries = getRenderValues("IdentityCardSeries");
 $getIdentityCardTypes = getRenderValues("IdentityCardType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 $getNotificationTypes = getRenderValues("NotificationType");
 
-        return view('buyers.edit', compact('buyer','getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUsers','getNotificationTypes'));
+        return view('buyers.edit', compact('buyer','getSettlements','getIdentityCardSeries','getIdentityCardTypes','getUploaders','getNotificationTypes'));
     }
 
     /**

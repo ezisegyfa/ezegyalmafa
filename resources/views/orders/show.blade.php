@@ -57,13 +57,13 @@
             <dt>@lang('view.Quantity')</dt>
             <dd>{{ $order->quantity}}</dd>
             <dt>@lang('view.Buyer')</dt>
-            <dd><a href="{{ url('/buyers/show/' . optional($order->getBuyer)->id) }}">{{ optional($order->getBuyer)->first_name }}</a></dd>
+            <dd><a href="{{ url('/buyers/show/' . optional($order->getBuyer)->id) }}">{{ optional($order->getBuyer)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Product Type')</dt>
-            <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->id }}</a></dd>
+            <dd><a href="{{ url('/productTypes/show/' . optional($order->getProductType)->id) }}">{{ optional($order->getProductType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($order->getUser)->id) }}">{{ optional($order->getUser)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Settlement')</dt>
-            <dd><a href="{{ url('/settlements/show/' . optional($order->getSettlement)->id) }}">{{ optional($order->getSettlement)->id }}</a></dd>
+            <dd><a href="{{ url('/settlements/show/' . optional($order->getSettlement)->id) }}">{{ optional($order->getSettlement)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Price')</dt>
             <dd>{{ $order->price}}</dd>
             <dt>@lang('view.Created At')</dt>

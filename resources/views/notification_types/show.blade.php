@@ -55,7 +55,7 @@
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>@lang('view.Name')</dt>
-            <dd>{{ $notificationType->name}}</dd>
+            <dd>{{ $notificationType->getRenderValue()}}</dd>
 
         </dl>
 

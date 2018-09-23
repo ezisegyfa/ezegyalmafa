@@ -1,20 +1,28 @@
-<table class="display" id="{{ snake_case(lcfirst($title)) }}Table" width="100%" dataRoute="{{ $dataRoute ?? '' }}">
-    <thead>                            
-        <tr>
-            @foreach($columnNames as $columnName)
-                <th databaseColumnName="{{ $columnName }}">@lang('view.' . $columnName)</th>
-            @endforeach
-            <th></th>
-        </tr>
+<?php 
+    $id = $id ?? snake_case(lcfirst($title))
+?>
+
+<table class="display" id="{{ $id }}Table" width="100%" dataRoute="{{ isset($dataRoute) ? url($dataRoute) : '' }}">
+    <thead>
+        @component('layouts.components.dataTableHeaderRow', [
+            'columnNames' => $columnNames,
+            'editButtonColumn' => isset($editButtonColumn),
+            'deleteButtonColumn' => isset($deleteButtonColumn),
+            'showButtonColumn' => isset($showButtonColumn),
+            'buttonColumns' => $buttonColumns ?? []
+        ])
+        @endcomponent
     </thead>
     <tbody>
     </tbody>
     <tfoot>
-        <tr>
-            @foreach($columnNames as $columnName)
-                <th databaseColumnName="{{ $columnName }}">@lang('view.' . $columnName)</th>
-            @endforeach
-            <th></th>
-        </tr>
+        @component('layouts.components.dataTableHeaderRow', [
+            'columnNames' => $columnNames,
+            'editButtonColumn' => isset($editButtonColumn),
+            'deleteButtonColumn' => isset($deleteButtonColumn),
+            'showButtonColumn' => isset($showButtonColumn),
+            'buttonColumns' => $buttonColumns ?? []
+        ])
+        @endcomponent
     </tfoot>
 </table>

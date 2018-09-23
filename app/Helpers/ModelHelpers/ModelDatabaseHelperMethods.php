@@ -41,4 +41,15 @@ trait ModelDatabaseHelperMethods
             return $relationship->name;
         }, getManyToOneRelationships(get_called_class()));
     }
+
+    public static function getGetColumnRelationship(string $columnName)
+    {
+        $columnName = camel_case($columnName);
+        foreach (getManyToOneRelationships(get_called_class()) as $relationship) {
+            $relationColumnName = $relationship->getNameWithoutGetSuffix();
+            if ($columnName === $relationColumnName)
+                return $relationship->name;
+        }
+        return false;
+    }
 }

@@ -63,9 +63,9 @@ class StockTransport extends Model
     }
 
     /**
-     * Get the getUser for this model.
+     * Get the getUploader for this model.
      */
-    public function getUser()
+    public function getUploader()
     {
         return $this->belongsTo('App\User','uploader','id');
     }
@@ -75,7 +75,7 @@ class StockTransport extends Model
      */
     public function transport()
     {
-        return $this->hasOne('App\Models\Transport','stock','id');
+        return $this->hasMany('App\Models\Transport','stock','id');
     }
 
 

@@ -59,9 +59,9 @@ class IdentityCardType extends Model
     /**
      * Get the buyer for this model.
      */
-    public function buyer()
+    public function buyers()
     {
-        return $this->hasOne('App\Models\Buyer','identity_card_type','id');
+        return $this->hasMany('App\Models\Buyer','identity_card_type','id');
     }
 
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Datatables;
 use App\User;
 use App\Models\Driver;
+use App\Models\Transport;
+use App\Models\Car;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DriversFormRequest;
 use Auth;
@@ -38,9 +40,9 @@ class DriversController extends Controller
      */
     public function create()
     {
-        $getUsers = getRenderValues("User");
+        $getUploaders = getRenderValues("User");
         
-        return view('drivers.create', compact('getUsers'));
+        return view('drivers.create', compact('getUploaders'));
     }
 
     /**
@@ -78,9 +80,11 @@ class DriversController extends Controller
      */
     public function show($id)
     {
-        $driver = Driver::with('getuser')->findOrFail($id);
+        $driver = Driver::with('getUploader')->findOrFail($id);
+        $transportColumnNames = Transport::getColumnNames();
+        $carColumnNames = Car::getColumnNames();
 
-        return view('drivers.show', compact('driver'));
+        return view('drivers.show', compact('driver', 'transportColumnNames', 'carColumnNames'));
     }
 
     /**
@@ -93,9 +97,9 @@ class DriversController extends Controller
     public function edit($id)
     {
         $driver = Driver::findOrFail($id);
-        $getUsers = getRenderValues("User");
+        $getUploaders = getRenderValues("User");
 
-        return view('drivers.edit', compact('driver','getUsers'));
+        return view('drivers.edit', compact('driver','getUploaders'));
     }
 
     /**

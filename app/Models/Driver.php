@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-
 class Driver extends Model
 {
     use ModelHelperMethods;
@@ -55,9 +54,9 @@ class Driver extends Model
     protected $casts = [];
     
     /**
-     * Get the getUser for this model.
+     * Get the getUploader for this model.
      */
-    public function getUser()
+    public function getUploader()
     {
         return $this->belongsTo('App\User','uploader','id');
     }
@@ -65,19 +64,23 @@ class Driver extends Model
     /**
      * Get the driverCar for this model.
      */
-    public function driverCar()
+    public function driverCars()
     {
-        return $this->hasOne('App\Models\DriverCar','driver','id');
+        return $this->hasMany('App\Models\DriverCar','driver','id');
     }
 
     /**
      * Get the transport for this model.
      */
-    public function transport()
+    public function transports()
     {
-        return $this->hasOne('App\Models\Transport','driver','id');
+        return $this->hasMany('App\Models\Transport','driver','id');
     }
 
+    public function cars()
+    {
+        return $this->belongsToMany('App\Models\car');
+    }
 
     /**
      * Get created_at in array format

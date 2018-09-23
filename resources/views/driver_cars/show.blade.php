@@ -55,9 +55,9 @@
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>@lang('view.Driver')</dt>
-            <dd><a href="{{ url('/drivers/show/' . optional($driverCar->getDriver)->id) }}">{{ optional($driverCar->getDriver)->id }}</a></dd>
+            <dd><a href="{{ url('/drivers/show/' . optional($driverCar->getDriver)->id) }}">{{ optional($driverCar->getDriver)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Car')</dt>
-            <dd><a href="{{ url('/cars/show/' . optional($driverCar->getCar)->id) }}">{{ optional($driverCar->getCar)->license_plate_number }}</a></dd>
+            <dd><a href="{{ url('/cars/show/' . optional($driverCar->getCar)->id) }}">{{ optional($driverCar->getCar)->getRenderValue() }}</a></dd>
 
         </dl>
 

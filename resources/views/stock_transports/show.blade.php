@@ -57,7 +57,7 @@
             <dt>@lang('view.Quantity')</dt>
             <dd>{{ $stockTransport->quantity}}</dd>
             <dt>@lang('view.Product Type')</dt>
-            <dd><a href="{{ url('/productTypes/show/' . optional($stockTransport->getProductType)->id) }}">{{ optional($stockTransport->getProductType)->image }}</a></dd>
+            <dd><a href="{{ url('/productTypes/show/' . optional($stockTransport->getProductType)->id) }}">{{ optional($stockTransport->getProductType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Average Price')</dt>
             <dd>{{ $stockTransport->average_price}}</dd>
             <dt>@lang('view.Created At')</dt>
@@ -65,7 +65,7 @@
             <dt>@lang('view.Updated At')</dt>
             <dd>{{ $stockTransport->updated_at}}</dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($stockTransport->getUser)->id) }}">{{ optional($stockTransport->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($stockTransport->getUser)->id) }}">{{ optional($stockTransport->getUser)->getRenderValue() }}</a></dd>
 
         </dl>
 

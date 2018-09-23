@@ -61,11 +61,37 @@
             <dt>@lang('view.Cnp')</dt>
             <dd>{{ $driver->cnp}}</dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($driver->getUser)->id) }}">{{ optional($driver->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($driver->getUser)->id) }}">{{ optional($driver->getUser)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Created At')</dt>
             <dd>{{ $driver->created_at}}</dd>
             <dt>@lang('view.Updated At')</dt>
             <dd>{{ $driver->updated_at}}</dd>
+
+            <span class="pull-left">
+                <h4 class="mt-5 mb-3">@lang('view.Transports')</h4>
+            </span>
+
+            @component('layouts.components.dataTable', [
+                'title' => 'transports',
+                'dataRoute' => 'transports/getByDriverQuery/' . $driver->id,
+                'columnNames' => $transportColumnNames,
+                'editButtonColumn' => true,
+                'deleteButtonColumn' => true
+            ])
+            @endcomponent
+
+            <span class="pull-left">
+                <h4 class="mt-5 mb-3">@lang('view.Cars')</h4>
+            </span>
+
+            @component('layouts.components.dataTable', [
+                'title' => 'cars',
+                'dataRoute' => 'cars/getByDriverQuery/' . $driver->id,
+                'columnNames' => $carColumnNames,
+                'editButtonColumn' => true,
+                'deleteButtonColumn' => true
+            ])
+            @endcomponent
 
         </dl>
 

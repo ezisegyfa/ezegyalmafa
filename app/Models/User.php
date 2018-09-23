@@ -9,8 +9,6 @@ use App\Helpers\ModelHelpers\ModelHelperMethods;
 class User extends Authenticatable
 {
     use ModelHelperMethods;
-    
-
 
     public static $renderColumnNames = ['email'];
 
@@ -57,57 +55,57 @@ class User extends Authenticatable
     /**
      * Get the buyerObservation for this model.
      */
-    public function buyerObservation()
+    public function buyerObservations()
     {
-        return $this->hasOne('App\Models\BuyerObservation','uploader','id');
+        return $this->hasMany('App\Models\BuyerObservation','uploader','id');
     }
 
     /**
      * Get the buyer for this model.
      */
-    public function buyer()
+    public function buyers()
     {
-        return $this->hasOne('App\Models\Buyer','uploader','id');
+        return $this->hasMany('App\Models\Buyer','uploader','id');
     }
 
     /**
      * Get the car for this model.
      */
-    public function car()
+    public function cars()
     {
-        return $this->hasOne('App\Models\Car','uploader','id');
+        return $this->hasMany('App\Models\Car','uploader','id');
     }
 
     /**
      * Get the driver for this model.
      */
-    public function driver()
+    public function drivers()
     {
-        return $this->hasOne('App\Models\Driver','uploader','id');
+        return $this->hasMany('App\Models\Driver','uploader','id');
     }
 
     /**
      * Get the order for this model.
      */
-    public function order()
+    public function orders()
     {
-        return $this->hasOne('App\Models\Order','uploader','id');
+        return $this->hasMany('App\Models\Order','uploader','id');
     }
 
     /**
      * Get the stockTransport for this model.
      */
-    public function stockTransport()
+    public function stockTransports()
     {
-        return $this->hasOne('App\Models\StockTransport','uploader','id');
+        return $this->hasMany('App\Models\StockTransport','uploader','id');
     }
 
     /**
      * Get the transport for this model.
      */
-    public function transport()
+    public function transports()
     {
-        return $this->hasOne('App\Models\Transport','uploader','id');
+        return $this->hasMany('App\Models\Transport','uploader','id');
     }
 
 

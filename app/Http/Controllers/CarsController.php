@@ -32,6 +32,11 @@ class CarsController extends Controller
         return Car::getDataTableQuery();
     }
 
+    public function getByDriverQuery($driverId)
+    {
+        return Car::getDataTableQuery(Car::getWithCarsQuery()->where('drivers.id', $driverId));
+    }
+
     /**
      * Show the form for creating a new car.
      *
@@ -40,9 +45,9 @@ class CarsController extends Controller
     public function create()
     {
         $getCarTypes = getRenderValues("CarType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
         
-        return view('cars.create', compact('getCarTypes','getUsers'));
+        return view('cars.create', compact('getCarTypes','getUploaders'));
     }
 
     /**
@@ -80,7 +85,7 @@ $getUsers = getRenderValues("User");
      */
     public function show($id)
     {
-        $car = Car::with('getcartype','getuser')->findOrFail($id);
+        $car = Car::with('getcartype','getUploader')->findOrFail($id);
 
         return view('cars.show', compact('car'));
     }
@@ -96,9 +101,9 @@ $getUsers = getRenderValues("User");
     {
         $car = Car::findOrFail($id);
         $getCarTypes = getRenderValues("CarType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 
-        return view('cars.edit', compact('car','getCarTypes','getUsers'));
+        return view('cars.edit', compact('car','getCarTypes','getUploaders'));
     }
 
     /**

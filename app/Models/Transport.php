@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
-
+use Illuminate\Support\Facades\DB;
 
 class Transport extends Model
 {
-    use ModelHelperMethods;
-    
-
+    use ModelHelperMethods{
+        getColumnNames as protected getOriginalColumnNames;
+        getDataTableQuery as protected getOriginalDataTableQuery;
+    }
 
     public static $renderColumnNames = ['order', 'created_at'];
 
@@ -65,9 +66,9 @@ class Transport extends Model
     }
 
     /**
-     * Get the getUser for this model.
+     * Get the getUploader for this model.
      */
-    public function getUser()
+    public function getUploader()
     {
         return $this->belongsTo('App\User','uploader','id');
     }
@@ -91,7 +92,7 @@ class Transport extends Model
     /**
      * Get the getStockTransport for this model.
      */
-    public function getStockTransport()
+    public function getStock()
     {
         return $this->belongsTo('App\Models\StockTransport','stock','id');
     }
@@ -121,4 +122,46 @@ class Transport extends Model
 
     }
 
+    public function getProfit()
+    {
+        return $this->getIncome() - $this->getCost();
+    }
+
+    public function getIncome()
+    {
+        return $this->getOrder->price * $this->quantity;
+    }
+
+    public function getCost()
+    {
+        return $this->getStock->average_price * $this->quantity;
+    }
+
+    public static function getColumnNames()
+    {
+        $columnNames = static::getOriginalColumnNames();
+        array_push($columnNames, 'profit', 'income', 'cost');
+        return $columnNames;
+    }
+
+    public static function getDataTableQuery($query = null)
+    {
+        $query = static::join('orders', 'orders.id', '=', 'transports.order')
+            ->join('stock_transports', 'stock_transports.id', '=', 'transports.stock')
+            ->select(
+                'transports.id', 
+                'transports.quantity',
+                'transports.order',
+                'transports.uploader',
+                'transports.car',
+                'transports.driver',
+                'transports.stock',
+                DB::raw('orders.price * transports.quantity - stock_transports.average_price * transports.quantity as profit'),
+                DB::raw('orders.price * transports.quantity as income'),
+                DB::raw('stock_transports.average_price * transports.quantity as cost'),
+                'transports.created_at',
+                'transports.updated_at'
+            );
+        return static::getOriginalDataTableQuery($query);
+    }
 }

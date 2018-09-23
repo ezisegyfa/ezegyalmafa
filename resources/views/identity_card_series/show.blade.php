@@ -55,7 +55,7 @@
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>@lang('view.Name')</dt>
-            <dd>{{ $identityCardSeries->name}}</dd>
+            <dd>{{ $identityCardSeries->getRenderValue()}}</dd>
 
         </dl>
 

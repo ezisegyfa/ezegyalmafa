@@ -35,6 +35,16 @@ class OrdersController extends Controller
         return Order::getDataTableQuery();
     }
 
+    public function getUncomplitedQuery()
+    {
+        return Order::getDataTableQuery(Order::getUncomplitedOrdersQuery());
+    }
+
+    public function getByBuyerQuery($buyerId)
+    {
+        return Order::getDataTableQuery(Order::where('buyer', $buyerId));
+    }
+
     /**
      * Show the form for creating a new order.
      *
@@ -44,10 +54,10 @@ class OrdersController extends Controller
     {
         $getBuyers = getRenderValues("Buyer");
 $getProductTypes = getRenderValues("ProductType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 $getSettlements = getRenderValues("Settlement");
         
-        return view('orders.create', compact('getBuyers','getProductTypes','getUsers','getSettlements'));
+        return view('orders.create', compact('getBuyers','getProductTypes','getUploaders','getSettlements'));
     }
 
     /**
@@ -125,7 +135,7 @@ $getSettlements = getRenderValues("Settlement");
      */
     public function show($id)
     {
-        $order = Order::with('getbuyer','getproducttype','getuser','getsettlement')->findOrFail($id);
+        $order = Order::with('getbuyer','getproducttype','getUploader','getsettlement')->findOrFail($id);
 
         return view('orders.show', compact('order'));
     }
@@ -142,10 +152,10 @@ $getSettlements = getRenderValues("Settlement");
         $order = Order::findOrFail($id);
         $getBuyers = getRenderValues("Buyer");
 $getProductTypes = getRenderValues("ProductType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 $getSettlements = getRenderValues("Settlement");
 
-        return view('orders.edit', compact('order','getBuyers','getProductTypes','getUsers','getSettlements'));
+        return view('orders.edit', compact('order','getBuyers','getProductTypes','getUploaders','getSettlements'));
     }
 
     /**

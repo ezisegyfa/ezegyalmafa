@@ -33,6 +33,11 @@ class BuyerObservationsController extends Controller
         return BuyerObservation::getDataTableQuery();
     }
 
+    public function getByBuyerQuery($buyerId)
+    {
+        return BuyerObservation::getDataTableQuery(BuyerObservation::where('buyer', $buyerId));
+    }
+
     /**
      * Show the form for creating a new buyer observation.
      *
@@ -41,10 +46,10 @@ class BuyerObservationsController extends Controller
     public function create()
     {
         $getObservationTypes = getRenderValues("ObservationType");
-$getBuyers = getRenderValues("Buyer");
-$getUsers = getRenderValues("User");
+        $getBuyers = getRenderValues("Buyer");
+        $getUploaders = getRenderValues("User");
         
-        return view('buyer_observations.create', compact('getObservationTypes','getBuyers','getUsers'));
+        return view('buyer_observations.create', compact('getObservationTypes','getBuyers','getUploaders'));
     }
 
     /**
@@ -82,7 +87,7 @@ $getUsers = getRenderValues("User");
      */
     public function show($id)
     {
-        $buyerObservation = BuyerObservation::with('getobservationtype','getbuyer','getuser')->findOrFail($id);
+        $buyerObservation = BuyerObservation::with('getObservationtype','getBuyer','getUploader')->findOrFail($id);
 
         return view('buyer_observations.show', compact('buyerObservation'));
     }
@@ -98,10 +103,10 @@ $getUsers = getRenderValues("User");
     {
         $buyerObservation = BuyerObservation::findOrFail($id);
         $getObservationTypes = getRenderValues("ObservationType");
-$getBuyers = getRenderValues("Buyer");
-$getUsers = getRenderValues("User");
+        $getBuyers = getRenderValues("Buyer");
+        $getUploaders = getRenderValues("User");
 
-        return view('buyer_observations.edit', compact('buyerObservation','getObservationTypes','getBuyers','getUsers'));
+        return view('buyer_observations.edit', compact('buyerObservation','getObservationTypes','getBuyers','getUploaders'));
     }
 
     /**

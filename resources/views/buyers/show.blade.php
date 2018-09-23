@@ -69,21 +69,47 @@
             <dt>@lang('view.Identity Seria Nr')</dt>
             <dd>{{ $buyer->identity_seria_nr}}</dd>
             <dt>@lang('view.Settlement')</dt>
-            <dd><a href="{{ url('/settlements/show/' . optional($buyer->getSettlement)->id) }}">{{ optional($buyer->getSettlement)->id }}</a></dd>
+            <dd><a href="{{ url('/settlements/show/' . optional($buyer->getSettlement)->id) }}">{{ optional($buyer->getSettlement)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Identity Seria Type')</dt>
-            <dd><a href="{{ url('/identityCardSeries/show/' . optional($buyer->getIdentityCardSeries)->id) }}">{{ optional($buyer->getIdentityCardSeries)->id }}</a></dd>
+            <dd><a href="{{ url('/identityCardSeries/show/' . optional($buyer->getIdentitySeriaType)->id) }}">{{ optional($buyer->getIdentitySeriaType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Identity Card Type')</dt>
-            <dd><a href="{{ url('/identityCardTypes/show/' . optional($buyer->getIdentityCardType)->id) }}">{{ optional($buyer->getIdentityCardType)->id }}</a></dd>
+            <dd><a href="{{ url('/identityCardTypes/show/' . optional($buyer->getIdentityCardType)->id) }}">{{ optional($buyer->getIdentityCardType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($buyer->getUser)->id) }}">{{ optional($buyer->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($buyer->getUser)->id) }}">{{ optional($buyer->getUploader)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Notification Type')</dt>
-            <dd><a href="{{ url('/notificationTypes/show/' . optional($buyer->getNotificationType)->id) }}">{{ optional($buyer->getNotificationType)->id }}</a></dd>
+            <dd><a href="{{ url('/notificationTypes/show/' . optional($buyer->getNotificationType)->id) }}">{{ optional($buyer->getNotificationType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Created At')</dt>
             <dd>{{ $buyer->created_at}}</dd>
             <dt>@lang('view.Updated At')</dt>
             <dd>{{ $buyer->updated_at}}</dd>
 
         </dl>
+
+        <div class="pull-left">
+            <h4 class="mt-3 mb-3">@lang('view.Buyer Observations')</h4>
+        </div>
+
+        @component('layouts.components.dataTable', [
+            'title' => 'Buyer Observations',
+            'dataRoute' => 'buyer_observations/getByBuyerQuery/' . $buyer->id,
+            'columnNames' => $buyerObservationColumnNames,
+            'editButtonColumn' => true,
+            'deleteButtonColumn' => true
+        ])
+        @endcomponent  
+
+        <div class="pull-left">
+            <h4 class="mt-3 mb-3">@lang('view.Orders')</h4>
+        </div>
+
+        @component('layouts.components.dataTable', [
+            'title' => 'Orders',
+            'dataRoute' => 'orders/getByBuyerQuery/' . $buyer->id,
+            'columnNames' => $orderColumnNames,
+            'editButtonColumn' => true,
+            'deleteButtonColumn' => true
+        ])
+        @endcomponent  
 
     </div>
 </div>

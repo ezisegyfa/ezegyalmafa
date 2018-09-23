@@ -25,12 +25,11 @@ class OrdersFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'buyer' => 'required',
-            'product_type' => 'required',
-            'uploader' => 'nullable',
-            'settlement' => 'required',
-            'price' => 'required|numeric|min:-2147483648|max:2147483647',
+            'quantity' => 'required|numeric|integer',
+            'buyer' => 'required|integer',
+            'product_type' => 'required|integer',
+            'settlement' => 'required|integer',
+            'price' => 'required|numeric|integer',
     
         ];
 

@@ -26,8 +26,8 @@ class SettlementsFormRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|min:1|max:255',
-            'region' => 'required',
-            'post_code' => 'required|numeric|min:-2147483648|max:2147483647',
+            'region' => 'required|integer',
+            'post_code' => 'required|numeric|integer',
     
         ];
 

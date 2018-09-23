@@ -59,11 +59,11 @@
             <dt>@lang('view.Score')</dt>
             <dd>{{ $buyerObservation->score}}</dd>
             <dt>@lang('view.Type')</dt>
-            <dd><a href="{{ url('/observationTypes/show/' . optional($buyerObservation->getObservationType)->id) }}">{{ optional($buyerObservation->getObservationType)->id }}</a></dd>
+            <dd><a href="{{ url('/observationTypes/show/' . optional($buyerObservation->getObservationType)->id) }}">{{ optional($buyerObservation->getObservationType)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Buyer')</dt>
-            <dd><a href="{{ url('/buyers/show/' . optional($buyerObservation->getBuyer)->id) }}">{{ optional($buyerObservation->getBuyer)->id }}</a></dd>
+            <dd><a href="{{ url('/buyers/show/' . optional($buyerObservation->getBuyer)->id) }}">{{ optional($buyerObservation->getBuyer)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Uploader')</dt>
-            <dd><a href="{{ url('/users/show/' . optional($buyerObservation->getUser)->id) }}">{{ optional($buyerObservation->getUser)->id }}</a></dd>
+            <dd><a href="{{ url('/users/show/' . optional($buyerObservation->getUploader)->id) }}">{{ optional($buyerObservation->getUploader)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Created At')</dt>
             <dd>{{ $buyerObservation->created_at}}</dd>
             <dt>@lang('view.Updated At')</dt>

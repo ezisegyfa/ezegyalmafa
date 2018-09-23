@@ -22,13 +22,11 @@
         </ul>
     @endif
 
-    <div class="btn-group btn-group-sm pull-right" role="group">
+    <div class="panel panel-default">
+
         <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
             <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.BackToMenu')</span>
         </a>
-    </div>
-
-    <div class="panel panel-default">
 
         <div class="panel-heading clearfix">
 
@@ -46,9 +44,28 @@
         
         @component('layouts.components.dataTable', [
             'title' => 'Transports',
-            'columnNames' => $columnNames
+            'columnNames' => $transportColumnNames,
+            'editButtonColumn' => true,
+            'deleteButtonColumn' => true,
         ])
-        @endcomponent   
+        @endcomponent
+
+        <div class="pull-left">
+            <h4 class="mt-3">@lang('view.Uncompleted orders')</h4>
+        </div>
+
+        @component('layouts.components.dataTable', [
+            'title' => 'uncomlitedOrders',
+            'dataRoute' => 'orders/getUncomplitedQuery',
+            'columnNames' => $orderColumnNames,
+            'buttonColumns' => [
+                [
+                    'link' => url('transports/createByOrder'),
+                    'text' => 'Create'
+                ]
+            ]
+        ])
+        @endcomponent
     
     </div>
 @endsection

@@ -29,8 +29,6 @@ class UsersController extends Controller
         return User::getDataTableQuery();
     }
 
-    }
-
     /**
      * Display the specified user.
      *

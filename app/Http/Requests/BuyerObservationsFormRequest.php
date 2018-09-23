@@ -25,11 +25,10 @@ class BuyerObservationsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'text' => 'required',
+            'text' => 'required|string',
             'score' => 'required|numeric|min:-2147483648|max:2147483647',
-            'type' => 'required',
-            'buyer' => 'required',
-            'uploader' => 'required',
+            'type' => 'required|integer',
+            'buyer' => 'required|integer',
     
         ];
 

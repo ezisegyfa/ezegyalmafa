@@ -22,13 +22,11 @@
         </ul>
     @endif
 
-    <div class="btn-group btn-group-sm pull-right" role="group">
+    <div class="panel panel-default">
+
         <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
             <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.BackToMenu')</span>
         </a>
-    </div>
-
-    <div class="panel panel-default">
 
         <div class="panel-heading clearfix">
 
@@ -46,7 +44,9 @@
         
         @component('layouts.components.dataTable', [
             'title' => 'Identity Card Types',
-            'columnNames' => $columnNames
+            'columnNames' => $columnNames,
+            'editButtonColumn' => true,
+            'deleteButtonColumn' => true,
         ])
         @endcomponent   
     

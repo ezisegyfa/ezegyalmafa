@@ -39,9 +39,9 @@ class StockTransportsController extends Controller
     public function create()
     {
         $getProductTypes = getRenderValues("ProductType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
         
-        return view('stock_transports.create', compact('getProductTypes','getUsers'));
+        return view('stock_transports.create', compact('getProductTypes','getUploaders'));
     }
 
     /**
@@ -78,7 +78,7 @@ $getUsers = getRenderValues("User");
      */
     public function show($id)
     {
-        $stockTransport = StockTransport::with('getproducttype','getuser')->findOrFail($id);
+        $stockTransport = StockTransport::with('getproducttype','getUploader')->findOrFail($id);
 
         return view('stock_transports.show', compact('stockTransport'));
     }
@@ -94,9 +94,9 @@ $getUsers = getRenderValues("User");
     {
         $stockTransport = StockTransport::findOrFail($id);
         $getProductTypes = getRenderValues("ProductType");
-$getUsers = getRenderValues("User");
+$getUploaders = getRenderValues("User");
 
-        return view('stock_transports.edit', compact('stockTransport','getProductTypes','getUsers'));
+        return view('stock_transports.edit', compact('stockTransport','getProductTypes','getUploaders'));
     }
 
     /**

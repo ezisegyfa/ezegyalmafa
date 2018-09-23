@@ -38,6 +38,7 @@
             {{ csrf_field() }}
             @include ('transports.form', [
                                         'transport' => null,
+                                        'order' => $order ?? null
                                       ])
 
                 <div class="form-group">

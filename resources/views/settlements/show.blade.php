@@ -57,7 +57,7 @@
             <dt>@lang('view.Name')</dt>
             <dd>{{ $settlement->name}}</dd>
             <dt>@lang('view.Region')</dt>
-            <dd><a href="{{ url('/regions/show/' . optional($settlement->getRegion)->id) }}">{{ optional($settlement->getRegion)->name }}</a></dd>
+            <dd><a href="{{ url('/regions/show/' . optional($settlement->getRegion)->id) }}">{{ optional($settlement->getRegion)->getRenderValue() }}</a></dd>
             <dt>@lang('view.Post Code')</dt>
             <dd>{{ $settlement->post_code}}</dd>
 

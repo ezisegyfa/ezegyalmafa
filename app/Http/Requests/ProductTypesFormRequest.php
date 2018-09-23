@@ -26,8 +26,8 @@ class ProductTypesFormRequest extends FormRequest
     {
         $rules = [
             'image' => 'required|numeric|string|min:1|max:255',
-            'material_type' => 'required',
-            'process_type' => 'required',
+            'material_type' => 'required|integer',
+            'process_type' => 'required|integer',
     
         ];
 

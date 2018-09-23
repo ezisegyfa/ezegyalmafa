@@ -25,12 +25,11 @@ class TransportsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'order' => 'required',
-            'uploader' => 'required',
-            'car' => 'required',
-            'driver' => 'required',
-            'stock' => 'required',
+            'quantity' => 'required|integer',
+            'order' => 'required|integer',
+            'car' => 'required|integer',
+            'driver' => 'required|integer',
+            'stock' => 'required|integer',
     
         ];
 

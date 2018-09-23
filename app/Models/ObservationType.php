@@ -59,9 +59,9 @@ class ObservationType extends Model
     /**
      * Get the buyerObservation for this model.
      */
-    public function buyerObservation()
+    public function buyerObservations()
     {
-        return $this->hasOne('App\Models\BuyerObservation','type','id');
+        return $this->hasMany('App\Models\BuyerObservation','type','id');
     }
 
 

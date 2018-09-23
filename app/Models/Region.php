@@ -62,7 +62,7 @@ class Region extends Model
      */
     public function settlement()
     {
-        return $this->hasOne('App\Models\Settlement','region','id');
+        return $this->hasMany('App\Models\Settlement','region','id');
     }
 
 

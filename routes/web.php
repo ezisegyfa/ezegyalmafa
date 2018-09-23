@@ -34,6 +34,8 @@ Route::group(
 
     Route::get('/getQuery', 'BuyerObservationsController@getQuery');     
 
+    Route::get('/getByBuyerQuery/{buyer}', 'BuyerObservationsController@getByBuyerQuery');     
+
     Route::post('/filter', 'BuyerObservationsController@filter')
          ->name('buyer_observations.buyer_observation.index.filter');
 
@@ -144,6 +146,8 @@ Route::group(
          ->name('cars.car.index');
 
     Route::get('/getQuery', 'CarsController@getQuery');     
+
+    Route::get('/getByDriverQuery/{driver}', 'CarsController@getByDriverQuery');  
 
     Route::post('/filter', 'CarsController@filter')
          ->name('cars.car.index.filter');
@@ -441,7 +445,9 @@ Route::group(
 
     Route::get('/getQuery', 'OrdersController@getQuery');  
 
-    Route::get('/byBuyer/{buyer}', 'OrdersController@byBuyer');   
+    Route::get('/getUncomplitedQuery', 'OrdersController@getUncomplitedQuery');  
+
+    Route::get('/getByBuyerQuery/{buyer}', 'OrdersController@getByBuyerQuery');   
 
     Route::post('/filter', 'OrdersController@filter')
          ->name('orders.order.index.filter');
@@ -663,13 +669,17 @@ Route::group(
     Route::get('/', 'TransportsController@index')
          ->name('transports.transport.index');
 
-    Route::get('/getQuery', 'TransportsController@getQuery');     
+    Route::get('/getQuery', 'TransportsController@getQuery');  
+
+    Route::get('/getByDriverQuery/{driver}', 'TransportsController@getByDriverQuery');
 
     Route::post('/filter', 'TransportsController@filter')
          ->name('transports.transport.index.filter');
 
     Route::get('/create','TransportsController@create')
          ->name('transports.transport.create');
+
+    Route::get('/createByOrder/{order}','TransportsController@createByOrder'); 
 
     Route::get('/show/{transport}','TransportsController@show')
          ->name('transports.transport.show')

@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
+use Illuminate\Support\Facades\DB;
 
 class Buyer extends Model
 {
-    use ModelHelperMethods;
-    
-
+    use ModelHelperMethods{
+        getColumnNames as protected getOriginalColumnNames;
+        getDataTableQuery as protected getOriginalDataTableQuery;
+    }
 
     public static $renderColumnNames = ['email'];
 
@@ -72,7 +74,7 @@ class Buyer extends Model
     /**
      * Get the getIdentityCardSeries for this model.
      */
-    public function getIdentityCardSeries()
+    public function getIdentitySeriaType()
     {
         return $this->belongsTo('App\Models\IdentityCardSeries','identity_seria_type','id');
     }
@@ -86,9 +88,9 @@ class Buyer extends Model
     }
 
     /**
-     * Get the getUser for this model.
+     * Get the getUploader for this model.
      */
-    public function getUser()
+    public function getUploader()
     {
         return $this->belongsTo('App\User','uploader','id');
     }
@@ -104,17 +106,17 @@ class Buyer extends Model
     /**
      * Get the buyerObservation for this model.
      */
-    public function buyerObservation()
+    public function buyerObservations()
     {
-        return $this->hasOne('App\Models\BuyerObservation','buyer','id');
+        return $this->hasMany('App\Models\BuyerObservation','buyer','id');
     }
 
     /**
      * Get the order for this model.
      */
-    public function order()
+    public function orders()
     {
-        return $this->hasOne('App\Models\Order','buyer','id');
+        return $this->hasMany('App\Models\Order','buyer','id');
     }
 
 
@@ -140,6 +142,42 @@ class Buyer extends Model
     {
         return \DateTime::createFromFormat('j/n/Y g:i A', $value);
 
+    }
+
+    public static function getColumnNames()
+    {
+        $columnNames = static::getOriginalColumnNames();
+        array_push($columnNames, 'profit', 'income', 'cost');
+        return $columnNames;
+    }
+
+    public static function getDataTableQuery()
+    {
+        $query = static::join('orders', 'orders.buyer', '=', 'buyers.id')
+            ->join('transports', 'orders.id', '=', 'transports.order')
+            ->join('stock_transports', 'stock_transports.id', '=', 'transports.stock')
+            ->select(
+                'buyers.id', 
+                'buyers.first_name',
+                'buyers.last_name',
+                'buyers.email',
+                'buyers.phone_number',
+                'buyers.adress',
+                'buyers.cnp',
+                'buyers.identity_seria_nr',
+                'buyers.settlement',
+                'buyers.identity_seria_type',
+                'buyers.identity_card_type',
+                'buyers.uploader',
+                'buyers.notification_type',
+                DB::raw('SUM(transports.quantity * orders.price) - SUM(stock_transports.average_price * transports.quantity) AS profit'),
+                DB::raw('SUM(transports.quantity * orders.price) AS income'),
+                DB::raw('SUM(stock_transports.average_price * transports.quantity) as cost'),
+                'buyers.created_at',
+                'buyers.updated_at'
+            )
+            ->groupBy('buyers.id');
+        return static::getOriginalDataTableQuery($query);
     }
 
 }

@@ -33,15 +33,7 @@
             </div>
 
             <div class="row mt-3 mb-3">
-                <div class="col-2">
-                    @include('layouts.leftBar')
-                </div>
-                <div class="col-8"> 
-                    @yield('content')
-                </div>
-                <div class="col-2">
-                    @include('layouts.rightBar')
-                </div>
+                @yield('content')
             </div>
 
             <div class="row fixed-bottom">
