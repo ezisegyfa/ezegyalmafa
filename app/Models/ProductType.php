@@ -41,7 +41,9 @@ class ProductType extends Model
     protected $fillable = [
                   'image',
                   'material_type',
-                  'process_type'
+                  'process_type',
+                  'average_price',
+                  'description'
               ];
 
     /**

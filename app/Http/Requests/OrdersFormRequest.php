@@ -29,6 +29,7 @@ class OrdersFormRequest extends FormRequest
             'buyer' => 'required|integer',
             'product_type' => 'required|integer',
             'settlement' => 'required|integer',
+            'address' => 'required|string'
             'price' => 'required|numeric|integer',
     
         ];
@@ -44,7 +45,7 @@ class OrdersFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['quantity','buyer','product_type','uploader','settlement','price']);
+        $data = $this->only(['quantity','buyer','product_type','uploader','settlement','address', 'price']);
 
 
 

@@ -43,6 +43,18 @@
 ])
 @endcomponent
 
+@component('layouts.components.formInputTextAreaField', [
+    'title' => __('view.address'),
+	'cssClass' => '',
+	'name' => 'address',
+	'value' => $address ??  old('address', optional($order)->address) ,
+	'minLength' => '',
+	'maxLength' => '',
+	'minValue' => '',
+	'maxValue' => ''
+])
+@endcomponent
+
 @component('layouts.components.formInputTextRow', [
     'title' => __('view.Price'),
 	'cssClass' => '',

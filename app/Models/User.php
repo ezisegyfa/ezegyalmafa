@@ -35,7 +35,10 @@ class User extends Authenticatable
                   'name',
                   'email',
                   'password',
-                  'remember_token'
+                  'remember_token',
+                  'last_activity',
+                    'accepted_gdpr',
+                    'isAnonymized'
               ];
 
     /**

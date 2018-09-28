@@ -17,13 +17,20 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('DataTables-1.10.18/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('DataTables-1.10.18/css/dataTables.jqueryui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('DataTables-1.10.18/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('DataTables-1.10.18/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('DataTables-1.10.18/css/dataTables.foundation.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('DataTables-1.10.18/css/dataTables.semanticui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('dataTables.min.css') }}" rel="stylesheet">
+    <!-- dataTables -->
+    <link href="{{ asset('css/dataTables/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables/dataTables.jqueryui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables/dataTables.foundation.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables/dataTables.semanticui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables/dataTables.min.css') }}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+    <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+
+    @yield('header')
 </head>
 <body>
     <div id="app">
@@ -48,13 +55,13 @@
     <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
 
     <!-- dataTables -->
-    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.jqueryui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.foundation.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('DataTables-1.10.18/js/dataTables.semanticui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.jqueryui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.foundation.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.semanticui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.min.js') }}"></script>
     @include('layouts.dataTableInitializer')
 
     @yield('scripts')

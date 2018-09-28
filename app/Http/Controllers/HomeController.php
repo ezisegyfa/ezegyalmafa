@@ -3,19 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductType;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -23,11 +14,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $productTypes = ProductType::with('getmaterialtype','getprocesstype')->get();
+        return view('welcome', compact('productTypes'));
     }
 
     public function showMenu()
     {
         return view('menu');
+    }
+
+    public function showTermsAndConditions()
+    {
+        return view('termsAndConditions');
+    }
+
+    public function showPrivateDataProtectionDescription()
+    {
+        return view('privateDataProtectionDescription');
     }
 }

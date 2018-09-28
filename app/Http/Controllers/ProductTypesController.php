@@ -63,7 +63,7 @@ $getProcessTypes = getRenderValues("ProcessType");
                              ->with('success_message', 'Product Type was successfully added!');
 
         } catch (Exception $exception) {
-
+            dd($exception->getMessage());
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }

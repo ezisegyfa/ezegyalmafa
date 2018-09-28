@@ -53,11 +53,10 @@ class OrdersController extends Controller
     public function create()
     {
         $getBuyers = getRenderValues("Buyer");
-$getProductTypes = getRenderValues("ProductType");
-$getUploaders = getRenderValues("User");
-$getSettlements = getRenderValues("Settlement");
+        $getProductTypes = getRenderValues("ProductType");
+        $getSettlements = getRenderValues("Settlement");
         
-        return view('orders.create', compact('getBuyers','getProductTypes','getUploaders','getSettlements'));
+        return view('orders.create', compact('getBuyers','getProductTypes','getSettlements'));
     }
 
     /**
@@ -86,15 +85,17 @@ $getSettlements = getRenderValues("Settlement");
         }
     }
 
-    public function createWithBuyer()
+    public function createWithBuyer($productTypeId)
     {
-        $getProductTypes = ProductType::pluck('name','id')->all();
-        $getCities = City::pluck('name','id')->all();
-        $getIdentityCardSeries = IdentityCardSeries::pluck('name','id')->all();
-        $getIdentityCardTypes = IdentityCardType::pluck('name','id')->all();
+        $product_type = $productTypeId;
+        $getProductTypes = getRenderValues("ProductType");
+        $getSettlements = getRenderValues("Settlement");
+        $getIdentityCardSeries = getRenderValues("IdentityCardSeries");
+        $getIdentityCardTypes = getRenderValues("IdentityCardType");
+        $getNotificationTypes = getRenderValues("NotificationType");
         $storedData = json_decode(Cookie::get('buyer'));
 
-        return view('orders.createWithBuyerForm', compact('getProductTypes', 'getCities', 'getIdentityCardSeries', 'getIdentityCardTypes', 'storedData'));
+        return view('orders.createWithBuyer', compact('getProductTypes', 'getSettlements', 'getIdentityCardSeries', 'getIdentityCardTypes', 'getNotificationTypes', 'storedData', 'product_type'));
     }
 
     public function storeWithBuyer(Request $request)
@@ -103,27 +104,30 @@ $getSettlements = getRenderValues("Settlement");
             'buyer.first_name' => 'required|string|min:1|max:255',
             'buyer.last_name' => 'required|string|min:1|max:255',
             'buyer.email' => 'nullable|string|min:0|max:255',
-            'buyer.phone_number' => 'required|numeric|string|min:1',
+            'buyer.phone_number' => 'required|numeric|string|digits:10',
             'buyer.adress' => 'required',
-            'buyer.cnp' => 'required|string|min:1|max:10',
-            'buyer.seria_nr' => 'required|string|min:1|max:10',
-            'buyer.city' => 'required',
-            'buyer.seria' => 'required',
+            'buyer.cnp' => 'required|string|numeric|digits:13',
+            'buyer.identity_seria_nr' => 'required|string|numeric|digits:6',
+            'buyer.settlement' => 'required',
+            'buyer.identity_seria_type' => 'required',
             'buyer.identity_card_type' => 'required',
-            'quantity' => 'required|numeric|min:-2147483648|max:2147483647',
-            'product_type' => 'required',
+            'order.quantity' => 'required|numeric|min:-2147483648|max:2147483647',
+            'order.product_type' => 'required',
+            'order.settlement' => 'required',
+            'order.address' => 'required|string'
         ]);
 
         $data = $request->all();
-        $buyer = Buyer::firstOrCreate($data['buyer'], ['cnp' => $data['buyer']['cnp']]);
-        $data['buyer'] = $buyer->id;
-        Order::create($data);
+        $buyer = Buyer::where(['cnp' => $data['buyer']['cnp']])->first();
+        if (!$buyer)
+            $buyer = Buyer::create($data['buyer']);
+        $orderRawData = $data['order'];
+        $orderRawData['buyer'] = $buyer->id;
+        $orderRawData['price'] = ProductType::find($orderRawData['product_type'])->average_price;
+        Order::create($orderRawData);
 
-        $response = redirect()->route('orders.order.index')
+        return redirect('/')
                          ->with('success_message', 'Order was successfully added!');
-        if (array_key_exists('remember_me', $data))
-            $response = $response->withCookie(Cookie::forever('buyer', json_encode($data['buyer'])));
-        return $response;
     }
 
     /**

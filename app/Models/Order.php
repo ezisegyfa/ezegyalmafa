@@ -40,6 +40,7 @@ class Order extends Model
                   'product_type',
                   'uploader',
                   'settlement',
+                  'address',
                   'price'
               ];
 

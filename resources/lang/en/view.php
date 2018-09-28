@@ -41,6 +41,8 @@ return [
     'notification_type' => 'Notification type',
 
     'order' => 'Comenz',
+    'order_settlement' => 'Order settlement',
+    'order_address' => 'Order address',
     'price' => 'Price',
     'average_price' => 'Average Price',
     'quantity' => 'Quantity',
@@ -48,6 +50,8 @@ return [
     'material_type' => 'Tip de materie',
     'process_type' => 'Tip de process',
     'image' => 'Image',
+    'Image' => 'Image',
+    'description' => 'Description',
     
     'code' => 'Codul',
     'post_code' => 'Post Code',
@@ -174,5 +178,12 @@ return [
     'SelectOption' => 'Select Option',
 
     'Create new' => 'Create new',
-    'Orders to complete' => 'Orders to complete'
+    'Orders to complete' => 'Orders to complete',
+
+    /*
+     * Terms and conditions
+     */
+    
+    'accept' => 'I accept ',
+    'terms' => 'Terms and conditions'
 ];

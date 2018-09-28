@@ -41,6 +41,8 @@ return [
     'notification_type' => 'Tip de notificare',
 
     'order' => 'Comenz',
+    'order_settlement' => 'Comenz oras',
+    'order_address' => 'Comenz adresa',
     'price' => 'Preț',
     'average_price' => 'Prețul mediu',
     'quantity' => 'Cantitate',
@@ -48,6 +50,8 @@ return [
     'material_type' => 'Tip de materie',
     'process_type' => 'Tip de process',
     'image' => 'Imagine',
+    'Image' => 'Imagine',
+    'description' => 'Descriere',
     
     'code' => 'Codul',
     'post_code' => 'Cod postal',
@@ -175,5 +179,12 @@ return [
     'SelectOption' => 'Selectați opțiunea',
 
     'Create new' => 'Creaza nou',
-    'Orders to complete' => 'Comenzi pentru a finaliza'
+    'Orders to complete' => 'Comenzi pentru a finaliza',
+
+    /*
+     * Terms and conditions
+     */
+
+    'accept' => 'accept ',
+    'terms' => 'Termeni si conditii'
 ];

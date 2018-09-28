@@ -33,3 +33,20 @@
 ])
 @endcomponent
 
+@component('layouts.components.formInputTextRow', [
+    'title' => __('view.average_price'),
+	'cssClass' => '',
+	'name' => 'average_price',
+	'type' => 'number',
+	'value' => $average_price ??  old('average_price', optional($productType)->average_price) ,
+	'step' => ''
+])
+@endcomponent
+
+@component('layouts.components.formInputTextAreaField', [
+    'title' => __('view.description'),
+	'cssClass' => '',
+	'name' => 'description',
+	'value' => $description ??  old('description', optional($productType)->description)
+])
+@endcomponent
