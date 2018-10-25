@@ -179,7 +179,7 @@
                 <div class="card py-4 h-100">
                   <div class="card-body text-center">
                     <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                    <div class="text-black mb-2"><a href="{{ url('/termsAndConditions') }}">Általános felhasználási feltételek</a></div>
+                    <div class="text-black mb-2"><a href="{{ url('/generalTermsAndConditions') }}">Általános felhasználási feltételek</a></div>
                     <div class="text-black mb-2"><a href="http://www.anpc.gov.ro">ANPC</a></div>
                     <div class="text-black mb-2"><a href="{{ url('/privateDataProtectionDescription') }}">Személyes adatok védelme</a></div>
                   </div>

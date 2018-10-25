@@ -22,6 +22,7 @@ Route::get('orders/createWithBuyer/{productType}','OrdersController@createWithBu
  ->name('orders.order.createWithBuyer');
 Route::post('orders/storeWithBuyer','OrdersController@storeWithBuyer')
      ->name('orders.order.storeWithBuyer');
+Route::get('setup', 'SetupController@setup');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/menu', 'HomeController@showMenu')->name('menu');

@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function showTermsAndConditions()
     {
-        return view('termsAndConditions');
+        return view('generalTermsAndConditions');
     }
 
     public function showPrivateDataProtectionDescription()
