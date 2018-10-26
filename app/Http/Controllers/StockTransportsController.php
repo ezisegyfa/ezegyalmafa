@@ -9,6 +9,7 @@ use App\Models\ProductType;
 use App\Models\StockTransport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StockTransportsFormRequest;
+use Auth;
 use Exception;
 
 class StockTransportsController extends Controller
@@ -56,6 +57,7 @@ $getUploaders = getRenderValues("User");
         try {
             
             $data = $request->getData();
+            $data['uploader'] = Auth::user()->id;
             
             StockTransport::create($data);
 

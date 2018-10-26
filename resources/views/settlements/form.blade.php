@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Name'),
+    'title' => __('view.name'),
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Region'),
+    'title' => __('view.region'),
     'cssClass' => '',
     'name' => 'region',
 	'value' => $region ??  old('region', optional($settlement)->region) ,
@@ -24,7 +24,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Post Code'),
+    'title' => __('view.post_code'),
 	'cssClass' => '',
 	'name' => 'post_code',
 	'type' => 'number',

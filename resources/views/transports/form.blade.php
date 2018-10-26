@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Quantity'),
+    'title' => __('view.quantity'),
 	'cssClass' => '',
 	'name' => 'quantity',
 	'type' => 'number',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Order'),
+    'title' => __('view.order'),
     'cssClass' => '',
     'name' => 'order',
 	'value' => $order ??  old('order', optional($transport)->order) ,
@@ -24,7 +24,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Car'),
+    'title' => __('view.car'),
     'cssClass' => '',
     'name' => 'car',
 	'value' => $car ??  old('car', optional($transport)->car) ,
@@ -34,7 +34,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Driver'),
+    'title' => __('view.driver'),
     'cssClass' => '',
     'name' => 'driver',
 	'value' => $driver ??  old('driver', optional($transport)->driver) ,
@@ -44,7 +44,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Stock'),
+    'title' => __('view.stock'),
     'cssClass' => '',
     'name' => 'stock',
 	'value' => $stock ??  old('stock', optional($transport)->stock) ,

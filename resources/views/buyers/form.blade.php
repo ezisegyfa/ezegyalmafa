@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.First Name'),
+    'title' => __('view.first_name'),
 	'cssClass' => '',
 	'name' => 'first_name',
 	'type' => 'text',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Last Name'),
+    'title' => __('view.last_name'),
 	'cssClass' => '',
 	'name' => 'last_name',
 	'type' => 'text',
@@ -28,7 +28,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Email'),
+    'title' => __('view.email'),
 	'cssClass' => '',
 	'name' => 'email',
 	'type' => 'text',
@@ -42,7 +42,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Phone Number'),
+    'title' => __('view.phone_number'),
 	'cssClass' => '',
 	'name' => 'phone_number',
 	'type' => 'text',
@@ -56,7 +56,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextAreaField', [
-    'title' => __('view.Adress'),
+    'title' => __('view.adress'),
 	'cssClass' => '',
 	'name' => 'adress',
 	'value' => $adress ??  old('adress', optional($buyer)->adress) ,
@@ -68,7 +68,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Cnp'),
+    'title' => __('view.cnp'),
 	'cssClass' => '',
 	'name' => 'cnp',
 	'type' => 'text',
@@ -82,7 +82,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Identity Seria Nr'),
+    'title' => __('view.identity_seria_nr'),
 	'cssClass' => '',
 	'name' => 'identity_seria_nr',
 	'type' => 'text',
@@ -96,7 +96,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Settlement'),
+    'title' => __('view.settlement'),
     'cssClass' => '',
     'name' => 'settlement',
 	'value' => $settlement ??  old('settlement', optional($buyer)->settlement) ,
@@ -106,7 +106,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Identity Seria Type'),
+    'title' => __('view.identity_seria_type'),
     'cssClass' => '',
     'name' => 'identity_seria_type',
 	'value' => $identity_seria_type ??  old('identity_seria_type', optional($buyer)->identity_seria_type) ,
@@ -116,7 +116,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Identity Card Type'),
+    'title' => __('view.identity_card_type'),
     'cssClass' => '',
     'name' => 'identity_card_type',
 	'value' => $identity_card_type ??  old('identity_card_type', optional($buyer)->identity_card_type) ,
@@ -126,7 +126,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Notification Type'),
+    'title' => __('view.notification_type'),
     'cssClass' => '',
     'name' => 'notification_type',
 	'value' => $notification_type ??  old('notification_type', optional($buyer)->notification_type) ,

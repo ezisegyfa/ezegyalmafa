@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Quantity'),
+    'title' => __('view.quantity'),
 	'cssClass' => '',
 	'name' => 'quantity',
 	'type' => 'number',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Product Type'),
+    'title' => __('view.product_type'),
     'cssClass' => '',
     'name' => 'product_type',
 	'value' => $product_type ??  old('product_type', optional($stockTransport)->product_type) ,
@@ -24,7 +24,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Average Price'),
+    'title' => __('view.average_price'),
 	'cssClass' => '',
 	'name' => 'average_price',
 	'type' => 'number',

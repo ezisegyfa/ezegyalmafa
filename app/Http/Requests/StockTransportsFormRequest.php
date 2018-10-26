@@ -28,7 +28,6 @@ class StockTransportsFormRequest extends FormRequest
             'quantity' => 'required|integer',
             'product_type' => 'required|integer',
             'average_price' => 'required|integer'
-    
         ];
 
         return $rules;

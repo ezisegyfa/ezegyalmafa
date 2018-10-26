@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Name'),
+    'title' => __('view.name'),
 	'cssClass' => '',
 	'name' => 'name',
 	'type' => 'text',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Email'),
+    'title' => __('view.email'),
 	'cssClass' => '',
 	'name' => 'email',
 	'type' => 'text',
@@ -28,7 +28,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Password'),
+    'title' => __('view.password'),
 	'cssClass' => '',
 	'name' => 'password',
 	'type' => 'text',
@@ -42,7 +42,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Remember Token'),
+    'title' => __('view.remember_token'),
 	'cssClass' => '',
 	'name' => 'remember_token',
 	'type' => 'text',

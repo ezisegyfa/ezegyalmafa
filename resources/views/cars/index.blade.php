@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <div class="panel panel-default">
+
     @if(Session::has('success_message'))
         <div class="alert alert-success">
             <span class="glyphicon glyphicon-ok"></span>
@@ -21,8 +23,6 @@
             @endforeach
         </ul>
     @endif
-
-    <div class="panel panel-default">
 
         <a href="{{ route('menu') }}" class="btn btn-primary" title="Return to menu">
             <span class="glyphicon glyphicon-th-list" aria-hidden="true">@lang('view.BackToMenu')</span>

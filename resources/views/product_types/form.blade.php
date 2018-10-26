@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Image'),
+    'title' => __('view.image'),
 	'cssClass' => '',
 	'name' => 'image',
 	'type' => 'text',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Material Type'),
+    'title' => __('view.material_type'),
     'cssClass' => '',
     'name' => 'material_type',
 	'value' => $material_type ??  old('material_type', optional($productType)->material_type) ,
@@ -24,7 +24,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Process Type'),
+    'title' => __('view.process_type'),
     'cssClass' => '',
     'name' => 'process_type',
 	'value' => $process_type ??  old('process_type', optional($productType)->process_type) ,

@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.First Name'),
+    'title' => __('view.first_name'),
 	'cssClass' => '',
 	'name' => 'first_name',
 	'type' => 'text',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Last Name'),
+    'title' => __('view.last_name'),
 	'cssClass' => '',
 	'name' => 'last_name',
 	'type' => 'text',
@@ -28,7 +28,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Cnp'),
+    'title' => __('view.cnp'),
 	'cssClass' => '',
 	'name' => 'cnp',
 	'type' => 'text',

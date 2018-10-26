@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextAreaField', [
-    'title' => __('view.Text'),
+    'title' => __('view.text'),
 	'cssClass' => '',
 	'name' => 'text',
 	'value' => $text ??  old('text', optional($buyerObservation)->text) ,
@@ -12,7 +12,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Score'),
+    'title' => __('view.score'),
 	'cssClass' => '',
 	'name' => 'score',
 	'type' => 'number',
@@ -26,7 +26,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Type'),
+    'title' => __('view.type'),
     'cssClass' => '',
     'name' => 'type',
 	'value' => $type ??  old('type', optional($buyerObservation)->type) ,
@@ -36,7 +36,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Buyer'),
+    'title' => __('view.buyer'),
     'cssClass' => '',
     'name' => 'buyer',
 	'value' => $buyer ??  old('buyer', optional($buyerObservation)->buyer) ,

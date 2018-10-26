@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.License Plate Number'),
+    'title' => __('view.license_plate_number'),
 	'cssClass' => '',
 	'name' => 'license_plate_number',
 	'type' => 'text',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Type'),
+    'title' => __('view.type'),
     'cssClass' => '',
     'name' => 'type',
 	'value' => $type ??  old('type', optional($car)->type) ,

@@ -1,6 +1,6 @@
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Quantity'),
+    'title' => __('view.quantity'),
 	'cssClass' => '',
 	'name' => 'quantity',
 	'type' => 'number',
@@ -14,7 +14,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Buyer'),
+    'title' => __('view.buyer'),
     'cssClass' => '',
     'name' => 'buyer',
 	'value' => $buyer ??  old('buyer', optional($order)->buyer) ,
@@ -24,7 +24,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Product Type'),
+    'title' => __('view.product_type'),
     'cssClass' => '',
     'name' => 'product_type',
 	'value' => $product_type ??  old('product_type', optional($order)->product_type) ,
@@ -34,7 +34,7 @@
 @endcomponent
 
 @component('layouts.components.formInputSelectMenuField', [
-    'title' => __('view.Settlement'),
+    'title' => __('view.settlement'),
     'cssClass' => '',
     'name' => 'settlement',
 	'value' => $settlement ??  old('settlement', optional($order)->settlement) ,
@@ -56,7 +56,7 @@
 @endcomponent
 
 @component('layouts.components.formInputTextRow', [
-    'title' => __('view.Price'),
+    'title' => __('view.price'),
 	'cssClass' => '',
 	'name' => 'price',
 	'type' => 'number',

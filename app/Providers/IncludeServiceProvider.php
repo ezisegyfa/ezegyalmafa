@@ -13,21 +13,25 @@ class IncludeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerDirectoryContent(app_path() . '\\Helpers');
+        require_once(str_replace('\\', '/', app_path() . '/Helpers/PathMethods.php'));
+        //var_dump('Loaded helper methods:');
+        $this->registerDirectoryContent(join_paths(app_path(), config('helpers.directory', 'Helpers')));
     }
 
     protected function registerDirectoryContent(string $directoryUrl)
     {
         $this->registerSubDirectoriyContents($directoryUrl);
-        $fileUrls = glob($directoryUrl . '\\*.php');
+        $fileUrls = glob(join_paths($directoryUrl, '*.php'));
         foreach ($fileUrls as $fileUrl)
-            if(file_exists($fileUrl))
+            if(file_exists($fileUrl)) {
+                //var_dump($fileUrl);
                 require_once($fileUrl);
+            }
     }
 
     protected function registerSubDirectoriyContents(string $directoryUrl)
     {
-        $directoryUrls = glob($directoryUrl . '\\*' , GLOB_ONLYDIR);
+        $directoryUrls = glob(join_paths($directoryUrl, '*'), GLOB_ONLYDIR);
         foreach ($directoryUrls as $directoryUrl)
             $this->registerDirectoryContent($directoryUrl);
     }

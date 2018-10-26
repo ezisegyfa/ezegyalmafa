@@ -2,7 +2,7 @@
 class DataTable {
     constructor(table) {
         this.title = table.id.replace('Table', '')
-        this.tableUrl = window.location.origin + '/' + this.title
+        this.tableUrl = "{{ URL::to('/') }}" + '/' + this.title
         this.addSearchInputsToTable()
         var dataTable = this.getDataTable(table)
         this.addSearchFunctionsToTable(dataTable)
@@ -65,7 +65,7 @@ class DataTable {
 
     getColumnWithNullData(firstHtmlPart, lastHtmlPart) {
         return {
-            "data":           null,
+            "data":           'id',
             "defaultContent": "",
             render : function ( data, type, row, meta ) {
                 return firstHtmlPart + row.id + lastHtmlPart;
@@ -75,7 +75,7 @@ class DataTable {
 
 
     getDeleteButtonColumnHtmlFirstPart() {
-        return '<form method="POST" action="' + this.tableUrl
+        return '<form method="POST" action="' + this.tableUrl + '/'
     }
 
     getDeleteButtonColumnHtmlLastPart() {
