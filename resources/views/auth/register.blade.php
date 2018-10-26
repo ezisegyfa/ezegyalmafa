@@ -5,7 +5,7 @@
         <div class="card-header">{{ __('Register') }}</div>
 
         <div class="card-body">
-            <form id="register-form" method="POST" action="{{ url('register') }}" aria-label="{{ __('Register') }}">
+            <form id="register-form" method="POST" action="/register" aria-label="{{ __('Register') }}">
                 @csrf
 
                 @component('layouts.components.formInputTextRow',[
