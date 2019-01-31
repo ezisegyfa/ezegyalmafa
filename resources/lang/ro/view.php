@@ -29,7 +29,7 @@ return [
     'password' => 'Password',
     'remember_token' => 'Remember token',
     'phone_number' => 'Numar de telefon',
-    'adress' => 'Adresa',
+    'address' => 'Adresa',
     'settlement' => 'Oras',
     'region' => 'Județ',
     'cnp' => 'Cnp',

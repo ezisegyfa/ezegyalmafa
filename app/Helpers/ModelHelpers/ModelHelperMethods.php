@@ -4,6 +4,9 @@ namespace App\Helpers\ModelHelpers;
 
 use App\Helpers\ModelHelpers\ModelRecursiveMethods;
 use App\Helpers\ModelHelpers\ModelFilterMethods;
+use App\Helpers\ModelHelpers\ModelDatabaseHelpers\ModelDatabaseMethods;
+use App\Helpers\ModelHelpers\ModelDatabaseHelpers\ModelSelectMethods;
+use App\Helpers\ModelHelpers\ModelFormInfoMethods;
 use Yajra\DataTables\Datatables;
 use Illuminate\Database\Eloquent\Model;
 use Log;
@@ -13,7 +16,7 @@ use Log;
  */
 trait ModelHelperMethods
 {
-    use ModelRecursiveMethods, ModelFilterMethods;
+    use ModelRecursiveMethods, ModelFilterMethods, ModelDatabaseMethods, ModelSelectMethods, ModelFormInfoMethods;
 
     public function getResource()
     {
@@ -21,11 +24,60 @@ trait ModelHelperMethods
     	return new $resourceClassName($this);
     }
 
-    public function getResourceClassName()
+    public static function getResourceClassName()
     {
-        $className = get_class($this);
-        $classNamespaceUrl = substr($className, 0, strripos($className, '\\'));
-    	return str_replace($classNamespaceUrl, 'App\\Http\\Resources', $className)  . 'Resource';
+        $className = get_called_class();
+        return str_replace(static::getNamespace(), 'App\\Http\\Resources', $className)  . 'Resource';
+    }
+
+    public static function getRequestClassName()
+    {
+        $className = get_called_class();
+        return str_replace(static::getNamespace(), 'App\\Http\\Requests', $className)  . 'Request';
+    }
+
+    public static function getNamespace()
+    {
+        $className = get_called_class();
+        return substr($className, 0, strripos($className, '\\'));
+    }
+
+    public static function getDataTableQuery($query = null)
+    {
+        if (!$query)
+            $query = static::withRelationsQuery();
+        $query = DataTables::of($query);
+        $query = static::addRenderValuesToDatatableQuery($query);
+        $query = static::addFiltersToDatatableQuery($query);
+        return $query->make(true);
+    }
+
+    public static function addRenderValuesToDatatableQuery($query)
+    {
+        foreach (static::getManyToOneRelationships() as $relationship) {
+            $columnName = static::getTableName() . '.' . $relationship->getColumnName();
+            $relatedModelTypeName = $relationship->getModelTypeNamespaceUrl();
+            $query->editColumn($columnName, function ($model) use($relatedModelTypeName) {
+                $valueToRender = '';
+                foreach ($relatedModelTypeName::$renderColumnNames as $renderColumnName) {
+                    $propertyName = $relatedModelTypeName::getTableName() . '.' . $renderColumnName;
+                    $valueToRender .= $model->$propertyName . ' - ';
+                }
+                return substr($valueToRender, 0, strlen($valueToRender) - 3);
+            });
+        }
+        return $query;
+    }
+
+    public static function addFiltersToDatatableQuery($query)
+    {
+        foreach (static::getManyToOneRelationships() as $relationship) {
+            $columnName = static::getTableName() . '.' . $relationship->getColumnName();
+            $query = $query->filterColumn($columnName, function($query, $keyword) use($relationship){
+                $query->whereRaw($relationship->getRenderColumnSearchQuery('"%' . $keyword . '%"'));
+            });
+        }
+        return $query;
     }
 
     public function getRenderValue()
@@ -33,7 +85,7 @@ trait ModelHelperMethods
         $modelTypeName = get_called_class();
         $renderValue = '';
         foreach ($modelTypeName::$renderColumnNames as $columnName) {
-            $columnRelationship = static::getGetColumnRelationship($columnName);
+            $columnRelationship = static::getColumnRelationship($columnName);
             if ($columnRelationship)
                 $renderValue .= $this->$columnRelationship->getRenderValue();
             else {
@@ -48,24 +100,34 @@ trait ModelHelperMethods
         return substr($renderValue, 0, strlen($renderValue) - 3);
     }
 
-    public static function getDataTableQuery($query = null)
+    protected static $requestRules;
+    public static function getRequestRules()
     {
-        if ($query)
-            $query = $query->with(static::getRelationshipNames());
+        if (!isset(static::$requestRules))
+            static::setRequestRules();
+        return static::$requestRules;
+    }
+    public static function setRequestRules()
+    {
+        $requestFiles = getRequestNamespaceUrls();
+        $requestTypeNamespaceUrl = static::getRequestClassName();
+        if (in_array($requestTypeNamespaceUrl, $requestFiles))
+            static::$requestRules = (new $requestTypeNamespaceUrl)->rules();
         else
-            $query = static::with(static::getRelationshipNames());
-        $query = static::addRenderValuesToDatatableQuery(Datatables::of($query));
-        return $query->make(true);
+            static::$requestRules = getTableRequestRules(static::getTableName());
     }
 
-    public static function addRenderValuesToDatatableQuery($query)
+    public static function getTypeName()
     {
-        foreach (static::getRelationshipNames() as $relationColumnName) {
-            $columnName = lcfirst(snake_case(removeGetSuffix($relationColumnName)));
-            $query = $query->editColumn($columnName, function ($model) use($relationColumnName) {
-                return $model->$relationColumnName->getRenderValue();
-            });
-        }
-        return $query;
+        return last(explode('\\', get_called_class()));
+    }
+
+    public static function getDataFromRequest($request)
+    {
+        $data = [];
+        foreach ($request->all() as $key => $requestData)
+            if (in_array($key, static::getColumnNames()))
+                $data[$key] = $requestData;
+        return $data;
     }
 }

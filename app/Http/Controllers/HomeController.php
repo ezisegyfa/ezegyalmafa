@@ -20,7 +20,9 @@ class HomeController extends Controller
 
     public function showMenu()
     {
-        return view('menu');
+        $user = \Auth::user();
+        $tableNames = getDatabaseTableNames();
+        return view('menu', compact('user', 'tableNames'));
     }
 
     public function showTermsAndConditions()

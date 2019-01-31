@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
+use App\Helpers\FormInfos\CheckBox;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,5 +37,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        $formInfos = [
+            User::getColumnDefaultFormInfos('email'),
+            User::getColumnDefaultFormInfos('password'),
+            new CheckBox('remember', 'Remember me')
+        ];
+        return view('auth.login', compact('formInfos'));
     }
 }

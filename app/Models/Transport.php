@@ -156,7 +156,7 @@ class Transport extends Model
                 'transports.car',
                 'transports.driver',
                 'transports.stock',
-                DB::raw('orders.price * transports.quantity - stock_transports.average_price * transports.quantity as profit'),
+                DB::raw('(orders.price - stock_transports.average_price) * transports.quantity as profit'),
                 DB::raw('orders.price * transports.quantity as income'),
                 DB::raw('stock_transports.average_price * transports.quantity as cost'),
                 'transports.created_at',

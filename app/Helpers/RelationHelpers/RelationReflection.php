@@ -64,14 +64,33 @@ function getOneParameterMethods(string $classTypeName)
 
 function getMethodRelationshipModelName(ReflectionMethod $method)
 {
+    return getNamespaceUrlClassName(getMethodRelationshipModelNamespaceUrl($method));
+}
+
+function getMethodRelationshipModelNamespaceUrl(ReflectionMethod $method)
+{
+    return getMethodParams($method)[0];
+}
+
+function getMethodParams(ReflectionMethod $method)
+{
+    $methodParamsPart = getMethodParamsPart($method);
+    $paramStrings = explode(',', $methodParamsPart);
+    if (count($paramStrings) == 0)
+        throw new Exception("Invalid method body!", 1);
+    else
+        return array_map(function($paramString) {
+            return str_replace(' ', '', str_replace("'", '', str_replace('::class', '', $paramString)));
+        }, $paramStrings);
+}
+
+function getMethodParamsPart(ReflectionMethod $method)
+{
     $methodBody = getMethodBody($method);
-    $parameterStartingPosition = getMethodBodyPartPosition('(', $methodBody, 'helpers.methodDoesntHaveFunctionCall') + 1;
-    $methodBodyAfterRelationshipFunction = substr($methodBody, $parameterStartingPosition);
-    $comaPosition = getMethodBodyPartPosition(',', $methodBodyAfterRelationshipFunction, 'helpers.methodDoesntHaveClassPart');
-    $modelNamespaceUrl = substr($methodBodyAfterRelationshipFunction, 0, $comaPosition);
-    $modelNamespaceUrl = str_replace('\'', '', str_replace('::class', '', $modelNamespaceUrl));
-    $modelName = last(explode('\\', $modelNamespaceUrl));
-    return $modelName;
+    $parametersStartingPosition = getMethodBodyPartPosition('(', $methodBody, 'helpers.methodDoesntHaveFunctionCall') + 1;
+    $parametersEndingPosition = getMethodBodyPartPosition(')', $methodBody, 'helpers.methodDoesntHaveFunctionCall') + 1;
+    $methodParametersPart = substr($methodBody, $parametersStartingPosition, $parametersEndingPosition - $parametersStartingPosition - 1);
+    return $methodParametersPart;
 }
 
 function getMethodBody(ReflectionMethod $method)
@@ -93,7 +112,7 @@ function getMethodBodyPartPosition(string $methodPartToFind, string $methodBody,
     if ($searchedPosition)
         return $searchedPosition;
     else
-        throw new Exception(__($errorMessageTitle) . ' Method body: ' . $methodBody);
+        throw new \Exception(__($errorMessageTitle) . ' Method body: ' . $methodBody);
         
 }
 
@@ -135,7 +154,7 @@ function checkRelatedValueTypes(array $relationAttributes)
     foreach ($relationAttributes as $relationAttribute) {
         $relatedValueType = gettype($relationAttribute->data);
         if ($relatedValueType != 'array' && !is_numeric($relatedValueType) != 'integer')
-            throw new Exception(__('helpers.invalidRelationDataType'));
+            throw new \Exception(__('helpers.invalidRelationDataType'));
     }
 }
 

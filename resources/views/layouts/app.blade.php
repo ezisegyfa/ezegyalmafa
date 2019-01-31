@@ -29,24 +29,11 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-
-    @yield('header')
+    @yield('styles')
 </head>
 <body>
     <div id="app">
-        <div class="container-fluid">
-            <div class="row">
-                @include('layouts.header')
-            </div>
-
-            <div class="row mt-3 mb-3">
-                @yield('content')
-            </div>
-
-            <div class="row fixed-bottom">
-                @include('layouts.footer')
-            </div>
-        </div>
+        @yield('content')
     </div>
     
     <!-- Scripts -->
@@ -63,7 +50,5 @@
     <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.semanticui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.min.js') }}"></script>
     @include('layouts.dataTableInitializer')
-
-    @yield('scripts')
 </body>
 </html>

@@ -85,7 +85,7 @@
                         <br>
                         Leírás: {{ $productType->description }}
                     </div>
-                    <img class="d-block w-100" src="{{ url('img/ipad.png') }}">
+                    <img class="d-block w-100" src="{{ $productType->image_link }}">
                 </div>
             @endforeach
           </div>

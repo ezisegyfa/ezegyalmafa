@@ -1,5 +1,5 @@
 <div class="form-group row {{ $errors->has('text') ? 'has-error' : '' }}">
-	<label for="{{ $name }}" class="col-md-3 col-form-label">{{ $title ?? $name }}</label>
+	<label for="{{ $name }}" class="col-md-3 col-form-label">{{ $label ?? $name }}</label>
 	
     <div class="col-md-6">
     	@yield('inputContent')

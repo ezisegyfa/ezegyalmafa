@@ -6,47 +6,81 @@ use ReflectionMethod;
 
 class Relationship
 {
+    use RelationPropertyGetters;
+
     public $name;
-    public $modelTypeName;
+    public $modelTypeNamespaceUrl;
+    public $columnName;
 
     public function __construct(ReflectionMethod $method)
     {
-    	$this->name = $method->getName();
-    	$this->modelTypeName = getMethodRelationshipModelName($method);
+        $this->name = $method->getName();
+        $methodParams = getMethodParams($method);
+        $this->modelTypeNamespaceUrl = $methodParams[0];
+        if (count($methodParams) > 1)
+            $this->columnName = $methodParams[1];
+        else
+            $this->columnName = snake_case(removeGetSuffix($this->name)) . '_id';
     }
 
-    public function getModelTypeNamespaceUrl()
+    public function selectSingularNamedProperAttribute(array $attributes)
     {
-        return 'App\\Models\\' . $this->modelTypeName;
+        return $this->selectProperAttribute($attributes, [
+            str_singular($this->name),
+            str_singular($this->getModelTypeName()),
+            str_singular($this->getNameInCamelFormat()),
+            str_singular($this->getNameInSnakeFormat()),
+            str_singular($this->getModelTypeNameInCamelFormat()),
+            str_singular($this->getModelTypeNameInSnakeFormat()),
+        ]);
     }
 
-    public function getParentModelFieldName()
+    public function selectPluralNamedProperAttribute(array $attributes)
     {
-    	return strtolower(snake_case($this->modelTypeName . '_id'));
+        return $this->selectProperAttribute($attributes, [
+            str_plural($this->name),
+            str_plural($this->getModelTypeName()),
+            str_plural($this->getNameInCamelFormat()),
+            str_plural($this->getNameInSnakeFormat()),
+            str_plural($this->getModelTypeNameInCamelFormat()),
+            str_plural($this->getModelTypeNameInSnakeFormat())
+        ]);
     }
 
-    public function getNameWithoutGetSuffix()
+    public function selectProperAttribute(array $attributes, array $potentialRelationAttributeNames)
     {
-        return lcfirst(removeGetSuffix($this->name));
+        foreach ($potentialRelationAttributeNames as $attributeName)
+            if ($this->hasAttribute($attributeName, $attributes))
+                return $attributes[$attributeName];
+        return null;
     }
 
-    public function getNameInCamelFormat()
+    protected function hasAttribute(string $attributeNameToCheck, array $attributes)
     {
-    	return camel_case($this->name);
+        return array_key_exists($attributeNameToCheck, $attributes) && is_array($attributes[$attributeNameToCheck]);
     }
 
-    public function getNameInSnakeFormat()
+    public function createRelatedModel(array $attributes)
     {
-    	return snake_case($this->name);
+        $modelTypeName = $this->getModelTypeNamespaceUrl();
+        return $modelTypeName::firstOrCreateRecursively($attributes);
     }
 
-    public function getModelTypeNameInCamelFormat()
+    public function getRenderColumnSearchQuery(string $searchedText)
     {
-    	return camel_case($this->modelTypeName);
+        return getRenderColumnSearchQuery($this->getRenderColumnNames(), $searchedText);
     }
 
-    public function getModelTypeNameInSnakeFormat()
+    public function getRenderColumnNames()
     {
-    	return snake_case($this->modelTypeName);
+        $renderColumnNames = [];
+        $relatedModelTypeName = $this->getModelTypeNamespaceUrl();
+        $tableName = $this->getTableName();
+        foreach ($relatedModelTypeName::$renderColumnNames as $relatedRenderColumnName)
+            if ($relatedModelTypeName::isRelationColumnName($relatedRenderColumnName))
+                $renderColumnNames = array_merge($renderColumnNames, $relatedModelTypeName::getColumnRelationship($this->name)->getRenderColumnNames());
+            else
+                array_push($renderColumnNames, $tableName . '.' . $relatedRenderColumnName);
+        return $renderColumnNames;
     }
 }

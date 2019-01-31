@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
+use App\Helpers\FormInfos\Input;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
+    private $ACCESS_CODE = "e10adc3949ba59abbe56e057f20f883e";
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -53,7 +55,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'access_code' => ['required', function($attribute, $value, $fail) {
-                if (md5($value) !== env('ACCESS_CODE')) 
+                if (md5($value) !== $this->ACCESS_CODE) 
                     return $fail('Access code is invalid.');
             }]
         ]);
@@ -72,5 +74,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        $formInfos = array_slice(User::getFormInfos(), 0, 3);
+        array_push($formInfos, new Input('password_confirmation', '', null, 'required|password|max:255'));
+        array_push($formInfos, new Input('access_code', '', null, 'required|max:255'));
+        return view('auth.register', compact('formInfos'));
     }
 }

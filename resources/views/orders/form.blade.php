@@ -46,8 +46,8 @@
 @component('layouts.components.formInputTextAreaField', [
     'title' => __('view.address'),
 	'cssClass' => '',
-	'name' => 'address',
-	'value' => $address ??  old('address', optional($order)->address) ,
+	'name' => 'adress',
+	'value' => $adress ??  old('adress', optional($order)->adress) ,
 	'minLength' => '',
 	'maxLength' => '',
 	'minValue' => '',

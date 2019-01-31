@@ -3,7 +3,6 @@
 namespace App\Helpers\ModelHelpers;
 
 use App\Helpers\RelationHelpers\Relationship;
-use App\Helpers\ModelHelpers\ModelDatabaseHelperMethods;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Log;
@@ -13,8 +12,6 @@ use Log;
  */
 trait ModelRecursiveMethods
 {
-    use ModelDatabaseHelperMethods;
-
     protected static function updateRecursively(array $attributes)
     {
         $attributes = static::updateRelatedValues($attributes);
@@ -75,7 +72,7 @@ trait ModelRecursiveMethods
 
     protected static function filterAttributesByTableColumnNames(array $attributes)
     {
-        $tableColumnNames = static::getTableColumnNames();
+        $tableColumnNames = static::getColumnNames();
         return collect($attributes)->filter(function($attributeValue, $attributeName) use($tableColumnNames) { 
             return in_array($attributeName, $tableColumnNames); 
         })->toArray();

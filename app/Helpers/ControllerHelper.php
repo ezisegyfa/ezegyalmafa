@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-//use Exception;
 
 function processUpdateModelRequest(string $modelTypeNameWithNamespaceUrl, Request $request, $id)
 {
@@ -13,7 +12,7 @@ function processUpdateModelRequest(string $modelTypeNameWithNamespaceUrl, Reques
                 return response()->json($modelToUpdate);
             else
                 return response()->json(getErrorMessage($id, $request, $modelTypeName));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(getErrorMessage($id, $request) . __('helpers.errorMessage') . $e->message);
         }
     }
@@ -37,4 +36,11 @@ function getRenderValues(string $modelClassName)
         $identifiers[$model->id] = $model->getRenderValue();
     });
     return $identifiers;
+}
+
+function getRequestNamespaceUrls()
+{
+    return array_map(function($requestFilePath) {
+        return 'App\\Models\\' . str_replace('.php', '', last(explode('/', $requestFilePath)));
+    }, getRequestFiles());
 }

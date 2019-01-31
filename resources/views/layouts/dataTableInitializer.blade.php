@@ -1,25 +1,37 @@
 <script>
 class DataTable {
-    constructor(table) {
-        this.title = table.id.replace('Table', '')
-        this.tableUrl = "{{ URL::to('/') }}" + '/' + this.title
-        this.addSearchInputsToTable()
+    constructor(table)
+    {
+        this.tableUrl = "{{ URL::to('/') }}" + '/' + this.getTableName(table)
+        this.addSearchInputsToTable(table)
         var dataTable = this.getDataTable(table)
         this.addSearchFunctionsToTable(dataTable)
     }
 
-    addSearchInputsToTable() {
-        $('#' + this.title + 'Table tfoot th').each(function () {
-            if (this.getAttribute("databaseColumnName"))
-                $(this).html('<input type="text" placeholder="Search ' + $(this).text() + '"/>' );
-        });
+    getTableName(table)
+    {
+        var tableName = table.getAttribute('tableName')
+        if (tableName)
+            return tableName
+        else
+            return pluralize(table.id.replace('Table', ''))
     }
 
-    getDataTable(table) {
+    addSearchInputsToTable(table)
+    {
+        $('#' + table.id + ' tfoot th').each(function () {
+            if (this.getAttribute("databaseColumnName")) {
+                $(this).html('<input type="text" placeholder="Search ' + $(this).text() + '"/>' )
+            }
+        })
+    }
+
+    getDataTable(table)
+    {
         var dataRoute = table.getAttribute('dataRoute')
         if (!dataRoute || dataRoute === '')
             dataRoute = this.tableUrl + '/getQuery'
-        return $('#' + this.title + 'Table').DataTable({
+        return $('#' + table.id).DataTable({
             processing : true,
             serverSide : true,
             ajax : dataRoute,
@@ -27,78 +39,60 @@ class DataTable {
         });
     }
 
-    getDataTableColumns(table) {
+    getDataTableColumns(table)
+    {
         var columns = []
         var headerTags = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0].getElementsByTagName('th')
         for (var i = 0; i < headerTags.length; ++i) {
             var columnName = headerTags[i].getAttribute("databaseColumnName")
             if (columnName)
                 columns.push({ data : columnName})
+            else if (headerTags[i].hasAttribute("deleteButtonColumn"))
+                    columns.push(this.getColumnWithNullData(this.getDeleteButtonHtml, this.tableUrl))
             else {
-                if (headerTags[i].hasAttribute("editButtonColumn"))
-                    columns.push(this.getColumnWithNullData(
-                        this.getLinkButtonColumnHtmlFirstPart(this.tableUrl), 
-                        '/edit' + this.getLinkButtonColumnHtmlLastPart("@lang('view.Edit')"))
-                    )
-                else if (headerTags[i].hasAttribute("deleteButtonColumn"))
-                    columns.push(this.getColumnWithNullData(
-                        this.getDeleteButtonColumnHtmlFirstPart(this.tableUrl), 
-                        this.getDeleteButtonColumnHtmlLastPart())
-                    )
-                else if (headerTags[i].hasAttribute("showButtonColumn"))
-                    columns.push(this.getColumnWithNullData(
-                        this.getLinkButtonColumnHtmlFirstPart(this.tableUrl + '/show'), 
-                        this.getLinkButtonColumnHtmlLastPart("@lang('view.Show')"))
-                    )
-                else if (headerTags[i].hasAttribute("linkButtonColumn")) {
-                    var buttonLink = headerTags[i].getAttribute("buttonLink")
-                    var buttonText = headerTags[i].getAttribute("buttonText")
-                    columns.push(this.getColumnWithNullData(
-                        this.getLinkButtonColumnHtmlFirstPart(buttonLink), 
-                        this.getLinkButtonColumnHtmlLastPart(buttonText))
-                    )
+                if (headerTags[i].hasAttribute("linkButtonColumn")) {
+                    var buttonLink = headerTags[i].getAttribute("buttonlink")
+                    var buttonText = headerTags[i].getAttribute("buttontext")
+                    columns.push(this.getColumnWithNullData(this.getLinkButtonColumnHtml, buttonLink, buttonText))
                 }
+                else
+                    console.log('Column nr. ' + i + ' is invalid')
             }
         }
         return columns;
     }
 
-    getColumnWithNullData(firstHtmlPart, lastHtmlPart) {
+    getColumnWithNullData(renderHtmlFunction, ...otherParams)
+    {
         return {
             "data":           'id',
             "defaultContent": "",
             render : function ( data, type, row, meta ) {
-                return firstHtmlPart + row.id + lastHtmlPart;
+                return renderHtmlFunction(row, otherParams);
             }
         };
     }
 
-
-    getDeleteButtonColumnHtmlFirstPart() {
-        return '<form method="POST" action="' + this.tableUrl + '/'
-    }
-
-    getDeleteButtonColumnHtmlLastPart() {
-        return '" accept-charset="UTF-8">' +
+    getDeleteButtonHtml(row, tableUrl)
+    {
+        return '<form method="POST" action="' + tableUrl + '/' + row.id + '" accept-charset="UTF-8">' +
                     '<input name="_method" value="DELETE" type="hidden">' + 
                     '{!! csrf_field() !!}' +
-                    '<button type="submit" class="btn btn-danger" onclick="return confirm(&quot;Delete Driver?&quot;)">' +
+                    '<button type="submit" class="btn btn-danger" onclick="return confirm(&quot;Delete Model?&quot;)">' +
                         '<span class="glyphicon glyphicon-trash" aria-hidden="true">' + "@lang('view.Delete')" + '</span>' +
                     '</button>' +
-                '</form>';
+                '</form>'
     }
 
-    getLinkButtonColumnHtmlFirstPart(link) {
-        return '<a href="' + link + '/'
-    }
-
-    getLinkButtonColumnHtmlLastPart(text) {
-        return '" class="btn btn-info">' +
-                    '<span class="glyphicon glyphicon-open" aria-hidden="true">' + text + '</span>' +
+    getLinkButtonColumnHtml(row, buttonProperties)
+    {
+        return '<a href="' + buttonProperties[0] + '/' + Object.values(row)[0] + '" class="btn btn-info">' +
+                    '<span class="glyphicon glyphicon-open" aria-hidden="true">' + buttonProperties[1] + '</span>' +
                 '</a>';
     }
 
-    addSearchFunctionsToTable(table) {
+    addSearchFunctionsToTable(table)
+    {
         table.columns(function ( idx, data, node ) {
             return node.textContent != '';
         }).every(function () {
@@ -115,7 +109,8 @@ class DataTable {
 }
 initDataTables()
 
-function initDataTables() {
+function initDataTables()
+{
     tables = document.getElementsByTagName('table')
     for (var i = 0; i < tables.length; i++)
         var d = new DataTable(tables[i]);

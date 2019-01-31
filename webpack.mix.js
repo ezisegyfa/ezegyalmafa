@@ -17,4 +17,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
 		'resources/assets/js/helperFunctions.js',
 		'resources/assets/js/routeFunctions.js'
 	], 'public/js/helperMethods.js')
-	.sass('resources/assets/sass/app.scss', 'public/css');
+	.sass('resources/assets/sass/app.scss', 'public/css')
+	.copy('resources/assets/css/crm.css', 'public/css');

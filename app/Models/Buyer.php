@@ -13,7 +13,7 @@ class Buyer extends Model
         getDataTableQuery as protected getOriginalDataTableQuery;
     }
 
-    public static $renderColumnNames = ['email'];
+    public static $renderColumnNames = ['email', 'first_name', 'last_name', 'cnp'];
 
     /**
      * The database table used by the model.
@@ -153,30 +153,30 @@ class Buyer extends Model
 
     public static function getDataTableQuery()
     {
-        $query = static::join('orders', 'orders.buyer', '=', 'buyers.id')
-            ->join('transports', 'orders.id', '=', 'transports.order')
-            ->join('stock_transports', 'stock_transports.id', '=', 'transports.stock')
+        $query = static::leftJoin('orders', 'orders.buyer', '=', 'buyers.id')
+            ->leftJoin('transports', 'orders.id', '=', 'transports.order')
+            ->leftJoin('stock_transports', 'stock_transports.id', '=', 'transports.stock')
             ->select(
-                'buyers.id', 
-                'buyers.first_name',
-                'buyers.last_name',
-                'buyers.email',
-                'buyers.phone_number',
-                'buyers.adress',
-                'buyers.cnp',
-                'buyers.identity_seria_nr',
-                'buyers.settlement',
-                'buyers.identity_seria_type',
-                'buyers.identity_card_type',
-                'buyers.uploader',
-                'buyers.notification_type',
+                'buyers.id AS id', 
+                'buyers.first_name AS first_name',
+                'buyers.last_name AS last_name',
+                'buyers.email AS email',
+                'buyers.phone_number AS phone_number',
+                'buyers.adress AS adress',
+                'buyers.cnp AS cnp',
+                'buyers.identity_seria_nr AS identity_seria_nr',
+                'buyers.settlement AS settlement',
+                'buyers.identity_seria_type AS identity_seria_type',
+                'buyers.identity_card_type AS identity_card_type',
+                'buyers.uploader AS uploader',
+                'buyers.notification_type AS notification_type',
                 DB::raw('SUM(transports.quantity * orders.price) - SUM(stock_transports.average_price * transports.quantity) AS profit'),
                 DB::raw('SUM(transports.quantity * orders.price) AS income'),
                 DB::raw('SUM(stock_transports.average_price * transports.quantity) as cost'),
                 'buyers.created_at',
                 'buyers.updated_at'
             )
-            ->groupBy('buyers.id');
+            ->groupBy('buyers.id', 'buyers.first_name', 'buyers.last_name', 'buyers.email', 'buyers.phone_number', 'buyers.adress', 'buyers.cnp', 'buyers.identity_seria_nr', 'buyers.settlement', 'buyers.identity_seria_type', 'buyers.identity_card_type', 'buyers.uploader', 'buyers.notification_type', 'buyers.created_at', 'buyers.updated_at');
         return static::getOriginalDataTableQuery($query);
     }
 

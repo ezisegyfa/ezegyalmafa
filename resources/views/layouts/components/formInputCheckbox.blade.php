@@ -2,7 +2,7 @@
     <div class="col-md-6 offset-md-4">
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="{{ $name }}" {{ old($name) ? 'checked' : '' }}> {{ $title ?? $name }}
+                <input type="checkbox" name="{{ $name }}" {{ $value ? 'checked' : '' }}> {{ $label ?? $name }}
             </label>
         </div>
     </div>

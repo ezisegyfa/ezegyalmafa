@@ -17,7 +17,7 @@ class Settlement extends Model
      */
     public $timestamps = false;
 
-    public static $renderColumnNames = ['name'];
+    public static $renderColumnNames = ['name', 'region'];
 
     /**
      * The database table used by the model.
@@ -63,7 +63,7 @@ class Settlement extends Model
      */
     public function getRegion()
     {
-        return $this->belongsTo('App\Models\Region','region','id');
+        return $this->belongsTo(\App\Models\Region::class,'region','id');
     }
 
     /**

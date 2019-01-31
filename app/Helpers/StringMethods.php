@@ -21,3 +21,8 @@ function getSuffix(string $text)
     else
     	return '';
 }
+
+function getNamespaceUrlClassName(string $namspaceUrl)
+{
+	return last(explode('\\', $namspaceUrl));
+}

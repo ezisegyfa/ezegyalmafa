@@ -1,14 +1,11 @@
 <?php 
-    $id = $id ?? snake_case(lcfirst($title))
+    $id = $id ?? snake_case(lcfirst(str_singular($tableName)))
 ?>
 
-<table class="display" id="{{ $id }}Table" width="100%" dataRoute="{{ isset($dataRoute) ? url($dataRoute) : '' }}">
+<table class="display" id="{{ $id }}Table" dataRoute="{{ isset($dataRoute) ? url($dataRoute) : url($tableName) . '/getQuery' }}" tableName="{{ $tableName }}">
     <thead>
         @component('layouts.components.dataTableHeaderRow', [
             'columnNames' => $columnNames,
-            'editButtonColumn' => isset($editButtonColumn),
-            'deleteButtonColumn' => isset($deleteButtonColumn),
-            'showButtonColumn' => isset($showButtonColumn),
             'buttonColumns' => $buttonColumns ?? []
         ])
         @endcomponent
@@ -18,9 +15,6 @@
     <tfoot>
         @component('layouts.components.dataTableHeaderRow', [
             'columnNames' => $columnNames,
-            'editButtonColumn' => isset($editButtonColumn),
-            'deleteButtonColumn' => isset($deleteButtonColumn),
-            'showButtonColumn' => isset($showButtonColumn),
             'buttonColumns' => $buttonColumns ?? []
         ])
         @endcomponent
