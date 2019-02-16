@@ -20,8 +20,8 @@ class HomeController extends Controller
 
     public function showProductDetails(int $productTypeId)
     {
-        $product = ProductType::findOrFail($productTypeId);
-        return view('webshop.productDetails', compact('product'));
+        $productType = ProductType::with('_productTypeProperties', '_productTypeSpecialities._productSpeciality')->findOrFail($productTypeId);
+        return view('webshop.productDetails', compact('productType'));
     }
 
     public function showTermsAndConditions()

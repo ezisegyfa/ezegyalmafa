@@ -76,9 +76,21 @@ class ProductType extends Model
     {
         if (count($this->_productTypeImages) == 0)
             return Image::getDefaultLink();
-        else {
-            \Log::debug($this->_productTypeImages);
+        else
             return $this->_productTypeImages[0]->_image->getLink();
-        }
+    }
+
+    public function getProperties()
+    {
+        return $this->_productTypeProperties->map(function($property) {
+            return $property->name;
+        });
+    }
+
+    public function getSpecialities()
+    {
+        return $this->_productTypeSpecialities->map(function($speciality) {
+            return $speciality->_productSpeciality->name;
+        });
     }
 }
