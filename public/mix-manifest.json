@@ -3,5 +3,9 @@
     "/css/app.css": "/css/app.css",
     "/js/jquery.redirect.js": "/js/jquery.redirect.js",
     "/js/helperMethods.js": "/js/helperMethods.js",
-    "/css/crm.css": "/css/crm.css"
+    "/css/crm.css": "/css/crm.css",
+    "/css/webshop/layout.css": "/css/webshop/layout.css",
+    "/css/webshop/productList.css": "/css/webshop/productList.css",
+    "/js/webshop/productDetails.js": "/js/webshop/productDetails.js",
+    "/js/webshop/productList.js": "/js/webshop/productList.js"
 }

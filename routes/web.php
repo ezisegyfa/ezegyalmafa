@@ -20,13 +20,14 @@ Route::get('/privateDataProtectionDescription', 'HomeController@showPrivateDataP
 
 Route::get('/', 'HomeController@index')
     ->name('welocme');
+Route::get('products/{productType}', 'HomeController@showProductDetails');
 Route::get('orders/createWithBuyer/{productType}','OrderController@createWithBuyer')
  ->name('orders.order.createWithBuyer');
 Route::post('orders/storeWithBuyer','OrderController@storeWithBuyer')
      ->name('orders.order.storeWithBuyer');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/menu', 'HomeController@showMenu')->name('menu');
+    Route::get('/menu', 'MenuController@showMenu')->name('menu');
 
     CrmController::initializeRoutes();
 });

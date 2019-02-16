@@ -18,4 +18,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
 		'resources/assets/js/routeFunctions.js'
 	], 'public/js/helperMethods.js')
 	.sass('resources/assets/sass/app.scss', 'public/css')
-	.copy('resources/assets/css/crm.css', 'public/css');
+	.copy('resources/assets/css/crm.css', 'public/css')
+	.copy('resources/assets/css/webshop/layout.css', 'public/css/webshop')
+	.copy('resources/assets/css/webshop/productList.css', 'public/css/webshop')
+	.copy('resources/assets/js/webshop/productDetails.js', 'public/js/webshop')
+	.copy('resources/assets/js/webshop/productList.js', 'public/js/webshop');

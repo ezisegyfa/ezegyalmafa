@@ -68,6 +68,13 @@ trait ModelSelectMethods
         return $columnSelectValues;
     }
 
+    public static function getTranslatedColumnWithTableNames()
+    {
+        return array_map(function($columnWithTableName) {
+            return getColumnTranslatedName($columnWithTableName);
+        }, static::getColumnWithTableNames());
+    }
+
     public static function getColumnWithTableNames()
     {
         $tableName = static::getTableName();

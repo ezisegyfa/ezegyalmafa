@@ -81,6 +81,7 @@ class RegisterController extends Controller
         $formInfos = array_slice(User::getFormInfos(), 0, 3);
         array_push($formInfos, new Input('password_confirmation', '', null, 'required|password|max:255'));
         array_push($formInfos, new Input('access_code', '', null, 'required|max:255'));
-        return view('auth.register', compact('formInfos'));
+        $sendButtonTitle = __('view.register');
+        return view('auth.register', compact('formInfos', 'sendButtonTitle'));
     }
 }

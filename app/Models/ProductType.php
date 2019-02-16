@@ -2,96 +2,83 @@
 
 namespace App\Models;
 
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
-use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-
+/**
+ * @property int $id
+ * @property int $category
+ * @property string $name
+ * @property float $price
+ * @property ProductCategory $productCategory
+ * @property OrderInfo[] $orderInfos
+ * @property ProductTypeBrand[] $productTypeBrands
+ * @property ProductTypeImage[] $productTypeImages
+ * @property ProductTypeProperty[] $productTypeProperties
+ * @property ProductTypeSpeciality[] $productTypeSpecialities
+ */
 class ProductType extends Model
 {
-    use ModelHelperMethods;
-    
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    public static $renderColumnNames = ['material_type', 'process_type'];
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'product_types';
-
-    /**
-    * The database primary key value.
-    *
-    * @var string
-    */
-    protected $primaryKey = 'id';
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
      * @var array
      */
-    protected $fillable = [
-                  'image',
-                  'material_type',
-                  'process_type',
-                  'average_price',
-                  'description'
-              ];
+    protected $fillable = ['category', 'name', 'price'];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    protected $dates = [];
-    
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
-    
-    /**
-     * Get the getMaterialType for this model.
-     */
-    public function getMaterialType()
+    public function _productCategory()
     {
-        return $this->belongsTo('App\Models\MaterialType','material_type','id');
+        return $this->belongsTo('App\Models\ProductCategory', 'category');
     }
 
     /**
-     * Get the getProcessType for this model.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getProcessType()
+    public function _orderInfos()
     {
-        return $this->belongsTo('App\Models\ProcessType','process_type','id');
+        return $this->hasMany('App\Models\OrderInfo', 'product_type');
     }
 
     /**
-     * Get the order for this model.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function orders()
+    public function _productTypeBrands()
     {
-        return $this->hasMany('App\Models\Order','product_type','id');
+        return $this->hasMany('App\Models\ProductTypeBrand', 'product_type');
     }
 
     /**
-     * Get the stockTransport for this model.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function stockTransports()
+    public function _productTypeImages()
     {
-        return $this->hasMany('App\Models\StockTransport','product_type','id');
+        return $this->hasMany('App\Models\ProductTypeImage', 'product_type');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function _productTypeProperties()
+    {
+        return $this->hasMany('App\Models\ProductTypeProperty', 'product_type');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function _productTypeSpecialities()
+    {
+        return $this->hasMany('App\Models\ProductTypeSpeciality', 'product_type');
+    }
 
+    public function getMainImageLink()
+    {
+        if (count($this->_productTypeImages) == 0)
+            return Image::getDefaultLink();
+        else {
+            \Log::debug($this->_productTypeImages);
+            return $this->_productTypeImages[0]->_image->getLink();
+        }
+    }
 }

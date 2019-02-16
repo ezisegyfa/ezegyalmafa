@@ -1,116 +1,82 @@
 [
     {
-        "model-name": "BuyerObservation",
-        "resource-file": "buyer_observations.json",
-        "table-name": "buyer_observations",
-        "with-migration": true
+        "model-name": "Brand",
+        "resource-file": "brands.json",
+        "table-name": "brands"
     },
     {
         "model-name": "Buyer",
         "resource-file": "buyers.json",
-        "table-name": "buyers",
-        "with-migration": true
+        "table-name": "buyers"
     },
     {
-        "model-name": "CarType",
-        "resource-file": "car_types.json",
-        "table-name": "car_types",
-        "with-migration": true
+        "model-name": "InputOrder",
+        "resource-file": "input_orders.json",
+        "table-name": "input_orders"
     },
     {
-        "model-name": "Car",
-        "resource-file": "cars.json",
-        "table-name": "cars",
-        "with-migration": true
+        "model-name": "OrderInfo",
+        "resource-file": "order_infos.json",
+        "table-name": "order_infos"
     },
     {
-        "model-name": "DriverCar",
-        "resource-file": "driver_cars.json",
-        "table-name": "driver_cars",
-        "with-migration": true
+        "model-name": "OutputOrder",
+        "resource-file": "output_orders.json",
+        "table-name": "output_orders"
     },
     {
-        "model-name": "Driver",
-        "resource-file": "drivers.json",
-        "table-name": "drivers",
-        "with-migration": true
+        "model-name": "ProductCategory",
+        "resource-file": "product_categories.json",
+        "table-name": "product_categories"
     },
     {
-        "model-name": "IdentityCardSeries",
-        "resource-file": "identity_card_series.json",
-        "table-name": "identity_card_series",
-        "with-migration": true
+        "model-name": "ProductSize",
+        "resource-file": "product_sizes.json",
+        "table-name": "product_sizes"
     },
     {
-        "model-name": "IdentityCardType",
-        "resource-file": "identity_card_types.json",
-        "table-name": "identity_card_types",
-        "with-migration": true
+        "model-name": "ProductSpeciality",
+        "resource-file": "product_specialities.json",
+        "table-name": "product_specialities"
     },
     {
-        "model-name": "MaterialType",
-        "resource-file": "material_types.json",
-        "table-name": "material_types",
-        "with-migration": true
+        "model-name": "ProductTypeBrand",
+        "resource-file": "product_type_brands.json",
+        "table-name": "product_type_brands"
     },
     {
-        "model-name": "NotificationType",
-        "resource-file": "notification_types.json",
-        "table-name": "notification_types",
-        "with-migration": true
+        "model-name": "ProductTypeImage",
+        "resource-file": "product_type_images.json",
+        "table-name": "product_type_images"
     },
     {
-        "model-name": "ObservationType",
-        "resource-file": "observation_types.json",
-        "table-name": "observation_types",
-        "with-migration": true
+        "model-name": "ProductTypeProperty",
+        "resource-file": "product_type_properties.json",
+        "table-name": "product_type_properties"
     },
     {
-        "model-name": "Order",
-        "resource-file": "orders.json",
-        "table-name": "orders",
-        "with-migration": true
-    },
-    {
-        "model-name": "ProcessType",
-        "resource-file": "process_types.json",
-        "table-name": "process_types",
-        "with-migration": true
+        "model-name": "ProductTypeSpeciality",
+        "resource-file": "product_type_specialities.json",
+        "table-name": "product_type_specialities"
     },
     {
         "model-name": "ProductType",
         "resource-file": "product_types.json",
-        "table-name": "product_types",
-        "with-migration": true
+        "table-name": "product_types"
     },
     {
         "model-name": "Region",
         "resource-file": "regions.json",
-        "table-name": "regions",
-        "with-migration": true
+        "table-name": "regions"
     },
     {
         "model-name": "Settlement",
         "resource-file": "settlements.json",
-        "table-name": "settlements",
-        "with-migration": true
-    },
-    {
-        "model-name": "StockTransport",
-        "resource-file": "stock_transports.json",
-        "table-name": "stock_transports",
-        "with-migration": true
-    },
-    {
-        "model-name": "Transport",
-        "resource-file": "transports.json",
-        "table-name": "transports",
-        "with-migration": true
+        "table-name": "settlements"
     },
     {
         "model-name": "User",
         "resource-file": "users.json",
-        "table-name": "users",
-        "with-migration": true
+        "table-name": "users"
     }
 ]

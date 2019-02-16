@@ -6,7 +6,8 @@
         <div class="col-md-8">
             @component('layouts.components.form', [
                 'formInfos' => $formInfos,
-                'route' => url('login')
+                'route' => url('login'),
+                'sendButtonTitle' => $sendButtonTitle
             ])
             @endcomponent
             <a class="btn btn-link" href="{{ route('password.request') }}">

@@ -7,133 +7,43 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
 
 class User extends Authenticatable
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $remember_token
+ * @property string $last_activity
+ * @property boolean $accepted_gdpr
+ * @property boolean $isAnonymized
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Buyer[] $buyers
+ * @property OrderInfo[] $orderInfos
+ */
 {
     use ModelHelperMethods;
 
     public static $renderColumnNames = ['email'];
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
-    * The database primary key value.
-    *
-    * @var string
-    */
-    protected $primaryKey = 'id';
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
      * @var array
      */
-    protected $fillable = [
-                  'name',
-                  'email',
-                  'password',
-                  'remember_token',
-                  'last_activity',
-                    'accepted_gdpr',
-                    'isAnonymized'
-              ];
+    protected $fillable = ['name', 'email', 'password', 'remember_token', 'last_activity', 'accepted_gdpr', 'isAnonymized', 'created_at', 'updated_at'];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $dates = [];
-    
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
-    
-    /**
-     * Get the buyerObservation for this model.
-     */
-    public function buyerObservations()
+    public function _buyers()
     {
-        return $this->hasMany('App\Models\BuyerObservation','uploader','id');
+        return $this->hasMany('App\Models\Buyer', 'uploader');
     }
 
     /**
-     * Get the buyer for this model.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function buyers()
+    public function _orderInfos()
     {
-        return $this->hasMany('App\Models\Buyer','uploader','id');
+        return $this->hasMany('App\Models\OrderInfo', 'uploader');
     }
-
-    /**
-     * Get the car for this model.
-     */
-    public function cars()
-    {
-        return $this->hasMany('App\Models\Car','uploader','id');
-    }
-
-    /**
-     * Get the driver for this model.
-     */
-    public function drivers()
-    {
-        return $this->hasMany('App\Models\Driver','uploader','id');
-    }
-
-    /**
-     * Get the order for this model.
-     */
-    public function orders()
-    {
-        return $this->hasMany('App\Models\Order','uploader','id');
-    }
-
-    /**
-     * Get the stockTransport for this model.
-     */
-    public function stockTransports()
-    {
-        return $this->hasMany('App\Models\StockTransport','uploader','id');
-    }
-
-    /**
-     * Get the transport for this model.
-     */
-    public function transports()
-    {
-        return $this->hasMany('App\Models\Transport','uploader','id');
-    }
-
-
-    /**
-     * Get created_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function CreatedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-
-    }
-
-    /**
-     * Get updated_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function UpdatedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-
-    }
-
 }

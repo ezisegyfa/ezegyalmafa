@@ -17,15 +17,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <!-- dataTables -->
-    <link href="{{ asset('css/dataTables/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables/dataTables.jqueryui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables/dataTables.foundation.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables/dataTables.semanticui.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables/dataTables.min.css') }}" rel="stylesheet">
-
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 

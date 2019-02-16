@@ -6,16 +6,16 @@ return [
      * Button texts
      */
 
-    'BackToMenu' => 'Back to menu',
-    'Show' => 'Show',
-    'ShowAll' => 'Show all',
-    'Add' => 'Add',
-    'Create' => 'Create',
-    'Update' => 'Update',
-    'Edit' => 'Edit',
-    'Delete' => 'Delete',
-    'Complete' => 'Complete',
-    'Filter' => 'Filter',
+    'backToMenu' => 'Back to menu',
+    'show' => 'Show',
+    'showAll' => 'Show all',
+    'add' => 'Add',
+    'create' => 'Create',
+    'update' => 'Update',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'complete' => 'Complete',
+    'filter' => 'Filter',
 
     /*
      * Model field texts
@@ -79,65 +79,66 @@ return [
      * Model singular texts
      */
 
-    'User' => 'User',
+    'user' => 'User',
 
-    'Buyer' => 'Buyer',
-    'Identity Card Type' => 'Identity Card Type',
-    'Identity Seria Type' => 'Identity Seria Type',
+    'buyer' => 'Buyer',
+    'identity Card Type' => 'Identity Card Type',
+    'identity Seria Type' => 'Identity Seria Type',
 
-    'Buyer Observation' => 'Buyer Observation',
-    'Observation Type' => 'Observation Type',
+    'buyer Observation' => 'Buyer Observation',
+    'observation Type' => 'Observation Type',
 
-    'Buyer Notification' => 'Buyer Notification',
-    'Notification Type' => 'Notification Type',
+    'buyer Notification' => 'Buyer Notification',
+    'notification Type' => 'Notification Type',
 
-    'Settlement' => 'Settlement',
-    'City' => 'City',
-    'Region' => 'Region',
+    'settlement' => 'Settlement',
+    'city' => 'City',
+    'region' => 'Region',
 
-    'Order' => 'Order',
-    'Stock' => 'Stock',
-    'Product Type' => 'Product Type',
-    'Material Type' => 'Material Type',
-    'Process Type' => 'Process Type',
+    'order' => 'Order',
+    'stock' => 'Stock',
+    'product Type' => 'Product Type',
+    'material Type' => 'Material Type',
+    'process Type' => 'Process Type',
 
-    'Transport' => 'Transport',
-    'Stock Transport' => 'Stock Transport',
-    'Driver' => 'Driver',
-    'Car' => 'Car',
-    'Car Type' => 'Car Type',
+    'transport' => 'Transport',
+    'stock Transport' => 'Stock Transport',
+    'driver' => 'Driver',
+    'car' => 'Car',
+    'car Type' => 'Car Type',
 
     /*
      * Model plural texts
      */
 
-    'Users' => 'Users',
+    'users' => 'Users',
 
-    'Buyers' => 'Buyers',
-    'Identity Card Series' => 'Identity Card Series',
-    'Identity Card Types' => 'Identity Card Types',
+    'buyers' => 'Buyers',
+    'identity Card Series' => 'Identity Card Series',
+    'identity Card Types' => 'Identity Card Types',
 
-    'Buyer Observations' => 'Buyer Observations',
-    'Observation Types' => 'Observation Types',
+    'buyer Observations' => 'Buyer Observations',
+    'observation Types' => 'Observation Types',
 
-    'Buyer Notifications' => 'Buyer Notifications',
-    'Notification Types' => 'Notification Types',
+    'buyer Notifications' => 'Buyer Notifications',
+    'notification Types' => 'Notification Types',
 
-    'Settlements' => 'Settlements',
-    'Cities' => 'Cities',
-    'Regions' => 'Regions',
+    'location' => 'Location',
+    'settlements' => 'Settlements',
+    'cities' => 'Cities',
+    'regions' => 'Regions',
 
-    'Orders' => 'Orders',
-    'Stocks' => 'Stocks',
-    'ProductTypes' => 'Product Types',
-    'MaterialTypes' => 'Material Types',
-    'ProcessTypes' => 'Process Types',
+    'orders' => 'Orders',
+    'stocks' => 'Stocks',
+    'productTypes' => 'Product Types',
+    'materialTypes' => 'Material Types',
+    'processTypes' => 'Process Types',
 
-    'Transports' => 'Transports',
-    'Stock Transports' => 'Stock Transports',
-    'Drivers' => 'Drivers',
-    'Cars' => 'Cars',
-    'Car Types' => 'Car Types',
+    'transports' => 'Transports',
+    'stock Transports' => 'Stock Transports',
+    'drivers' => 'Drivers',
+    'cars' => 'Cars',
+    'car Types' => 'Car Types',
 
     /*
      * Model no available texts
@@ -185,5 +186,20 @@ return [
      */
     
     'accept' => 'I accept ',
-    'terms' => 'Terms and conditions'
+    'terms' => 'Terms and conditions',
+
+    /*
+     * Login
+     */
+
+    'login' => 'Login',
+    'remember' => 'Remember me',
+
+    /*
+     * Register
+     */
+
+    'password_confirmation' => 'Confirm password',
+    'access_code' => 'Access code',
+    'register' => 'Register',
 ];

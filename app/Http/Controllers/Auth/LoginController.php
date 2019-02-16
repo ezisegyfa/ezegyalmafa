@@ -46,6 +46,7 @@ class LoginController extends Controller
             User::getColumnDefaultFormInfos('password'),
             new CheckBox('remember', 'Remember me')
         ];
-        return view('auth.login', compact('formInfos'));
+        $sendButtonTitle = __('view.login');
+        return view('auth.login', compact('formInfos', 'sendButtonTitle'));
     }
 }

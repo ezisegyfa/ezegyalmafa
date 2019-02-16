@@ -6,7 +6,8 @@
         <div class="col-md-8">
             @component('layouts.components.form', [
                 'formInfos' => $formInfos,
-                'route' => url('register')
+                'route' => url('register'),
+                'sendButtonTitle' => $sendButtonTitle
             ])
             @endcomponent
         </div>

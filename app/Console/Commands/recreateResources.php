@@ -39,8 +39,8 @@ class recreateResources extends Command
     public function handle()
     {
         $this->deleteCodeGeneratorJsonFiles();
-        $this->deleteControllerFiles();
-        $this->deleteRequestFiles();
+        //$this->deleteControllerFiles();
+        //$this->deleteRequestFiles();
         $this->deleteModelFiles();
         $this->call('make:resources-map');
         $this->call('create:mapped-resources', ['--force' => true]);

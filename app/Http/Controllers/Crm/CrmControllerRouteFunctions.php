@@ -65,7 +65,8 @@ trait CrmControllerRouteFunctions
         $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
         $formInfos = $modelTypeNamespaceUrl::getFormInfos();
         $tableNames = getDatabaseTableNames();
-        return view('data.form', compact('formInfos', 'tableNames', 'tableName'));
+        $sendButtonTitle = __('view.create');
+        return view('data.form', compact('formInfos', 'tableNames', 'tableName', 'sendButtonTitle'));
     }
 
     public static function processStore(Request $request, string $tableName)
@@ -97,7 +98,8 @@ trait CrmControllerRouteFunctions
         $modelToEdit = $modelTypeNamespaceUrl::findOrFail($id);
         $formInfos = $modelToEdit->getModelFormInfos();
         $tableNames = getDatabaseTableNames();
-        return view('data.form', compact('formInfos', 'tableName', 'tableNames'));
+        $sendButtonTitle = __('view.edit');
+        return view('data.form', compact('formInfos', 'tableName', 'tableNames', 'sendButtonTitle'));
     }
 
     public static function processUpdate($id, Request $request, string $tableName)

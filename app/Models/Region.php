@@ -3,68 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $code
+ * @property Settlement[] $settlements
+ */
 class Region extends Model
 {
-    use ModelHelperMethods;
-    
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    public static $renderColumnNames = ['name'];
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'regions';
-
-    /**
-    * The database primary key value.
-    *
-    * @var string
-    */
-    protected $primaryKey = 'id';
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
      * @var array
      */
-    protected $fillable = [
-                  'name',
-                  'code'
-              ];
+    protected $fillable = ['name', 'code'];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $dates = [];
-    
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
-    
-    /**
-     * Get the settlement for this model.
-     */
-    public function settlement()
+    public function _settlements()
     {
-        return $this->hasMany('App\Models\Settlement','region','id');
+        return $this->hasMany('App\Models\Settlement', 'region');
     }
-
-
-
 }

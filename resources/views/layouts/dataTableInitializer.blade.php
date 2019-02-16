@@ -5,6 +5,8 @@ class DataTable {
         this.tableUrl = "{{ URL::to('/') }}" + '/' + this.getTableName(table)
         this.addSearchInputsToTable(table)
         var dataTable = this.getDataTable(table)
+        dataTable.columns.defaultContent = 'sd'
+        console.log(dataTable)
         this.addSearchFunctionsToTable(dataTable)
     }
 
@@ -46,7 +48,10 @@ class DataTable {
         for (var i = 0; i < headerTags.length; ++i) {
             var columnName = headerTags[i].getAttribute("databaseColumnName")
             if (columnName)
-                columns.push({ data : columnName})
+                columns.push({ 
+                    data : columnName,
+                    defaultContent : "",
+                })
             else if (headerTags[i].hasAttribute("deleteButtonColumn"))
                     columns.push(this.getColumnWithNullData(this.getDeleteButtonHtml, this.tableUrl))
             else {
@@ -79,7 +84,7 @@ class DataTable {
                     '<input name="_method" value="DELETE" type="hidden">' + 
                     '{!! csrf_field() !!}' +
                     '<button type="submit" class="btn btn-danger" onclick="return confirm(&quot;Delete Model?&quot;)">' +
-                        '<span class="glyphicon glyphicon-trash" aria-hidden="true">' + "@lang('view.Delete')" + '</span>' +
+                        '<span class="glyphicon glyphicon-trash" aria-hidden="true">' + "@lang('view.delete')" + '</span>' +
                     '</button>' +
                 '</form>'
     }

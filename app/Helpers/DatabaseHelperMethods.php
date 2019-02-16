@@ -61,3 +61,12 @@ function getTableColumnInfos(string $tableName)
 {
 	return DB::table('information_schema.columns')->where('table_schema', \DB::getDatabaseName())->where('table_name',$tableName)->get()->toArray();
 }
+
+function getColumnTranslatedName(string $columnName)
+{
+	$translatedColumnName = '';
+	$columnItems = explode('.', $columnName);
+	foreach ($columnItems as $columnItem)
+		$translatedColumnName .= __('view.' . $columnItem) . ' ';
+	return substr($translatedColumnName, 0, strlen($translatedColumnName));
+}

@@ -1,9 +1,9 @@
 <tr>
 	@foreach($columnNames as $columnName)
-	    <th databaseColumnName="{{ $columnName }}">@lang('view.' . $columnName)</th>
+	    <th databaseColumnName="{{ $columnName }}">{{ getColumnTranslatedName($columnName) }}</th>
 	@endforeach
 	@foreach($buttonColumns as $buttonColumn)
-		@if($buttonColumn['text'] == __('view.Delete'))
+		@if($buttonColumn['text'] == __('view.delete'))
 	    	<th deleteButtonColumn buttonLink="{{ $buttonColumn['link'] }}" buttonText="{{ $buttonColumn['text'] }}"></th>
 		@else
 	    	<th linkButtonColumn buttonLink="{{ $buttonColumn['link'] }}" buttonText="{{ $buttonColumn['text'] }}"></th>
