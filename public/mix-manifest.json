@@ -7,5 +7,6 @@
     "/css/webshop/layout.css": "/css/webshop/layout.css",
     "/css/webshop/productList.css": "/css/webshop/productList.css",
     "/js/webshop/productDetails.js": "/js/webshop/productDetails.js",
-    "/js/webshop/productList.js": "/js/webshop/productList.js"
+    "/js/webshop/productList.js": "/js/webshop/productList.js",
+    "/js/webshop/layout.js": "/js/webshop/layout.js"
 }

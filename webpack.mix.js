@@ -22,4 +22,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.copy('resources/assets/css/webshop/layout.css', 'public/css/webshop')
 	.copy('resources/assets/css/webshop/productList.css', 'public/css/webshop')
 	.copy('resources/assets/js/webshop/productDetails.js', 'public/js/webshop')
-	.copy('resources/assets/js/webshop/productList.js', 'public/js/webshop');
+	.copy('resources/assets/js/webshop/productList.js', 'public/js/webshop')
+	.copy('resources/assets/js/webshop/layout.js', 'public/js/webshop');

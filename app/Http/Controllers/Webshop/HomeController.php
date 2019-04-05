@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\ProductType;
+use App\Models\Buyer;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $productTypes = ProductType::with('_productTypeImages._image')->paginate();
+        $productTypes = ProductType::with('_productTypeImages._image')->paginate(16);
         return view('webshop.productList', compact('productTypes'));
     }
 
@@ -32,5 +33,22 @@ class HomeController extends Controller
     public function showPrivateDataProtectionDescription()
     {
         return view('privateDataProtectionDescription');
+    }
+
+    public function showOutputOrderForm()
+    {
+        //dd(Buyer::getFormInfos());
+        $formInfos = Buyer::getFormInfos();
+        return view('webshop.orderForm', compact('formInfos'));
+    }
+
+    public function storeOutputOrder()
+    {
+        return redirect('');
+    }
+
+    public function downloadCatalogPdf()
+    {
+        return response()->download(storage_path('protectorate katalogus.pdf'));
     }
 }

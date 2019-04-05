@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
+                            <a href="{{ url('orders/createWithBuyer/' . $productType->id) }}" class="btn btn-success btn-lg btn-block text-uppercase">
                                 <i class="fa fa-shopping-cart"></i> Buy
                             </a>
                         </form>
