@@ -12,7 +12,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,22 +24,14 @@
 </head>
 <body>
     <div id="app">
+        @yield('header')
+        
         @yield('content')
-    </div>
-    
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.redirect.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
 
-    <!-- dataTables -->
-    <script type="text/javascript" src="{{ asset('js/dataTables/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.jqueryui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.foundation.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.semanticui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.min.js') }}"></script>
-    @include('layouts.dataTableInitializer')
+        @yield('footer')
+    </div>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
+    @yield('scripts')
 </body>
-</html>

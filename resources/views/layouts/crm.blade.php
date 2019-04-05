@@ -52,3 +52,15 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/jquery.redirect.js') }}"></script>
+    <!-- dataTables -->
+    <script type="text/javascript" src="{{ asset('js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.jqueryui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.foundation.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.semanticui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.min.js') }}"></script>
+@endsection
