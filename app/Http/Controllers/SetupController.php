@@ -11,7 +11,6 @@ class SetupController extends Controller
 {
     public function setup()
     {
-        Artisan::call("migrate");
-        Artisan::call("key:generate");
+        Artisan::call("config:cache");
     }
 }
