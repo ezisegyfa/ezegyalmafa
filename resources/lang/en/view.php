@@ -30,6 +30,7 @@ return [
     'remember_token' => 'Remember token',
     'phone_number' => 'Phone Number',
     'address' => 'Address',
+    'adress' => 'Address',
     'settlement' => 'Oras',
     'region' => 'Județ',
     'cnp' => 'Cnp',
@@ -38,6 +39,8 @@ return [
     'identity_seria_nr' => 'Identity seria nr',
     'identity_seria_type' => 'Identity seria type',
     'identity_card_type' => 'Identity card type',
+    'identity_card_serial_number' => 'Identity serial number',
+    'identity_card_serial_type' => 'Identity serial type',
     'notification_type' => 'Notification type',
 
     'order' => 'Comenz',

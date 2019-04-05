@@ -36,7 +36,6 @@ a, a:hover, a:focus {
     transition: all 0.3s;
     min-width: 250px;
     max-width: 250px;
-    min-height: 100vh;
 }
 
 #sidebar .sidebar-header {
