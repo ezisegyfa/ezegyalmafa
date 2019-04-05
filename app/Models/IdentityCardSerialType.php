@@ -8,23 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property string $name
- * @property string $code
- * @property Settlement[] $settlements
+ * @property Buyer[] $buyers
  */
-class Region extends Model
+class IdentityCardSerialType extends Model
 {
     use ModelHelperMethods;
-    
+
     /**
      * @var array
      */
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function _settlements()
+    public function _buyers()
     {
-        return $this->hasMany('App\Models\Settlement', 'region');
+        return $this->hasMany('App\Models\Buyer', 'identity_card_serial_type');
     }
 }

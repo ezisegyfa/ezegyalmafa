@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,10 +23,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrderInfo extends Model
 {
+    use ModelHelperMethods;
+    
     /**
      * @var array
      */
-    protected $fillable = ['product_type', 'uploader', 'quantity', 'average_price', 'description', 'sell_price', 'created_at', 'updated_at'];
+    protected $fillable = ['product_type', 'uploader', 'quantity', 'description', 'sell_price', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

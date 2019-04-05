@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProductType extends Model
 {
+    use ModelHelperMethods;
+    
     /**
      * @var array
      */

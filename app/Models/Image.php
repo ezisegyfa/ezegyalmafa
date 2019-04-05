@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Image extends Model
 {
+    use ModelHelperMethods;
+    
     /**
      * @var array
      */
@@ -45,7 +48,7 @@ class Image extends Model
 
     public function getLink()
     {
-        return join_paths(url('images'), 'webshop', $this->name);
+        return join_paths(url('images'), 'webshop', 'products', $this->name);
     }
 
     public static function getDefaultLink()

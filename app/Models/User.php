@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-class User extends Authenticatable
 /**
  * @property int $id
  * @property string $name
@@ -21,6 +20,7 @@ class User extends Authenticatable
  * @property Buyer[] $buyers
  * @property OrderInfo[] $orderInfos
  */
+class User extends Authenticatable
 {
     use ModelHelperMethods;
 

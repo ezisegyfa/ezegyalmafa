@@ -82,7 +82,7 @@ trait ModelFormInfoMethods
         return new Select(
             $columnName, 
             static::getRelationFormOptions($relationship->getModelTypeNamespaceUrl()),
-            '',
+            0,
             null,
             static::getRequestRules()[$columnName]
         );
