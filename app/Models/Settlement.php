@@ -2,48 +2,86 @@
 
 namespace App\Models;
 
-use App\Helpers\ModelHelpers\ModelHelperMethods;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-/**
- * @property int $id
- * @property int $region
- * @property string $name
- * @property int $post_code
- * @property Region $region
- * @property Buyer[] $buyers
- * @property OutputOrder[] $outputOrders
- */
+
 class Settlement extends Model
 {
     use ModelHelperMethods;
     
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    public static $renderColumnNames = [];
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'settlements';
+
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
      * @var array
      */
-    protected $fillable = ['region', 'name', 'post_code'];
+    protected $fillable = [
+                  'name',
+                  'region_id',
+                  'post_code'
+              ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
      */
-    public function _region()
+    protected $dates = [];
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+    
+    /**
+     * Get the region for this model.
+     */
+    public function region()
     {
-        return $this->belongsTo('App\Models\Region', 'region');
+        return $this->belongsTo('App\Models\Region','region_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the outputOrder for this model.
      */
-    public function _buyers()
+    public function outputOrders()
     {
-        return $this->hasMany('App\Models\Buyer', 'location');
+        return $this->hasMany('App\Models\OutputOrder','location_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the user for this model.
      */
-    public function _outputOrders()
+    public function users()
     {
-        return $this->hasMany('App\Models\OutputOrder', 'location');
+        return $this->hasMany('App\Models\User','location_id','id');
     }
+
+
+
 }

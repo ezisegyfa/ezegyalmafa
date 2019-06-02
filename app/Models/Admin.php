@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
 
 
-class OrderInfo extends Model
+class Admin extends Model
 {
     use ModelHelperMethods;
     
@@ -19,7 +19,7 @@ class OrderInfo extends Model
      *
      * @var string
      */
-    protected $table = 'order_infos';
+    protected $table = 'admins';
 
     /**
     * The database primary key value.
@@ -34,10 +34,10 @@ class OrderInfo extends Model
      * @var array
      */
     protected $fillable = [
-                  'quantity',
-                  'description',
-                  'sell_price',
-                  'product_type_id'
+                  'name',
+                  'email',
+                  'password',
+                  'remember_token'
               ];
 
     /**
@@ -55,19 +55,11 @@ class OrderInfo extends Model
     protected $casts = [];
     
     /**
-     * Get the productType for this model.
+     * Get the investment for this model.
      */
-    public function productType()
+    public function investments()
     {
-        return $this->belongsTo('App\Models\ProductType','product_type_id','id');
-    }
-
-    /**
-     * Get the inputOrder for this model.
-     */
-    public function inputOrder()
-    {
-        return $this->hasOne('App\Models\InputOrder','order_info_id','id');
+        return $this->hasMany('App\Models\Investment','owner_id','id');
     }
 
     /**
@@ -75,23 +67,7 @@ class OrderInfo extends Model
      */
     public function orderInfosUploadedByAdmin()
     {
-        return $this->hasMany('App\Models\OrderInfosUploadedByAdmin','order_info_id','id');
-    }
-
-    /**
-     * Get the outputOrder for this model.
-     */
-    public function outputOrder()
-    {
-        return $this->hasOne('App\Models\OutputOrder','order_info_id','id');
-    }
-
-    /**
-     * Get the productSize for this model.
-     */
-    public function productSizes()
-    {
-        return $this->hasMany('App\Models\ProductSize','order_id','id');
+        return $this->hasOne('App\Models\OrderInfosUploadedByAdmin','uploader_id','id');
     }
 
 

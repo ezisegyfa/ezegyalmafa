@@ -2,28 +2,68 @@
 
 namespace App\Models;
 
-use App\Helpers\ModelHelpers\ModelHelperMethods;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-/**
- * @property int $id
- * @property string $name
- * @property ProductTypeSpeciality[] $productTypeSpecialities
- */
+
 class ProductSpeciality extends Model
 {
     use ModelHelperMethods;
     
     /**
-     * @var array
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
      */
-    protected $fillable = ['name'];
+    public $timestamps = false;
+
+    public static $renderColumnNames = [];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * The database table used by the model.
+     *
+     * @var string
      */
-    public function _productTypeSpecialities()
+    protected $table = 'product_specialities';
+
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+                  'name'
+              ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [];
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+    
+    /**
+     * Get the productTypeSpeciality for this model.
+     */
+    public function productTypeSpecialities()
     {
-        return $this->hasMany('App\Models\ProductTypeSpeciality', 'product_speciality');
+        return $this->hasMany('App\Models\ProductTypeSpeciality','product_speciality_id','id');
     }
+
+
+
 }

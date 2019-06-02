@@ -6,94 +6,126 @@ use App\Helpers\ModelHelpers\ModelHelperMethods;
 use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property int $id
- * @property int $category
- * @property string $name
- * @property float $price
- * @property ProductCategory $productCategory
- * @property OrderInfo[] $orderInfos
- * @property ProductTypeBrand[] $productTypeBrands
- * @property ProductTypeImage[] $productTypeImages
- * @property ProductTypeProperty[] $productTypeProperties
- * @property ProductTypeSpeciality[] $productTypeSpecialities
- */
+
 class ProductType extends Model
 {
     use ModelHelperMethods;
     
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    public static $renderColumnNames = [];
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'product_types';
+
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
      * @var array
      */
-    protected $fillable = ['category', 'name', 'price'];
+    protected $fillable = [
+                  'name',
+                  'price',
+                  'category_id'
+              ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
      */
-    public function _productCategory()
+    protected $dates = [];
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+    
+    /**
+     * Get the productCategory for this model.
+     */
+    public function productCategory()
     {
-        return $this->belongsTo('App\Models\ProductCategory', 'category');
+        return $this->belongsTo('App\Models\ProductCategory','category_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the orderInfo for this model.
      */
-    public function _orderInfos()
+    public function orderInfos()
     {
-        return $this->hasMany('App\Models\OrderInfo', 'product_type');
+        return $this->hasMany('App\Models\OrderInfo','product_type_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the productTypeBrand for this model.
      */
-    public function _productTypeBrands()
+    public function productTypeBrand()
     {
-        return $this->hasMany('App\Models\ProductTypeBrand', 'product_type');
+        return $this->hasOne('App\Models\ProductTypeBrand','product_type_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the productTypeImage for this model.
      */
-    public function _productTypeImages()
+    public function productTypeImages()
     {
-        return $this->hasMany('App\Models\ProductTypeImage', 'product_type');
+        return $this->hasMany('App\Models\ProductTypeImage','product_type_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the productTypeProperty for this model.
      */
-    public function _productTypeProperties()
+    public function productTypeProperties()
     {
-        return $this->hasMany('App\Models\ProductTypeProperty', 'product_type');
+        return $this->hasMany('App\Models\ProductTypeProperty','product_type_id','id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the productTypeSpeciality for this model.
      */
-    public function _productTypeSpecialities()
+    public function productTypeSpecialities()
     {
-        return $this->hasMany('App\Models\ProductTypeSpeciality', 'product_type');
+        return $this->hasMany('App\Models\ProductTypeSpeciality','product_type_id','id');
     }
 
     public function getMainImageLink()
     {
-        if (count($this->_productTypeImages) == 0)
+        if (count($this->productTypeImages) == 0)
             return Image::getDefaultLink();
         else
-            return $this->_productTypeImages[0]->_image->getLink();
+            return $this->productTypeImages[0]->image->getLink();
     }
 
-    public function getProperties()
+    public function getPropertyNames()
     {
-        return $this->_productTypeProperties->map(function($property) {
+        return $this->productTypeProperties->map(function($property) {
             return $property->name;
         });
     }
 
-    public function getSpecialities()
+    public function getSpecialityNames()
     {
-        return $this->_productTypeSpecialities->map(function($speciality) {
-            return $speciality->_productSpeciality->name;
+        return $this->productTypeSpecialities->map(function($speciality) {
+            return $speciality->productSpeciality->name;
         });
     }
 }

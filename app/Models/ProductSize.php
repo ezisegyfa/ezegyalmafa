@@ -2,29 +2,69 @@
 
 namespace App\Models;
 
-use App\Helpers\ModelHelpers\ModelHelperMethods;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\ModelHelpers\ModelHelperMethods;
 
-/**
- * @property int $id
- * @property int $order
- * @property int $size
- * @property OrderInfo $orderInfo
- */
+
 class ProductSize extends Model
 {
     use ModelHelperMethods;
     
     /**
-     * @var array
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
      */
-    protected $fillable = ['order', 'size'];
+    public $timestamps = false;
+
+    public static $renderColumnNames = [];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * The database table used by the model.
+     *
+     * @var string
      */
-    public function _orderInfo()
+    protected $table = 'product_sizes';
+
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+                  'size',
+                  'order_id'
+              ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [];
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+    
+    /**
+     * Get the orderInfo for this model.
+     */
+    public function orderInfo()
     {
-        return $this->belongsTo('App\Models\OrderInfo', 'order');
+        return $this->belongsTo('App\Models\OrderInfo','order_id','id');
     }
+
+
+
 }

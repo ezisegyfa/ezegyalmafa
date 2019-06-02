@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
 
 
-class OutputOrder extends Model
+class OrderInfosUploadedByAdmin extends Model
 {
     use ModelHelperMethods;
     
@@ -24,7 +24,7 @@ class OutputOrder extends Model
      *
      * @var string
      */
-    protected $table = 'output_orders';
+    protected $table = 'order_infos_uploaded_by_admin';
 
     /**
     * The database primary key value.
@@ -39,9 +39,8 @@ class OutputOrder extends Model
      * @var array
      */
     protected $fillable = [
-                  'order_info_id',
-                  'buyer_id',
-                  'location_id'
+                  'uploader_id',
+                  'order_info_id'
               ];
 
     /**
@@ -59,27 +58,19 @@ class OutputOrder extends Model
     protected $casts = [];
     
     /**
+     * Get the admin for this model.
+     */
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin','uploader_id','id');
+    }
+
+    /**
      * Get the orderInfo for this model.
      */
     public function orderInfo()
     {
         return $this->belongsTo('App\Models\OrderInfo','order_info_id','id');
-    }
-
-    /**
-     * Get the user for this model.
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User','buyer_id','id');
-    }
-
-    /**
-     * Get the settlement for this model.
-     */
-    public function settlement()
-    {
-        return $this->belongsTo('App\Models\Settlement','location_id','id');
     }
 
 
