@@ -71,7 +71,7 @@
             "on-update": null
         },
         {
-            "name": "product_type",
+            "name": "product_type_id",
             "labels": "Product Type",
             "html-type": "select",
             "css-class": "",
@@ -90,13 +90,13 @@
             "comment": null,
             "is-nullable": false,
             "is-header": false,
-            "is-unsigned": false,
+            "is-unsigned": true,
             "is-auto-increment": false,
             "is-inline-options": false,
             "is-date": false,
             "date-format": "",
             "cast-as": "",
-            "placeholder": "Enter product type here...",
+            "placeholder": "Select product type",
             "delimiter": "; ",
             "range": [],
             "foreign-relation": {
@@ -104,13 +104,13 @@
                 "type": "belongsTo",
                 "params": [
                     "App\\Models\\ProductType",
-                    "product_type",
+                    "product_type_id",
                     "id"
                 ],
                 "field": "id"
             },
             "foreign-constraint": {
-                "field": "product_type",
+                "field": "product_type_id",
                 "references": "product_types",
                 "on": "id",
                 "on-delete": "restrict",

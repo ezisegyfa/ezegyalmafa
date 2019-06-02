@@ -17,7 +17,15 @@ window.pluralize = require('pluralize');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('vueinput', require('./components/form/linear/input.vue'));
 
 const app = new Vue({
     el: '#app'
 });
+
+/*const vinput = new Vue({
+    el: '#vinput'
+});
+
+vinput.id = 'sd'
+console.log(vinput)*/

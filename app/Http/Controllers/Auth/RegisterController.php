@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use App\Helpers\FormInfos\Input;
+use App\Models\Region;
+use App\Helpers\FormInfos\TextInput;
+use App\Helpers\FormInfos\Select;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -11,7 +13,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    private $ACCESS_CODE = "e10adc3949ba59abbe56e057f20f883e";
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/menu';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -39,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     /**
@@ -50,15 +51,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'access_code' => ['required', function($attribute, $value, $fail) {
-                if (md5($value) !== $this->ACCESS_CODE) 
-                    return $fail('Access code is invalid.');
-            }]
-        ]);
+        return Validator::make($data, User::getRequestRules());
     }
 
     /**
@@ -69,19 +62,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $data['password'] = Hash::make($data['password']);
+        return User::create($data);
     }
 
-    public function showRegistrationForm()
+    public function showUserRegistrationForm()
     {
-        $formInfos = array_slice(User::getFormInfos(), 0, 3);
-        array_push($formInfos, new Input('password_confirmation', '', null, 'required|password|max:255'));
-        array_push($formInfos, new Input('access_code', '', null, 'required|max:255'));
-        $sendButtonTitle = __('view.register');
-        return view('auth.register', compact('formInfos', 'sendButtonTitle'));
+        $userFormInfos = User::getFormInfos();
+        $registerFormInfos = array_slice($userFormInfos, 0, 6);
+        $passwordConfirmationInput = new TextInput('password_confirmation', '', null, 'required|max:255');
+        array_splice($registerFormInfos, 4, 0, [$passwordConfirmationInput]);
+        array_splice($registerFormInfos, 5, 0, [Region::createSelectFormInfos()]);
+        array_splice($registerFormInfos, 6, 0, [new Select('location_id', [])]);
+        return view('auth.register', compact('registerFormInfos'));
     }
 }

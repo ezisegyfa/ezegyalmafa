@@ -10,7 +10,7 @@ class SelectOption
 	public $id;
 	public $label;
 
-	public function __construct(string $id, string $label = null)
+	public function __construct(string $id, string $label = '')
 	{
 		$this->id = $id;
 		if ($label)

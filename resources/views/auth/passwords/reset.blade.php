@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.webshop')
 
 @section('content')
 <div class="container">
@@ -13,29 +13,18 @@
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
-                        @component('layouts.components.formInputTextRow',[
-                            'name' => 'email',
-                            'labelTextLanguageTitle' => 'E-Mail Address',
-                            'errors' => $errors,
-                            'value' => old('email') ?? ''
+                        @component('layouts.components.form.labeledFormInput', [
+                            'formInfo' => new \App\Helpers\FormInfos\TextInput('email', '', '', 'email|maxLength:255')
                         ])
                         @endcomponent
 
-                        @component('layouts.components.formInputTextRow',[
-                            'name' => 'password',
-                            'labelTextLanguageTitle' => 'Password',
-                            'errors' => $errors,
-                            'value' => old('password') ?? ''
+                        @component('layouts.components.form.labeledFormInput',[
+                            'formInfo' => new \App\Helpers\FormInfos\TextInput('password', '', '',)
                         ])
                         @endcomponent
 
-                        @component('layouts.components.formInputTextRow',[
-                            'name' => 'password_confirmation',
-                            'id' => 'password-confirm',
-                            'labelTextLanguageTitle' => 'Password confirmation',
-                            'type' => 'password',
-                            'errors' => $errors,
-                            'value' => old('password_confirmation') ?? ''
+                        @component('layouts.components.form.labeledFormInput',[
+                            'formInfo' => new \App\Helpers\FormInfos\TextInput('password_confirmation', '', '', 'minLength:8|maxLength:32')
                         ])
                         @endcomponent
 

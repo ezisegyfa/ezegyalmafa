@@ -58,3 +58,15 @@ footer {
 footer a {
     color: #f8f9fa!important
 }
+.center-position {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centered-content {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}

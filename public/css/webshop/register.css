@@ -1,0 +1,12 @@
+#register_card .row {
+	display: flex;
+	justify-content: center;
+}
+
+#register_card .label {
+    text-align: right;
+}
+
+#register_card {
+	margin-bottom: 2rem;
+}

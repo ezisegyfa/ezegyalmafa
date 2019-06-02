@@ -113,7 +113,7 @@
             "type": "hasOne",
             "params": [
                 "App\\Models\\Settlement",
-                "region",
+                "region_id",
                 "id"
             ],
             "field": "id"

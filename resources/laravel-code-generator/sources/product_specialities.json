@@ -77,7 +77,7 @@
             "type": "hasOne",
             "params": [
                 "App\\Models\\ProductTypeSpeciality",
-                "product_speciality",
+                "product_speciality_id",
                 "id"
             ],
             "field": "id"

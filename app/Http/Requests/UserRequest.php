@@ -24,30 +24,12 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-            'email' => 'required|email|min:1|max:255',
-            'password' => 'required|string|min:1|max:255',
-            'remember_token' => 'nullable|string|min:0|max:100',
-    
-        ];
+        $rules = getTableRequestRules('users');
+        $rules['email'] .= '|unique:users,email';
+        $rules['password'] .= '|confirmed|min:8';
+        $rules['phone_number'] = 'nullable|numeric|digits:10';
+        unset($rules['isAnonymized']);
 
         return $rules;
     }
-    
-    /**
-     * Get the request's data from the request.
-     *
-     * 
-     * @return array
-     */
-    public function getData()
-    {
-        $data = $this->only(['name','email','password','remember_token']);
-
-
-
-        return $data;
-    }
-
 }

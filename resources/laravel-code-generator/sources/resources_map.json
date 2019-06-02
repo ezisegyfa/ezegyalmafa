@@ -1,13 +1,23 @@
 [
     {
+        "model-name": "Admin",
+        "resource-file": "admins.json",
+        "table-name": "admins"
+    },
+    {
         "model-name": "Brand",
         "resource-file": "brands.json",
         "table-name": "brands"
     },
     {
-        "model-name": "Buyer",
-        "resource-file": "buyers.json",
-        "table-name": "buyers"
+        "model-name": "IdentityCardSerialType",
+        "resource-file": "identity_card_serial_types.json",
+        "table-name": "identity_card_serial_types"
+    },
+    {
+        "model-name": "Image",
+        "resource-file": "images.json",
+        "table-name": "images"
     },
     {
         "model-name": "InputOrder",
@@ -15,9 +25,19 @@
         "table-name": "input_orders"
     },
     {
+        "model-name": "Investment",
+        "resource-file": "investments.json",
+        "table-name": "investments"
+    },
+    {
         "model-name": "OrderInfo",
         "resource-file": "order_infos.json",
         "table-name": "order_infos"
+    },
+    {
+        "model-name": "OrderInfosUploadedByAdmin",
+        "resource-file": "order_infos_uploaded_by_admins.json",
+        "table-name": "order_infos_uploaded_by_admin"
     },
     {
         "model-name": "OutputOrder",

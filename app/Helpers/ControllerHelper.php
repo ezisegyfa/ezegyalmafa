@@ -41,6 +41,6 @@ function getRenderValues(string $modelClassName)
 function getRequestNamespaceUrls()
 {
     return array_map(function($requestFilePath) {
-        return 'App\\Models\\' . str_replace('.php', '', last(explode('/', $requestFilePath)));
+        return 'App\\Http\\Requests\\' . str_replace('.php', '', last(explode('/', $requestFilePath)));
     }, getRequestFiles());
 }

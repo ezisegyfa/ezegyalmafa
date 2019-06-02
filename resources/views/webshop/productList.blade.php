@@ -1,37 +1,39 @@
 @extends('layouts.webshop')
 
 @section('webshopStyles')
-    <link href="{{ asset('css/webshop/productList.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/webshop/productList.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-	<!-- Page Content -->
   <div class="container">
+    @include('layouts.components.successMessage')
     <div class="row text-center text-lg-left">
-    	@foreach ($productTypes as $productType)
-    		<div class="col-lg-3 col-md-4 col-xs-6">
+      @foreach ($productTypes as $productType)
+        <div class="col-lg-3 col-md-4 col-xs-6">
           <article class="col-item">
-      		<div class="photo">
-      			<div class="options-cart">
-      				<a href="{{ url('products/' . $productType->id) }}">
-        				<button class="btn btn-default" title="Add to cart">
-        					<span class="fa fa-shopping-cart"></span>
-        				</button>
-        			</a>
-      			</div>
-      			<a href="{{ url('products/' . $productType->id) }}"> <img src="{{ $productType->getMainImageLink() }}" class="img-responsive" alt="Product Image" /> </a>
-      		</div>
-      		<div class="info">
-    				<div class="price-details">
-    					<h1>{{ $productType->name }}</h1>
-              @if ($productType->price)
-    					  <span class="price-new">${{ $productType->price }}</span>
-              @endif
-    				</div>
-      		</div>
-      	  </article>
+          <div class="photo">
+            <div class="options-cart">
+              <a href="{{ url('products/' . $productType->id) }}">
+                <button class="btn btn-default" title="Add to cart">
+                  <span class="fa fa-shopping-cart"></span>
+                </button>
+              </a>
+            </div>
+            <a href="{{ url('products/' . $productType->id) }}"> <img src="{{ $productType->getMainImageLink() }}" class="img-responsive" alt="Product Image" /> </a>
+          </div>
+          <div class="info">
+            <h5>{{ $productType->name }}</h5>
+            @if ($productType->price)
+              <div class="price-details">
+                <span class="price-new">${{ $productType->price }}</span>
+              </div>
+            @endif
+          </div>
+          </article>
         </div>
-    	@endforeach
+      @endforeach
+    </div>
+    <div id="product_list_pagination_row" class="row">
       {{ $productTypes->links() }}
     </div>
   </div>

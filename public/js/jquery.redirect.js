@@ -36,12 +36,32 @@
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -59,24 +79,21 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 45);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 45:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(46);
-
-
-/***/ }),
-
-/***/ 46:
+/***/ "./resources/assets/js/jquery.redirect.js":
+/*!************************************************!*\
+  !*** ./resources/assets/js/jquery.redirect.js ***!
+  \************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /*
 jQuery Redirect v1.1.3
@@ -95,10 +112,10 @@ Under following conditions:
 Attribution - You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 ShareAlike - If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
 */
-;(function ($) {
-  'use strict';
+;
 
-  //Defaults configuration
+(function ($) {
+  'use strict'; //Defaults configuration
 
   var defaults = {
     url: null,
@@ -108,7 +125,6 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
     traditional: false,
     redirectTop: false
   };
-
   /**
   * jQuery Redirect
   * @param {string} url - Url of the redirection
@@ -117,19 +133,23 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
   * @param {string} target - (optional) The target of the form. "_blank" will open the url in a new window.
   * @param {boolean} traditional - (optional) This provides the same function as jquery's ajax function. The brackets are omitted on the field name if its an array.  This allows arrays to work with MVC.net among others.
   * @param {boolean} redirectTop - (optional) If its called from a iframe, force to navigate the top window. 
-  */ /**
-     * jQuery Redirect
-     * @param {string} opts - Options object
-     * @param {string} opts.url - Url of the redirection
-     * @param {Object} opts.values - (optional) An object with the data to send. If not present will look for values as QueryString in the target url.
-     * @param {string} opts.method - (optional) The HTTP verb can be GET or POST (defaults to POST)
-     * @param {string} opts.target - (optional) The target of the form. "_blank" will open the url in a new window.
-     * @param {boolean} opts.traditional - (optional) This provides the same function as jquery's ajax function. The brackets are omitted on the field name if its an array.  This allows arrays to work with MVC.net among others.
-     * @param {boolean} opts.redirectTop - (optional) If its called from a iframe, force to navigate the top window. 
-     */
+  */
+
+  /**
+  * jQuery Redirect
+  * @param {string} opts - Options object
+  * @param {string} opts.url - Url of the redirection
+  * @param {Object} opts.values - (optional) An object with the data to send. If not present will look for values as QueryString in the target url.
+  * @param {string} opts.method - (optional) The HTTP verb can be GET or POST (defaults to POST)
+  * @param {string} opts.target - (optional) The target of the form. "_blank" will open the url in a new window.
+  * @param {boolean} opts.traditional - (optional) This provides the same function as jquery's ajax function. The brackets are omitted on the field name if its an array.  This allows arrays to work with MVC.net among others.
+  * @param {boolean} opts.redirectTop - (optional) If its called from a iframe, force to navigate the top window. 
+  */
+
   $.redirect = function (url, values, method, target, traditional, redirectTop) {
     var opts = url;
-    if ((typeof url === "undefined" ? "undefined" : _typeof(url)) !== "object") {
+
+    if (_typeof(url) !== "object") {
       var opts = {
         url: url,
         values: values,
@@ -149,7 +169,6 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
 
   $.redirect.getForm = function (url, values, method, target, traditional) {
     method = method && ["GET", "POST", "PUT", "DELETE"].indexOf(method.toUpperCase()) !== -1 ? method.toUpperCase() : 'POST';
-
     url = url.split("#");
     var hash = url[1] ? "#" + url[1] : "";
     url = url[0];
@@ -161,7 +180,6 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
     }
 
     values = removeNulls(values);
-
     var form = $('<form>').attr("method", method).attr("action", url + hash);
 
     if (target) {
@@ -170,34 +188,37 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
 
     var _submit = form[0].submit;
     iterateValues(values, [], form, null, traditional);
-
-    return { form: form, submit: function submit() {
+    return {
+      form: form,
+      submit: function submit() {
         _submit.call(form[0]);
-      } };
-  };
+      }
+    };
+  }; //Utility Functions
 
-  //Utility Functions
   /**
    * Url and QueryString Parser.
    * @param {string} url - a Url to parse.
    * @returns {object} an object with the parsed url with the following structure {url: URL, params:{ KEY: VALUE }}
    */
-  $.parseUrl = function (url) {
 
+
+  $.parseUrl = function (url) {
     if (url.indexOf('?') === -1) {
       return {
         url: url,
         params: {}
       };
     }
+
     var parts = url.split('?'),
         query_string = parts[1],
         elems = query_string.split('&');
     url = parts[0];
-
     var i,
         pair,
         obj = {};
+
     for (i = 0; i < elems.length; i += 1) {
       pair = elems[i].split('=');
       obj[pair[0]] = pair[1];
@@ -207,14 +228,16 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
       url: url,
       params: obj
     };
-  };
+  }; //Private Functions
 
-  //Private Functions
+
   var getInput = function getInput(name, value, parent, array, traditional) {
     var parentString;
+
     if (parent.length > 0) {
       parentString = parent[0];
       var i;
+
       for (i = 1; i < parent.length; i += 1) {
         parentString += "[" + parent[i] + "]";
       }
@@ -245,8 +268,10 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
 
   var removeNulls = function removeNulls(values) {
     var propNames = Object.getOwnPropertyNames(values);
+
     for (var i = 0; i < propNames.length; i++) {
       var propName = propNames[i];
+
       if (values[propName] === null || values[propName] === undefined) {
         delete values[propName];
       } else if (_typeof(values[propName]) === 'object') {
@@ -255,9 +280,22 @@ ShareAlike - If you remix, transform, or build upon the material, you must distr
         delete values[propName];
       }
     }
+
     return values;
   };
 })(window.jQuery || window.Zepto || window.jqlite);
+
+/***/ }),
+
+/***/ 1:
+/*!******************************************************!*\
+  !*** multi ./resources/assets/js/jquery.redirect.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\ezegyalmafa\resources\assets\js\jquery.redirect.js */"./resources/assets/js/jquery.redirect.js");
+
 
 /***/ })
 

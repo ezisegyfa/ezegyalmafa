@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link href="{{ asset('css/crm.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/crm/sidebar.css') }}" rel="stylesheet">
     
     <!-- dataTables -->
     <link href="{{ asset('css/dataTables/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -11,6 +11,10 @@
     <link href="{{ asset('css/dataTables/dataTables.foundation.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables/dataTables.semanticui.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables/dataTables.min.css') }}" rel="stylesheet">
+@endsection
+
+@section('header')
+    @include('layouts.header')
 @endsection
 
 @section('content')
@@ -53,6 +57,10 @@
     </div>
 @endsection
 
+@section('footer')
+    @include('webshop.components.footer')
+@endsection
+
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/jquery.redirect.js') }}"></script>
     <!-- dataTables -->
@@ -63,4 +71,5 @@
     <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.foundation.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.semanticui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables/dataTables.min.js') }}"></script>
+    @include('layouts.dataTableInitializer')
 @endsection

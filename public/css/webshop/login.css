@@ -1,0 +1,9 @@
+#login_card .row {
+	display: flex;
+	justify-content: center;
+}
+
+#login_card .label {
+	width: 100px;
+    text-align: right;
+}

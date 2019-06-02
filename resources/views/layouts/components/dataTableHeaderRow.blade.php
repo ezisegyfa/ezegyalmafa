@@ -1,6 +1,6 @@
 <tr>
 	@foreach($columnNames as $columnName)
-	    <th databaseColumnName="{{ $columnName }}">{{ getColumnTranslatedName($columnName) }}</th>
+	    <th databaseColumnName="{{ $columnName }}">{{ $columnName }}</th>
 	@endforeach
 	@foreach($buttonColumns as $buttonColumn)
 		@if($buttonColumn['text'] == __('view.delete'))

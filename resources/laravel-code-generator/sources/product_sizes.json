@@ -69,7 +69,7 @@
             "on-update": null
         },
         {
-            "name": "order",
+            "name": "order_id",
             "labels": "Order",
             "html-type": "select",
             "css-class": "",
@@ -88,13 +88,13 @@
             "comment": null,
             "is-nullable": false,
             "is-header": false,
-            "is-unsigned": false,
+            "is-unsigned": true,
             "is-auto-increment": false,
             "is-inline-options": false,
             "is-date": false,
             "date-format": "",
             "cast-as": "",
-            "placeholder": "Enter order here...",
+            "placeholder": "Select order",
             "delimiter": "; ",
             "range": [],
             "foreign-relation": {
@@ -102,13 +102,13 @@
                 "type": "belongsTo",
                 "params": [
                     "App\\Models\\OrderInfo",
-                    "order",
+                    "order_id",
                     "id"
                 ],
                 "field": "quantity"
             },
             "foreign-constraint": {
-                "field": "order",
+                "field": "order_id",
                 "references": "order_infos",
                 "on": "id",
                 "on-delete": "restrict",

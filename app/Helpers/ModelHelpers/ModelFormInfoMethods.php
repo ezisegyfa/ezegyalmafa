@@ -4,7 +4,7 @@ namespace App\Helpers\ModelHelpers;
 
 use App\Helpers\ModelHelpers\ModelRecursiveMethods;
 use App\Helpers\ModelHelpers\ModelFilterMethods;
-use App\Helpers\FormInfos\Input;
+use App\Helpers\FormInfos\TextInput;
 use App\Helpers\FormInfos\TextArea;
 use App\Helpers\FormInfos\Select;
 use App\Helpers\FormInfos\SelectOption;
@@ -18,15 +18,13 @@ use App\Helpers\RelationHelpers\Relationship;
  */
 trait ModelFormInfoMethods
 {
-    protected static $defaultIgnoredFormColumnNames = ['id', 'user_id', 'created_at', 'updated_at'];
-
     public function getModelFormInfos()
     {
         return array_map(function ($columnName) {
             $formInfo = static::getColumnDefaultFormInfos($columnName);
             $formInfo->value = $this->$columnName;
             return $formInfo;
-        }, static::getColumnNames());
+        }, static::getAcceptedColumnNames());
     }
 
     public static function getFormInfos()
@@ -46,12 +44,9 @@ trait ModelFormInfoMethods
 
     public static function getNonRelationshipFormInfos()
     {
-        $columnNames = array_filter(static::getNonRelationColumnNames(), function($columnName) {
-            return static::isAcceptedFormColumn($columnName);
-        });
         return array_map(function($columnName) {
             return static::createNonRelationColumnFormInfos($columnName);
-        }, $columnNames);
+        }, static::getAcceptedColumnNames());
     }
 
     public static function getColumnDefaultFormInfos(string $columnName)
@@ -63,12 +58,12 @@ trait ModelFormInfoMethods
                 return static::createRelationColumnFormInfosByColumnName($columnName);
         }
         else
-            throw new Exception("Invalid column name", 500);
+            throw new \Exception("Invalid column name:" . $columnName, 500);
     }
 
     protected static function createNonRelationColumnFormInfos(string $columnName)
     {
-        return new Input($columnName, '', null, static::getRequestRules()[$columnName]);
+        return new TextInput($columnName, '', '', static::getColumnRequestRules($columnName));
     }
 
     protected static function createRelationColumnFormInfosByColumnName(string $columnName)
@@ -76,28 +71,42 @@ trait ModelFormInfoMethods
         return static::createRelationColumnFormInfos(static::getColumnRelationship($columnName));
     }
 
-    protected static function createRelationColumnFormInfos(Relationship $relationship)
+    public static function createSelectFormInfos()
     {
-        $columnName = $relationship->getColumnName();
         return new Select(
-            $columnName, 
-            static::getRelationFormOptions($relationship->getModelTypeNamespaceUrl()),
-            0,
-            null,
-            static::getRequestRules()[$columnName]
+            str_singular(static::getTableName()),
+            static::getSelectFormOptions()
         );
     }
 
-    public static function getRelationFormOptions(string $relatedModelTypeName)
+    protected static function createRelationColumnFormInfos(Relationship $relationship)
     {
-        return $relatedModelTypeName::all()->map(function($relatedObject) {
-            return new SelectOption($relatedObject->id, $relatedObject->getRenderValue());
-        })->toArray();
+        $columnName = $relationship->getColumnName();
+        $relatedModelTypeName = $relationship->getModelTypeNamespaceUrl();
+        return new Select(
+            $columnName, 
+            $relatedModelTypeName::getSelectFormOptions(),
+            null,
+            '',
+            static::getColumnRequestRules($columnName)
+        );
+    }
+
+    public static function getSelectFormOptions()
+    {
+        return convertModelsToSelectOptions(static::all());
+    }
+
+    public static function getAcceptedColumnNames()
+    {
+        return array_filter(static::getColumnNames(), function($columnName) {
+            return static::isAcceptedFormColumn($columnName);
+        });
     }
 
     public static function isAcceptedFormColumn(string $columnName)
     {
         $isCustomIgnoredColumnName = isset(static::$ignoredFormColumnNames) && in_array($columnName, static::$ignoredFormColumnNames);
-        return !in_array($columnName, static::$defaultIgnoredFormColumnNames) && !$isCustomIgnoredColumnName;
+        return !in_array($columnName, getIgnoredColumnNames()) && !$isCustomIgnoredColumnName;
     }
 }

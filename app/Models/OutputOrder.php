@@ -41,7 +41,8 @@ class OutputOrder extends Model
     protected $fillable = [
                   'order_info_id',
                   'buyer_id',
-                  'location_id'
+                  'location_id',
+                  'address'
               ];
 
     /**

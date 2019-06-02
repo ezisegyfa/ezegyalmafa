@@ -57,6 +57,7 @@ trait CrmControllerRouteFunctions
     public static function getQuery(string $tableName)
     {
         $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
+        \Log::debug($modelTypeNamespaceUrl::getDataTableQuery());
         return $modelTypeNamespaceUrl::getDataTableQuery();
     }
 

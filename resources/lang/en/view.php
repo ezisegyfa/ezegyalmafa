@@ -3,6 +3,21 @@
 return [
 
     /*
+     * Header
+     */
+
+    'category_id' => 'Category',
+    'product_speciality' => 'Product speciality',
+    'brand' => 'Brand',
+
+    /*
+     * Product details
+     */
+
+    'Specialities' => 'Specialities',
+    'Properties' => 'Properties',
+
+    /*
      * Button texts
      */
 
@@ -127,6 +142,7 @@ return [
     'notification Types' => 'Notification Types',
 
     'location' => 'Location',
+    'address' => 'Address',
     'settlements' => 'Settlements',
     'cities' => 'Cities',
     'regions' => 'Regions',

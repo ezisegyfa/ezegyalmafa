@@ -15,20 +15,34 @@ use App\Http\Controllers\Crm\CrmController;
 
 Auth::routes();
 
-Route::get('/termsAndConditions', 'HomeController@showTermsAndConditions');
-Route::get('/privateDataProtectionDescription', 'HomeController@showPrivateDataProtectionDescription');
-Route::get('/setup', 'SetupController@setup');
+Route::get('admin/login', 'Auth\LoginController@showAdminLoginForm');
+Route::get('user/login', 'Auth\LoginController@showUserLoginForm');
+Route::get('user/register', 'Auth\RegisterController@showUserRegistrationForm');
+
+Route::post('admin/login', 'Auth\LoginController@adminLogin');
+Route::post('admin/logout', 'Auth\LoginController@adminLogout');
+Route::post('user/login', 'Auth\LoginController@userLogin');
+Route::post('user/register', 'Auth\RegisterController@createUser');
+Route::post('user/logout', 'Auth\LoginController@userLogout');
+
+Route::get('termsAndConditions', 'HomeController@showTermsAndConditions');
+Route::get('privateDataProtectionDescription', 'HomeController@showPrivateDataProtectionDescription');
+Route::get('setup', 'SetupController@setup');
 
 Route::get('/', 'HomeController@index')
     ->name('welocme');
+Route::post('search', 'HomeController@search');
 Route::get('products/{productType}', 'HomeController@showProductDetails');
-Route::get('orders/createWithBuyer/{productType}','HomeController@showOutputOrderForm')
-	->name('orders.order.createWithBuyer');
-Route::post('orders/storeWithBuyer','HomeController@storeWithBuyer')
-    ->name('orders.order.storeWithBuyer');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/menu', 'MenuController@showMenu')->name('menu');
+Route::middleware(['auth:user'])->group(function () {
+    Route::post('webshop/order_infos/store', 'OutputOrderController@webshopStore');
+	Route::get('user/edit', 'UserController@showEditUserForm')->name('profile');
+	Route::post('user/edit', 'UserController@updateProfile');
+});
+Route::get('webshop/regions/{regionId}/locations', 'RegionController@getLocations');
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin', 'MenuController@showMenu')->name('menu');
 
     CrmController::initializeRoutes();
 });

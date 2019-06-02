@@ -36,8 +36,9 @@ class User extends Authenticatable
                   'first_name',
                   'last_name',
                   'email',
+                  'password',
                   'phone_number',
-                  'adress',
+                  'address',
                   'location_id',
                   'identity_card_serial_type_id',
                   'identity_card_serial_number',
@@ -83,7 +84,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\OutputOrder','buyer_id','id');
     }
-
 
     /**
      * Get created_at in array format

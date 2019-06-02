@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.webshop')
 
 @section('content')
 <div class="container">
@@ -17,11 +17,8 @@
                     <form method="POST" action="{{ route('password.email') }}" aria-label="{{ __('Reset Password') }}">
                         @csrf
 
-                        @component('layouts.components.formInputTextRow',[
-                            'name' => 'email',
-                            'labelTextLanguageTitle' => 'E-Mail Address',
-                            'errors' => $errors,
-                            'value' => old('email') ?? ''
+                        @component('layouts.components.form.labeledFormInput', [
+                            'formInfo' => new \App\Helpers\FormInfos\TextInput('email', '', '', 'email|maxLength:255')
                         ])
                         @endcomponent
 

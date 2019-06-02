@@ -1,0 +1,44 @@
+.bg-dark {
+    background-color: #0c0c0c !important;
+}
+.card-form .row {
+	display: flex;
+	justify-content: center;
+}
+
+.card-form .label {
+    text-align: right;
+}
+
+.card-form {
+	margin-bottom: 2rem;
+}
+
+.label {
+	margin-right: 5px;
+	padding-left: 30px;
+}
+
+@media (min-width: 1200px) {
+	.page-content {
+		min-height: 1100px;
+	}
+}
+
+@media (min-width: 992px) {
+	.page-content {
+		min-height: 900px;
+	}
+}
+
+@media (min-width: 768px) {
+	.page-content {
+		min-height: 700px;
+	}
+}
+
+@media (min-width: 576px) {
+	.page-content {
+		min-height: 500px;
+	}
+}

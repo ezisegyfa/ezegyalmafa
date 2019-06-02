@@ -13,3 +13,11 @@ function castObjectToArray($object)
     }
     return $arrayWithCorrectedKeys;
 }
+
+function getAttribute(string $name)
+{
+	if (!empty($$name))
+		return $name . '=' . $$name;
+	else
+		return '';
+}

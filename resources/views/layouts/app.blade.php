@@ -16,6 +16,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components.css') }}" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -26,12 +27,17 @@
     <div id="app">
         @yield('header')
         
-        @yield('content')
+        <div class="page-content">
+            @yield('content')
+        </div>
 
         @yield('footer')
     </div>
 
-    <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/helperMethods.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+        var APP_URL = {!! json_encode(url('/')) !!}
+    </script>
     @yield('scripts')
 </body>

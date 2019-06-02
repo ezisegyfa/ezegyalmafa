@@ -6,7 +6,7 @@ use BenSampo\Enum\Enum;
 
 final class FormItemType extends Enum
 {
-    const input = 0;
+    const textinput = 0;
     const textarea = 1;
     const select = 2;
     const checkBox = 3;
@@ -37,16 +37,15 @@ class FormItemInfos
 	public function setValidationRules(string $validationRules)
 	{
 		$this->validationRules = [];
-		$this->setBoolValidationRules($validationRules, 'required', 'numeric', 'date', 'email', 'password');
-		if (strpos($validationRules, 'max') !== false) {
-			$validationRulesAfterMax = substr($validationRules, strpos($validationRules, 'max'));
-			$ruleEndCharacterPos = strpos($validationRulesAfterMax, '|');
-			if ($ruleEndCharacterPos === false)
-				$maxPart = substr($validationRulesAfterMax, 0);
-			else
-				$maxPart = substr($validationRulesAfterMax, 0, $ruleEndCharacterPos);
-			$maxLength = (int)(substr($maxPart, strpos($maxPart, ':') + 1));
-			$this->validationRules['max'] = $maxLength;
+		$rules = explode('|', $validationRules);
+		foreach ($rules as $rule) {
+			if ($this->checkRuleIsBooleanRule($rule))
+				$this->validationRules[$rule] = true;
+			else {
+				$oneValueRule = $this->checkOneValueRule($rule);
+				if ($oneValueRule)
+					$this->validationRules[$oneValueRule['name']] = $oneValueRule['value'];
+			}
 		}
 	}
 	public function getValidationRules()
@@ -54,22 +53,36 @@ class FormItemInfos
 		return $this->validationRules;
 	}
 
-	protected function setBoolValidationRules(string $ruleString, string ...$ruleNames)
+	protected function checkRuleIsBooleanRule(string $ruleToCheck)
 	{
+		$ruleNames = ['required', 'numeric', 'date', 'email', 'password'];
 		foreach ($ruleNames as $ruleName)
-			if (strpos($ruleString, $ruleName) !== false)
-				$this->validationRules[$ruleName] = true;
+			if ($ruleName == $ruleToCheck)
+				return true;
+		return false;
 	}
 
-	public function __construct(string $id, int $type = null, $value = null, string $label = null, string $validationRules = '')
+	protected function checkOneValueRule(string $ruleToCheck)
+	{
+		$semicolonPosition = strpos($ruleToCheck, ':');
+		if ($semicolonPosition !== false)
+			return [
+				'name' => substr($ruleToCheck, 0, $semicolonPosition),
+				'value' => substr($ruleToCheck, $semicolonPosition + 1)
+			];
+		else
+			return null;
+	}
+
+	public function __construct(string $id, int $type = null, $value = null, string $label = '', string $validationRules = '')
 	{
 		$this->id = $id;
 		$this->setType($type);
 		$this->value = $value;
-		if ($label)
-			$this->label = $label;
-		else
+		if (empty($label))
 			$this->label = __('view.' . $this->id);
+		else
+			$this->label = __('view.' . $label);
 		$this->setValidationRules($validationRules);
 	}
 }

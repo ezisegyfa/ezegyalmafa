@@ -71,7 +71,7 @@
             "on-update": null
         },
         {
-            "name": "region",
+            "name": "region_id",
             "labels": "Region",
             "html-type": "select",
             "css-class": "",
@@ -90,13 +90,13 @@
             "comment": null,
             "is-nullable": false,
             "is-header": false,
-            "is-unsigned": false,
+            "is-unsigned": true,
             "is-auto-increment": false,
             "is-inline-options": false,
             "is-date": false,
             "date-format": "",
             "cast-as": "",
-            "placeholder": "Enter region here...",
+            "placeholder": "Select region",
             "delimiter": "; ",
             "range": [],
             "foreign-relation": {
@@ -104,13 +104,13 @@
                 "type": "belongsTo",
                 "params": [
                     "App\\Models\\Region",
-                    "region",
+                    "region_id",
                     "id"
                 ],
                 "field": "name"
             },
             "foreign-constraint": {
-                "field": "region",
+                "field": "region_id",
                 "references": "regions",
                 "on": "id",
                 "on-delete": "restrict",
@@ -158,24 +158,24 @@
     ],
     "relations": [
         {
-            "name": "buyer",
-            "type": "hasOne",
-            "params": [
-                "App\\Models\\Buyer",
-                "location",
-                "id"
-            ],
-            "field": "first_name"
-        },
-        {
             "name": "outputOrder",
             "type": "hasOne",
             "params": [
                 "App\\Models\\OutputOrder",
-                "location",
+                "location_id",
                 "id"
             ],
-            "field": "order_info"
+            "field": "id"
+        },
+        {
+            "name": "user",
+            "type": "hasOne",
+            "params": [
+                "App\\Models\\User",
+                "location_id",
+                "id"
+            ],
+            "field": "id"
         }
     ],
     "indexes": [],

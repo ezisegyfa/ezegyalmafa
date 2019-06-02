@@ -2,11 +2,17 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/jquery.redirect.js": "/js/jquery.redirect.js",
+    "/css/crm/sidebar.css": "/css/crm/sidebar.css",
+    "/css/components.css": "/css/components.css",
     "/js/helperMethods.js": "/js/helperMethods.js",
-    "/css/crm.css": "/css/crm.css",
     "/css/webshop/layout.css": "/css/webshop/layout.css",
+    "/css/webshop/header.css": "/css/webshop/header.css",
+    "/css/webshop/login.css": "/css/webshop/login.css",
     "/css/webshop/productList.css": "/css/webshop/productList.css",
-    "/js/webshop/productDetails.js": "/js/webshop/productDetails.js",
+    "/css/webshop/productDetails.css": "/css/webshop/productDetails.css",
+    "/js/webshop/location.js": "/js/webshop/location.js",
+    "/js/webshop/layout.js": "/js/webshop/layout.js",
+    "/js/webshop/header.js": "/js/webshop/header.js",
     "/js/webshop/productList.js": "/js/webshop/productList.js",
-    "/js/webshop/layout.js": "/js/webshop/layout.js"
+    "/js/webshop/productDetails.js": "/js/webshop/productDetails.js"
 }

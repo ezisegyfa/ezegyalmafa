@@ -84,7 +84,7 @@ class DataTable {
                     '<input name="_method" value="DELETE" type="hidden">' + 
                     '{!! csrf_field() !!}' +
                     '<button type="submit" class="btn btn-danger" onclick="return confirm(&quot;Delete Model?&quot;)">' +
-                        '<span class="glyphicon glyphicon-trash" aria-hidden="true">' + "@lang('view.delete')" + '</span>' +
+                        '<span class="glyphicon glyphicon-trash" aria-hidden="true">' + "Delete" + '</span>' +
                     '</button>' +
                 '</form>'
     }
@@ -117,6 +117,7 @@ initDataTables()
 function initDataTables()
 {
     tables = document.getElementsByTagName('table')
+
     for (var i = 0; i < tables.length; i++)
         var d = new DataTable(tables[i]);
 }

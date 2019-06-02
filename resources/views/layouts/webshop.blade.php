@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('styles')
-    <link href="{{ asset('css/webshop/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('css/webshop/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/webshop/layout.css') }}" rel="stylesheet">
     @yield('webshopStyles')
 @endsection
 @section('header')
@@ -33,5 +33,6 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{ URL::asset('js/webshop/layout.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/webshop/header.js') }}"></script>
     @yield('webshopScripts')
 @endsection

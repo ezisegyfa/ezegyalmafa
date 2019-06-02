@@ -82,9 +82,9 @@ trait ModelHelperMethods
 
     public function getRenderValue()
     {
-        $modelTypeName = get_called_class();
         $renderValue = '';
-        foreach ($modelTypeName::$renderColumnNames as $columnName) {
+        $modelTypeName = get_called_class();
+        foreach ($modelTypeName::getRenderColumnNames() as $columnName) {
             $columnRelationship = static::getColumnRelationship($columnName);
             if ($columnRelationship)
                 $renderValue .= $this->$columnRelationship->getRenderValue();
@@ -98,6 +98,25 @@ trait ModelHelperMethods
             $renderValue .= ' - ';
         }
         return substr($renderValue, 0, strlen($renderValue) - 3);
+    }
+
+    public static function getRenderColumnNames()
+    {
+        if (isset(static::$renderColumnNames) && !empty(static::$renderColumnNames))
+            return static::$renderColumnNames;
+        else if (in_array('name', static::getColumnNames()))
+            return ['name'];
+        else
+            return ['id'];
+    }
+
+    public static function getColumnRequestRules(string $columnName)
+    {
+        $modelRequestRules = static::getRequestRules();
+        if (array_key_exists($columnName, $modelRequestRules))
+            return $modelRequestRules[$columnName];
+        else
+            return '';
     }
 
     protected static $requestRules;

@@ -1,20 +1,34 @@
 <?php
 
+function getIgnoredColumnNames()
+{
+	if (!array_key_exists('ignoredColumnNames', $GLOBALS))
+		$GLOBALS['ignoredColumnNames'] = [
+			'id',
+			'created_at',
+			'updated_at',
+			'deleted_at'
+		];
+	return $GLOBALS['ignoredColumnNames'];
+}
+
 function getTableRequestRules(string $tableName)
 {
 	$requestRules = [];
 	foreach (getTableColumnInfos($tableName) as $tableColumnInfo) {
-		$currentRules = [];
-		addRequiredRule($currentRules, $tableColumnInfo);
-		addTypeRule($currentRules, $tableColumnInfo);
-		addMaxRule($currentRules, $tableColumnInfo);
-		addRelationRule($currentRules, $tableColumnInfo, $tableName);
-		$requestRules[$tableColumnInfo->COLUMN_NAME] = createRuleString($currentRules);
+		if (!in_array($tableColumnInfo->COLUMN_NAME, getIgnoredColumnNames())) {
+			$currentRules = [];
+			checkRequiredRule($currentRules, $tableColumnInfo);
+			checkTypeRule($currentRules, $tableColumnInfo);
+			checkMaxRule($currentRules, $tableColumnInfo);
+			checkRelationRule($currentRules, $tableColumnInfo, $tableName);
+			$requestRules[$tableColumnInfo->COLUMN_NAME] = createRuleString($currentRules);
+		}
 	}
 	return $requestRules;
 }
 
-function addRequiredRule(array &$rules, $tableColumnInfo)
+function checkRequiredRule(array &$rules, $tableColumnInfo)
 {
 	if ($tableColumnInfo->IS_NULLABLE == 'YES')
 		array_push($rules, 'nullable');
@@ -22,7 +36,7 @@ function addRequiredRule(array &$rules, $tableColumnInfo)
 		array_push($rules, 'required');
 }
 
-function addTypeRule(array &$rules, $tableColumnInfo)
+function checkTypeRule(array &$rules, $tableColumnInfo)
 {
 	if (strpos($tableColumnInfo->COLUMN_TYPE, 'int') !== false)
 		array_push($rules, 'numeric');
@@ -30,23 +44,22 @@ function addTypeRule(array &$rules, $tableColumnInfo)
 		array_push($rules, 'date');
 	else if ($tableColumnInfo->COLUMN_NAME == 'email')
 		array_push($rules, 'email');
-	else if ($tableColumnInfo->COLUMN_NAME == 'password')
-		array_push($rules, 'password');
 }
 
-function addMaxRule(array &$rules, $tableColumnInfo)
+function checkMaxRule(array &$rules, $tableColumnInfo)
 {
 	if (strpos($tableColumnInfo->COLUMN_TYPE, 'varchar') !== false) {
 		$openBracketPostition = strpos($tableColumnInfo->COLUMN_TYPE, '(');
 		if ($openBracketPostition !== false) {
 			$closeBracketPosition = strpos($tableColumnInfo->COLUMN_TYPE, ')');
 			$lengthInfo = substr($tableColumnInfo->COLUMN_TYPE, $openBracketPostition + 1, $closeBracketPosition - $openBracketPostition - 1);
+			array_push($rules, 'string');
 			array_push($rules, 'max:' . $lengthInfo);
 		}
 	}
 }
 
-function addRelationRule(array &$rules, $tableColumnInfo, string $tableName)
+function checkRelationRule(array &$rules, $tableColumnInfo, string $tableName)
 {
 	$modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
 	$columnName = $tableColumnInfo->COLUMN_NAME;
