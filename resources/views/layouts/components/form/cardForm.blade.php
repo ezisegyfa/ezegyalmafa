@@ -6,7 +6,7 @@
 ?>
 <div {{ $idAttribute }} class="card card-form">
 	@if (isset($title) && !empty($title))
-    	<div class="card-header">@lang($title)</div>
+    	<div class="card-header">{{ $title }}</div>
     @endif
 
     <div class="card-body">

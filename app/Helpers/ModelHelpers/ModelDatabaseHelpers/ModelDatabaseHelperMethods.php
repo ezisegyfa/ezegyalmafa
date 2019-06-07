@@ -33,6 +33,16 @@ trait ModelDatabaseMethods
         return in_array($columnName, static::getRelationColumnNames());
     }
 
+    protected static $acceptedRelationColumnNames = [];
+    public static function getAcceptedRelationColumnNames()
+    {
+        if (empty(static::$acceptedRelationColumnNames))
+            static::$acceptedRelationColumnNames = array_filter(static::getRelationColumnNames(), function($columnName) {
+                return static::isAcceptedFormColumn($columnName);
+            });
+        return static::$acceptedRelationColumnNames;
+    }
+
     protected static $relationColumnNames = [];
     public static function getRelationColumnNames()
     {
@@ -73,6 +83,13 @@ trait ModelDatabaseMethods
     public static function getManyToManyRelationFieldName(string $relatedModelName)
     {
         return getManyToManyRelationshipFieldName(get_called_class(), $relatedModelName);
+    }
+
+    public static function getAcceptedNonRelationColumnNames()
+    {
+        return array_filter(static::getNonRelationColumnNames(), function($columnName) {
+            return static::isAcceptedFormColumn($columnName);
+        });
     }
 
     public static function getNonRelationColumnNames()

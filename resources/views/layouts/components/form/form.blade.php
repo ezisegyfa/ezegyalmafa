@@ -16,7 +16,7 @@
 
     <div class="form-group row">
         @component('layouts.components.inputs.button', [
-            'sendButtonTitle' => $sendButtonTitle ?? 'Send'
+            'sendButtonTitle' => $sendButtonTitle ?? __('Send')
         ])
         @endcomponent
     </div>

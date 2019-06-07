@@ -14,7 +14,7 @@ trait ModelSelectMethods
         $tableName = static::getTableName();
         foreach (static::getManyToOneRelationships() as $relationship) {
             $relatedTableName = $relationship->getTableName();
-            $query = $query->join($relatedTableName, $relatedTableName . '.id', $tableName . '.' . $relationship->getColumnName());
+            $query = $query->leftJoin($relatedTableName, $relatedTableName . '.id', $tableName . '.' . $relationship->getColumnName());
         }
         return $query;
     }
@@ -35,7 +35,7 @@ trait ModelSelectMethods
         $tableName = static::getTableName();
         return array_map(function($columnName) use($tableName) {
             return getSelectValue($tableName, $columnName);
-        }, static::$renderColumnNames);
+        }, static::getRenderColumnNames());
     }
 
     public static function getAllColumnsSelectValues()

@@ -15,6 +15,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 	.js('resources/assets/js/app.js', 'public/js')
 
 	//Helpers
+	.copy('resources/assets/css/crm/layout.css', 'public/css/crm')
 	.copy('resources/assets/css/crm/sidebar.css', 'public/css/crm')
 	.copy('resources/assets/css/components.css', 'public/css')
 	.js('resources/assets/js/jquery.redirect.js', 'public/js')

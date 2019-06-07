@@ -22,6 +22,10 @@ class MenuController extends Controller
     {
         $user = \Auth::user();
         $tableNames = getDatabaseTableNames();
+        unset($tableNames[2]);
+        unset($tableNames[10]);
+        unset($tableNames[21]);
+        unset($tableNames[23]);
         return view('menu', compact('user', 'tableNames'));
     }
 

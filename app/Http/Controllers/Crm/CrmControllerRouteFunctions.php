@@ -50,14 +50,13 @@ trait CrmControllerRouteFunctions
     {
         $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
         $columnNames = $modelTypeNamespaceUrl::getColumnWithTableNames();
-        $tableNames = getDatabaseTableNames();
+        $tableNames = static::getTableNamesToRender();
         return view('data.index', compact('columnNames', 'tableName', 'tableNames'));
     }
 
     public static function getQuery(string $tableName)
     {
         $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
-        \Log::debug($modelTypeNamespaceUrl::getDataTableQuery());
         return $modelTypeNamespaceUrl::getDataTableQuery();
     }
 
@@ -65,9 +64,10 @@ trait CrmControllerRouteFunctions
     {
         $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
         $formInfos = $modelTypeNamespaceUrl::getFormInfos();
-        $tableNames = getDatabaseTableNames();
+        $tableNames = static::getTableNamesToRender();
         $sendButtonTitle = __('view.create');
-        return view('data.form', compact('formInfos', 'tableNames', 'tableName', 'sendButtonTitle'));
+        $route = url($tableName);
+        return view('data.form', compact('formInfos', 'tableNames', 'tableName', 'sendButtonTitle', 'route'));
     }
 
     public static function processStore(Request $request, string $tableName)
@@ -100,7 +100,8 @@ trait CrmControllerRouteFunctions
         $formInfos = $modelToEdit->getModelFormInfos();
         $tableNames = getDatabaseTableNames();
         $sendButtonTitle = __('view.edit');
-        return view('data.form', compact('formInfos', 'tableName', 'tableNames', 'sendButtonTitle'));
+        $route = url($tableName, $modelToEdit->id);
+        return view('data.form', compact('formInfos', 'tableName', 'tableNames', 'sendButtonTitle', 'route'));
     }
 
     public static function processUpdate($id, Request $request, string $tableName)
@@ -108,7 +109,7 @@ trait CrmControllerRouteFunctions
         $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
         $request->validate($modelTypeNamespaceUrl::getRequestRules());
         try {
-            $data = $request->input(getTableModelTypeName($tableName));
+            $data = $modelTypeNamespaceUrl::getDataFromRequest($request);
             $modelToUpdate = $modelTypeNamespaceUrl::findOrFail($id);
             $modelToUpdate->update($data);
             return redirect()->route($tableName . '.index')
@@ -122,14 +123,24 @@ trait CrmControllerRouteFunctions
     public static function processDestroy($id, string $tableName)
     {
         try {
-            $modelTypeNamespaceUrl = getTableModelTypeName($tableName);
+            $modelTypeNamespaceUrl = getTableModelTypeNamespaceUrl($tableName);
             $modelToDelete = $modelTypeNamespaceUrl::findOrFail($id);
             $modelToDelete->delete();
             return redirect()->route($tableName . '.index')
-                             ->with('success_message', 'Settlement was successfully deleted!');
-        } catch (Exception $exception) {
+                             ->with('success_message', 'Model was successfully deleted!');
+        } catch (\Exception $exception) {
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }
+    }
+
+    public static function getTableNamesToRender()
+    {
+        $tableNames = getDatabaseTableNames();
+        unset($tableNames[2]);
+        unset($tableNames[10]);
+        unset($tableNames[21]);
+        unset($tableNames[23]);
+        return $tableNames;
     }
 }

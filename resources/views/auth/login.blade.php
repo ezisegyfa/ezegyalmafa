@@ -12,6 +12,16 @@
                 <div class="card-header">{{ __('login.Login') }}</div>
 
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    @if (session('warning'))
+                        <div class="alert alert-warning">
+                            {{ session('warning') }}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ url($baseUrl . '/login') }}" aria-label="{{ __('login.Login') }}">
                         @csrf
 

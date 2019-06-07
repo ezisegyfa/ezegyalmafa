@@ -34,6 +34,11 @@
     else
         $minLengthAttribute = '';
 
+    if (!empty($validationRules['step']))
+        $stepAttribute = 'step=' . $validationRules['step'];
+    else
+        $stepAttribute = '';
+
     if (empty($value)) {
         $oldValue = old($name);
         if (empty($oldValue))
@@ -44,4 +49,4 @@
     else
         $valueAttribute = 'value=' . $value;
 ?>
-<input id="{{ $name }}" type="{{ $type }}" class="form-control{{ $hasError ? ' is-invalid' : '' }}" name="{{ $name }}" {{ $valueAttribute }} {{ $minLengthAttribute }} {{ $maxAttribute }} {{ $maxLengthAttribute }} {{ $required }}>
+<input id="{{ $name }}" type="{{ $type }}" class="form-control{{ $hasError ? ' is-invalid' : '' }}" name="{{ $name }}" {{ $valueAttribute }} {{ $minLengthAttribute }} {{ $maxAttribute }} {{ $maxLengthAttribute }} {{ $stepAttribute }} {{ $required }}>

@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/jquery.redirect.js": "/js/jquery.redirect.js",
+    "/css/crm/layout.css": "/css/crm/layout.css",
     "/css/crm/sidebar.css": "/css/crm/sidebar.css",
     "/css/components.css": "/css/components.css",
     "/js/helperMethods.js": "/js/helperMethods.js",

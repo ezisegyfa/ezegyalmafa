@@ -1,6 +1,6 @@
 @extends('layouts.header')
 @section('rightContent')
-    <form id="search_form" method="POST" action="{{ url('search') }}" class="w-100">
+    <form id="search_form" method="GET" action="{{ url('/') . '/' }}" class="w-100">
 	    @csrf
 
 	    @foreach (getHeaderSearchFormInfos() as $formInfo)

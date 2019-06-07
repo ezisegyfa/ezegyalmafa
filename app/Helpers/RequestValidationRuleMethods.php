@@ -32,13 +32,13 @@ function checkRequiredRule(array &$rules, $tableColumnInfo)
 {
 	if ($tableColumnInfo->IS_NULLABLE == 'YES')
 		array_push($rules, 'nullable');
-	else if (!$tableColumnInfo->COLUMN_DEFAULT && $tableColumnInfo->EXTRA != 'auto_increment')
+	else if (is_null($tableColumnInfo->COLUMN_DEFAULT) && $tableColumnInfo->EXTRA != 'auto_increment')
 		array_push($rules, 'required');
 }
 
 function checkTypeRule(array &$rules, $tableColumnInfo)
 {
-	if (strpos($tableColumnInfo->COLUMN_TYPE, 'int') !== false)
+	if (strpos($tableColumnInfo->COLUMN_TYPE, 'int') !== false || strpos($tableColumnInfo->COLUMN_TYPE, 'double') !== false)
 		array_push($rules, 'numeric');
 	else if (strpos($tableColumnInfo->COLUMN_TYPE, 'datetime') !== false)
 		array_push($rules, 'date');

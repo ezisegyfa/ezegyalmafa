@@ -6,7 +6,6 @@ class DataTable {
         this.addSearchInputsToTable(table)
         var dataTable = this.getDataTable(table)
         dataTable.columns.defaultContent = 'sd'
-        console.log(dataTable)
         this.addSearchFunctionsToTable(dataTable)
     }
 
@@ -48,7 +47,7 @@ class DataTable {
         for (var i = 0; i < headerTags.length; ++i) {
             var columnName = headerTags[i].getAttribute("databaseColumnName")
             if (columnName)
-                columns.push({ 
+                columns.push({
                     data : columnName,
                     defaultContent : "",
                 })
@@ -80,7 +79,7 @@ class DataTable {
 
     getDeleteButtonHtml(row, tableUrl)
     {
-        return '<form method="POST" action="' + tableUrl + '/' + row.id + '" accept-charset="UTF-8">' +
+        return '<form method="POST" action="' + tableUrl + '/' + row[Object.keys(row)[0]] + '" accept-charset="UTF-8">' +
                     '<input name="_method" value="DELETE" type="hidden">' + 
                     '{!! csrf_field() !!}' +
                     '<button type="submit" class="btn btn-danger" onclick="return confirm(&quot;Delete Model?&quot;)">' +

@@ -59,7 +59,7 @@ trait ModelHelperMethods
             $relatedModelTypeName = $relationship->getModelTypeNamespaceUrl();
             $query->editColumn($columnName, function ($model) use($relatedModelTypeName) {
                 $valueToRender = '';
-                foreach ($relatedModelTypeName::$renderColumnNames as $renderColumnName) {
+                foreach ($relatedModelTypeName::getRenderColumnNames() as $renderColumnName) {
                     $propertyName = $relatedModelTypeName::getTableName() . '.' . $renderColumnName;
                     $valueToRender .= $model->$propertyName . ' - ';
                 }

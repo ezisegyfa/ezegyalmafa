@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use ModelHelperMethods;
+    use ModelHelperMethods, Notifiable;
     
 
     public static $renderColumnNames = ['email'];
@@ -36,6 +37,7 @@ class User extends Authenticatable
                   'first_name',
                   'last_name',
                   'email',
+                  'verified',
                   'password',
                   'phone_number',
                   'address',
@@ -85,6 +87,20 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\OutputOrder','buyer_id','id');
     }
 
+    public function userVerificationRequest()
+    {
+        return $this->hasOne('App\Models\UserVerificationRequest', 'user_id', 'id');
+    }
+
+    public function getVerificationRequest()
+    {
+        $userVerificationRequest = $this->userVerificationRequest;
+        if (empty($userVerificationRequest))
+            throw new \Exception("This user doesn't has verification request. user email: " . $this->email, 500);
+        else
+            return $userVerificationRequest->verificationRequest;
+    }
+
     /**
      * Get created_at in array format
      *
@@ -94,7 +110,6 @@ class User extends Authenticatable
     public function CreatedAtAttribute($value)
     {
         return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-
     }
 
     /**
@@ -106,7 +121,5 @@ class User extends Authenticatable
     public function UpdatedAtAttribute($value)
     {
         return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-
     }
-
 }

@@ -1,10 +1,12 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);
 
 .col-item {
-  border: 1px solid #E1E1E1;
-  background-color: #FDFFFF;
-  margin-bottom:12px;
+  border: none;
+  background: linear-gradient(to bottom, #fff500, #ffcb00);
+  margin-bottom: 12px;
   border-radius: 3px;
+  padding: 1px;
+  color: black;
 }
 .col-item .options {
   position:absolute;
@@ -13,10 +15,13 @@
 }
 .col-item .photo {
   overflow: hidden;
-  border: 1px solid #D1D1D1;
+  border: none;
   margin: 5px;
-  background-color: #C1E1E1;
-  border-radius: 2px;
+  background-color: #000000fa;
+  border-radius: 3px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 .col-item .photo .options {
   display:none;
@@ -28,9 +33,9 @@
 
 .col-item .options-cart {
   position:absolute;
-  left:22px;
-  top:6px;
   display:none;
+  background: linear-gradient(to bottom, #ffef00, #ffd300);
+  border-radius: 0.3rem;
 }
 .col-item .photo:hover .options,
 .col-item .photo:hover .options-cart {
@@ -133,13 +138,24 @@
 .col-item .btn-details a:first-child {
   margin-right:12px;
 }
+.col-item .fa {
+  color: #000000;
+}
 .page-item.active .page-link {
   background-color: #C1E1E1;
   color: black;
   border-color: #B1E1E1;
 }
 .page-link {
-  color: black;
+  background: linear-gradient(to bottom, #fff500, #ffcb00);
+  color: black !important;
+  font-size: 1.4rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
+  border-color: black !important;
+  border-width: 1px;
 }
 #product_list_pagination_row {
   display: flex;

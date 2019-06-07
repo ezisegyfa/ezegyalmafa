@@ -14,6 +14,7 @@ return [
 	'password_confirmation' => 'Jelszo megerosites',
 	'phone_number' => 'Telefonszam',
 	'region' => 'Megye',
+	'location' => 'Telepules',
 	'location_id' => 'Telepules',
 	'address' => 'Lakcim',
 ];

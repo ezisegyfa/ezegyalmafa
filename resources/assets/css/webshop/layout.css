@@ -6,18 +6,37 @@
 	padding-right: 5px;
 }
 .pagination {
-    margin-top: 20px;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
 }
 footer {
-    background: #0c0c0c;
+    background: #000000;
     padding: 40px;
 }
 footer a {
     color: #f8f9fa!important
 }
-#app {
-	background-color: #FBFFFF;
-}
 .page-content {
-	margin-top: 2rem;
+	padding-top: 2rem;
+	background-image: url('../../images/webshop/background2.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.card {
+	background: linear-gradient(to bottom, #ffd500, #ffbb00);
+    border-color: black;
+    border-radius: 5px;
+}
+.card .btn-link {
+	color: #0000ff;
+}
+.card button {
+	background: linear-gradient(to bottom, #000077, #000000);
+	border: none;
+}
+.card-header {
+	background: linear-gradient(to bottom, #ffd500, #ffbb00);
+}
+.card-header h1 {
+	margin-bottom: 0;
 }

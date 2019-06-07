@@ -1,9 +1,9 @@
 @extends('layouts.crm')
 
 @section('crmContent')
-    @component('layouts.components.form', [
+    @component('layouts.components.form.cardForm', [
         'formInfos' => $formInfos,
-        'route' => url($tableName),
+        'route' => $route,
         'sendButtonTitle' => $sendButtonTitle
     ])
     @endcomponent

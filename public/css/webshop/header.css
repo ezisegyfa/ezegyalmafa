@@ -1,8 +1,11 @@
 .nav-link {
     color: white;
 }
+.nav-link:hover {
+	color: #eeef00;
+}
 .navbar .btn {
-	background: linear-gradient(to bottom, #eeef00, #cecf00);    
+	background: linear-gradient(to bottom, #ffef00, #ffd300);    
 	border: 0;
     padding: 4px;
 	box-shadow: none;
@@ -38,4 +41,7 @@
 	display: flex;
 	align-items: center;
 	margin-right: 4rem;
+}
+#search_form_collapse_navbar select {
+    color: black;
 }

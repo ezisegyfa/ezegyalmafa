@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Webshop;
 
 use App\Models\ProductType;
 use App\Models\Buyer;
 use App\Models\Region;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
@@ -16,32 +18,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $productTypes = ProductType::with('productTypeImages.image')->paginate(16);
-        return view('webshop.productList', compact('productTypes'));
-    }
-
-    public function search(Request $request)
-    {
-        $searchedText = $request->get('searched_text');
+        $searchData = Input::get();
+        if (array_key_exists('searched_text', $searchData))
+            $searchedText = $searchData['searched_text'];
+        else
+            $searchedText = '';
 
         $searchQuery = ProductType::with('productTypeImages.image');
         
-        $this->textSearch($searchQuery, $request, $searchedText);
-        $this->categorySearch($searchQuery, $request, $searchedText);
-        $this->specialitiesSearch($searchQuery, $request, $searchedText);
-        $this->brandSearch($searchQuery, $request, $searchedText);
+        $this->textSearch($searchQuery, $searchData, $searchedText);
+        $this->categorySearch($searchQuery, $searchData, $searchedText);
+        $this->specialitiesSearch($searchQuery, $searchData, $searchedText);
+        $this->brandSearch($searchQuery, $searchData, $searchedText);
         
         $productTypes = $searchQuery->paginate(16);
-        $request->flash();
+        request()->flash();
         return view('webshop.productList', compact('productTypes'));
     }
 
-    public function textSearch($searchQuery, $request, $searchedText = '')
+    public function textSearch($searchQuery, $searchData, $searchedText = '')
     {
-        $searchQuery->where(function($query) use($request, $searchedText) {
+        $searchQuery->where(function($query) use($searchData, $searchedText) {
             if (!empty($searchedText)) {
                 $query->whereRaw('name LIKE "%' . $searchedText . '%" OR code LIKE "%' . $searchedText . '%"');
-                if (empty($request->get('category_id'))) {
+                if (empty($searchData['category_id'])) {
                     $query->orWhereExists(function ($subQuery) use($searchedText) {
                         $subQuery->select(\DB::raw(1))
                             ->from('product_categories')
@@ -49,7 +49,7 @@ class HomeController extends Controller
                             ->whereRaw('product_categories.name LIKE "%' . $searchedText . '%"');
                     });
                 }
-                if (empty($request->get('product_speciality'))) {
+                if (empty($searchData['product_speciality'])) {
                     $query->orWhereExists(function ($subQuery) use($searchedText) {
                         $subQuery->select(\DB::raw(1))
                             ->from('product_specialities')
@@ -58,7 +58,7 @@ class HomeController extends Controller
                             ->whereRaw('product_specialities.name LIKE "%' . $searchedText . '%"');
                     });
                 }
-                if (empty($request->get('brand'))) {
+                if (empty($searchData['brand'])) {
                     $query->orWhereExists(function ($subQuery) use($searchedText) {
                         $subQuery->select(\DB::raw(1))
                             ->from('brands')
@@ -71,37 +71,34 @@ class HomeController extends Controller
         });
     }
 
-    public function categorySearch($searchQuery, $request, $searchedText = '')
+    public function categorySearch($searchQuery, $searchData, $searchedText = '')
     {
-        $searchedCategory = $request->get('category_id');
-        if (!empty($searchedCategory)) 
-            $searchQuery->where('category_id', $searchedCategory);
+        if (!empty($searchData['category_id'])) 
+            $searchQuery->where('category_id', $searchData['category_id']);
     }
 
-    public function specialitiesSearch($searchQuery, $request, $searchedText = '')
+    public function specialitiesSearch($searchQuery, $searchData, $searchedText = '')
     {
-        $searchedSpeciality = $request->get('product_speciality');
-        if (!empty($searchedSpeciality)) {
-            $searchQuery->whereExists(function ($query) use($searchedSpeciality) {
+        if (!empty($searchData['product_speciality'])) {
+            $searchQuery->whereExists(function ($query) use($searchData) {
                 $query->select(\DB::raw(1))
                     ->from('product_specialities')
                     ->join('product_type_specialities', 'product_type_specialities.product_speciality_id', 'product_specialities.id')
                     ->whereRaw('product_types.id = product_type_specialities.product_type_id')
-                    ->whereRaw('product_specialities.id = ' . $searchedSpeciality);
+                    ->whereRaw('product_specialities.id = ' . $searchData['product_speciality']);
             });
         }
     }
 
-    public function brandSearch($searchQuery, $request, $searchedText = '')
+    public function brandSearch($searchQuery, $searchData, $searchedText = '')
     {
-        $searchedBrand = $request->get('brand');
-        if (!empty($searchedBrand)) 
-            $searchQuery->whereExists(function ($query) use($searchedBrand) {
+        if (!empty($searchData['brand'])) 
+            $searchQuery->whereExists(function ($query) use($searchData) {
                 $query->select(\DB::raw(1))
                     ->from('brands')
                     ->join('product_type_brands', 'product_type_brands.brand_id', 'brands.id')
                     ->whereRaw('product_types.id = product_type_brands.product_type_id')
-                    ->whereRaw('brands.id = ' . $searchedBrand);
+                    ->whereRaw('brands.id = ' . $searchData['brand']);
             });
     }
 
@@ -142,11 +139,6 @@ class HomeController extends Controller
         //dd(Buyer::getFormInfos());
         $formInfos = Buyer::getFormInfos();
         return view('webshop.orderForm', compact('formInfos'));
-    }
-
-    public function storeOutputOrder()
-    {
-        return redirect('');
     }
 
     public function downloadCatalogPdf()

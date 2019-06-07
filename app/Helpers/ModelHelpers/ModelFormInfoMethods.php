@@ -46,7 +46,7 @@ trait ModelFormInfoMethods
     {
         return array_map(function($columnName) {
             return static::createNonRelationColumnFormInfos($columnName);
-        }, static::getAcceptedColumnNames());
+        }, static::getAcceptedNonRelationColumnNames());
     }
 
     public static function getColumnDefaultFormInfos(string $columnName)

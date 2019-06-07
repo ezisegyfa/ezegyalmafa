@@ -33,7 +33,7 @@ class FormItemInfos
 		return $this->type;
 	}
 
-	protected $validationRules;
+	public $validationRules;
 	public function setValidationRules(string $validationRules)
 	{
 		$this->validationRules = [];

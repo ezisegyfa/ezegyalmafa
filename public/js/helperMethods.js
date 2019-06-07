@@ -50,6 +50,11 @@ function upperFirstLetter(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
+function getRequestParameterValue(name) {
+  var name = new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)').exec(location.search);
+  if (name) return decodeURIComponent(name[1]);else return null;
+}
+
 function axiosPostWithLog(settings) {
   axiosPost(extendSettingsWithPostLog(settings));
 }

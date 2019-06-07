@@ -51,10 +51,16 @@ class LoginController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        if (\Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember')))
-            return $this->intendedRedirect('/');
-
-        return $this->sendFailedLoginResponse($request);
+        $authenticated = \Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'));
+        if ($authenticated)
+            if (\Auth::user()->verified)
+                return $this->intendedRedirect('/');
+            else {
+                auth()->logout();
+                return back()->with('warning', __('login.You need to confirm your account. We have sent you an activation code, please check your email.'));
+            }
+        else
+            return $this->sendFailedLoginResponse($request);
     }
 
     public function showAdminLoginForm()

@@ -45,7 +45,7 @@ trait CrmControllerRouteInitializing
                     return static::getEditView($id, $tableName);
                 };
                 $updateFunction = function($id, Request $request) use($tableName) {
-                    return static::processUpdate($request, $tableName);
+                    return static::processUpdate($id, $request, $tableName);
                 };
                 $destroyFunction = function($id) use($tableName) {
                     return static::processDestroy($id, $tableName);
@@ -69,7 +69,7 @@ trait CrmControllerRouteInitializing
                 Route::get('/edit/{' . $modelTypeName . '}', $editFunction)
                     ->name($tableName . '.edit')
                     ->where('id', '[0-9]+'); 
-                Route::put('/{' . $modelTypeName . '}', $updateFunction)
+                Route::post('/{' . $modelTypeName . '}', $updateFunction)
                     ->name($tableName . '.update')
                     ->where('id', '[0-9]+');
                 Route::delete('/{' . $modelTypeName . '}', $destroyFunction)

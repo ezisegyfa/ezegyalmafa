@@ -30,14 +30,14 @@ $(document).ready(function(){
         });
     })
 
-    var productDetailsSectionHeight = $('#product_details_section').height()
-    var productImageSectionHeight = $('#product_image_section').height()
+    var productDetailsSectionHeight = $('#product_details_section').outerHeight()
+    var productImageSectionHeight = $('#product_image_section').outerHeight()
     if (productImageSectionHeight > productDetailsSectionHeight)
-        $('#product_details_section').height($('#product_image_section').height())
+        $('#product_details_section').height($('#product_image_section').outerHeight())
     else
-        $('#product_image_section').height($('#product_details_section').height())
+        $('#product_image_section').height($('#product_details_section').outerHeight())
     
     var userInfosSection = $('#user_infos_section')
     if (userInfosSection)
-        $('#buy_product_section').height(userInfosSection.height())
+        $('#buy_product_section').height(userInfosSection.outerHeight())
 });

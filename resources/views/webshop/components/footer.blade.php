@@ -13,16 +13,16 @@
             </div>
 
             <div class="col-4">
-                <h5>Informations</h5>
+                <h5>@lang('footer.Informations')</h5>
                 <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <ul class="list-unstyled">
-                    <li><a href="{{ url('termsAndConditions') }}">Terms and conditions</a></li>
-                    <li><a href="{{ url('privateDataProtectionDescription') }}">Private data protection</a></li>
+                    <li><a href="{{ url('termsAndConditions') }}">@lang('footer.Terms and conditions')</a></li>
+                    <li><a href="{{ url('privateDataProtectionDescription') }}">@lang('footer.Private data protection')</a></li>
                 </ul>
             </div>
 
             <div class="col-3">
-                <h5>Contact</h5>
+                <h5>@lang('footer.Contact')</h5>
                 <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <ul class="list-unstyled">
                     <li><i class="fa fa-home mr-2"></i> Protectorate</li>

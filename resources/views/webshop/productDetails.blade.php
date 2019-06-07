@@ -14,15 +14,14 @@
                         <img class="img-fluid" src="{{ $productType->getMainImageLink() }}" />
                     </div>
                 </div>
-                
             </div>
 
             <div class="col-12 col-lg-6">
-                <div class="card mb-3">
-                    <div id="product_details_section" class="card-body">
+                <div id="product_details_section" class="card mb-3">
+                    <div class="card-header">
                         <h1>{{ $productType->name }}</h1>
-                        <br>
-                        <br>
+                    </div>
+                    <div class="card-body">
                         @if ($productType->price)
                             <span class="price-new">$productType->price</span>
                         @endif
@@ -44,7 +43,7 @@
                         @guest
                             <div id="guest_buy_button_container">
                                 <a id="guest_buy_button" href="{{ url('user/login') }}" class="btn btn-success">
-                                    @lang('ProductDetails.BUY')
+                                    @lang('productDetails.BUY')
                                 </a>
                             </div>
                         @endguest
@@ -59,11 +58,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div id="user_infos_section" class="card mb-3">
+                            <div class="card-header">
+                                <h1 class="text-center">@lang('productDetails.User infos')</h1>
+                            </div>
                             <div class="card-body">
-                                <h1 class="text-center mt-3">@lang('User infos')</h1>
-                                <br>
                                 <div class="form-group row">
-                                    <label for="region_id" class="col-sm-4 col-form-label text-md-right">{{ __('Region') }}</label>
+                                    <label for="region_id" class="col-sm-4 col-form-label text-md-right">{{ __('view.region') }}</label>
 
                                     <div class="col-md-6">
                                         <select id="region_id" class="form-control{{ $errors->has('region_id') ? ' is-invalid' : '' }}" name="region_id" value="{{ old('region_id') }}" required autofocus>
@@ -89,20 +89,20 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="location_id" class="col-sm-4 col-form-label text-md-right">{{ __('Location') }}</label>
+                                    <label for="location_id" class="col-sm-4 col-form-label text-md-right">{{ __('view.location') }}</label>
 
                                     <div class="col-md-6">
                                         <select id="location_id" class="form-control{{ $errors->has('location_id') ? ' is-invalid' : '' }}" name="location_id" value="{{ old('location_id') }}" required autofocus>
                                             <?php
                                                 $user = \Auth::user();
                                                 if (isset($user->settlement) && !empty($user->settlement))
-                                                    $selectedLocationId = $user->location->id;
+                                                    $selectedLocationId = $user->settlement->id;
                                                 else
                                                     $selectedLocationId = 0;
                                             ?>
                                             <option value="" disabled selected>@lang('Select your option')</option>
                                             @foreach ($locationOptions as $locationOption)
-                                                <option value="{{ $location->value }}" {{ $location->value == $selectedLocationId ? 'selected' : '' }}>$location->label</option>
+                                                <option value="{{ $locationOption->value }}" {{ $locationOption->value == $selectedLocationId ? 'selected' : '' }}>{{ $locationOption->label }}</option>
                                             @endforeach
                                         </select>
 
@@ -115,7 +115,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="address" class="col-sm-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                                    <label for="address" class="col-sm-4 col-form-label text-md-right">{{ __('view.address') }}</label>
 
                                     <div class="col-md-6">
                                         <?php
@@ -142,7 +142,7 @@
                         <div id="buy_product_section" class="card mb-3">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label class="mt-4">Quantity </label>
+                                    <label class="mt-4">@lang('productDetails.Quantity')</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
@@ -161,7 +161,7 @@
                                 </div>
                                 <div id="buy_button_container">
                                     <button id="buy_button" type="submit" class="btn btn-success">
-                                        @lang('BUY')
+                                        @lang('productDetails.BUY')
                                     </button>
                                 </div>
                             </div>

@@ -16,8 +16,10 @@ class UserController extends CrmController
     {
         $userToEdit = \Auth::user();
         $userFormInfos = $userToEdit->getModelFormInfos();
-        $formInfos = array_slice($userFormInfos, 0, 6);
+        $formInfos = array_slice($userFormInfos, 0, 7);
         unset($formInfos[3]);
+        $formInfos[4]->value = '';
+        unset($formInfos[4]->validationRules['required']);
         $regionFormInfos = Region::createSelectFormInfos();
         $userLocation = $userToEdit->settlement;
         if (empty($userLocation))
@@ -38,7 +40,10 @@ class UserController extends CrmController
     public function updateProfile(EditProfileRequest $request)
     {
         $userToEdit = \Auth::user();
-        $userToEdit->update($request->all());
+        $updateData = $request->all();
+        if (array_key_exists('password', $updateData) && empty($updateData['password']))
+            unset($updateData['password']);
+        $userToEdit->update($updateData);
         return redirect('/')->with('success_message', 'Profile was successfully updated!');
     }
 }

@@ -34,7 +34,11 @@
       @endforeach
     </div>
     <div id="product_list_pagination_row" class="row">
-      {{ $productTypes->links() }}
+      <?php
+        $searchData = Illuminate\Support\Facades\Input::get();
+        unset($searchData['_token']);
+      ?>
+      {{ $productTypes->appends($searchData)->links() }}
     </div>
   </div>
 @endsection

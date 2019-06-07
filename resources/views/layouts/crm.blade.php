@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
+    <link href="{{ asset('css/crm/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crm/sidebar.css') }}" rel="stylesheet">
     
     <!-- dataTables -->
