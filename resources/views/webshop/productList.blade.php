@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+  <example-component></example-component>
   <div class="container">
     @include('layouts.components.successMessage')
     <div class="row text-center text-lg-left">

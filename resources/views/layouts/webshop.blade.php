@@ -2,12 +2,14 @@
 @section('styles')
     <link href="{{ asset('css/webshop/header.css') }}" rel="stylesheet">
     <link href="{{ asset('css/webshop/layout.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cookieConsent.css') }}" rel="stylesheet">
     @yield('webshopStyles')
 @endsection
 @section('header')
     @include('webshop.components.header')
 @endsection
 @section('footer')
+    @include('cookieConsent::index')
     @include('webshop.components.footer')
 
     <!-- Modal image -->
@@ -34,5 +36,6 @@
 @section('scripts')
     <script type="text/javascript" src="{{ URL::asset('js/webshop/layout.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/webshop/header.js') }}"></script>
+    @include('vendor.cookieConsent.consentJs')
     @yield('webshopScripts')
 @endsection

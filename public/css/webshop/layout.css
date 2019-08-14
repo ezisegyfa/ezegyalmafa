@@ -26,6 +26,7 @@ footer a {
 	background: linear-gradient(to bottom, #ffd500, #ffbb00);
     border-color: black;
     border-radius: 5px;
+    font-family: impact, fantasy;
 }
 .card .btn-link {
 	color: #0000ff;

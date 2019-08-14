@@ -8,6 +8,7 @@ use App\Models\UserVerificationRequest;
 use App\Models\VerificationRequest;
 use App\Helpers\FormInfos\TextInput;
 use App\Helpers\FormInfos\Select;
+use App\Helpers\FormInfos\CheckBox;
 use App\Mail\UserVerificationMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -55,7 +56,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, User::getRequestRules());
+        $validationRules = User::getRequestRules();
+        $validationRules['terms'] = 'required';
+        return Validator::make($data, $validationRules);
     }
 
     /**

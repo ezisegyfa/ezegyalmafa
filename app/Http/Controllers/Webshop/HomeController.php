@@ -58,6 +58,12 @@ class HomeController extends Controller
                             ->whereRaw('product_specialities.name LIKE "%' . $searchedText . '%"');
                     });
                 }
+                $query->orWhereExists(function ($subQuery) use($searchedText) {
+                    $subQuery->select(\DB::raw(1))
+                        ->from('product_type_properties')
+                        ->whereRaw('product_types.id = product_type_properties.product_type_id')
+                        ->whereRaw('product_type_properties.name LIKE "%' . $searchedText . '%"');
+                });
                 if (empty($searchData['brand'])) {
                     $query->orWhereExists(function ($subQuery) use($searchedText) {
                         $subQuery->select(\DB::raw(1))

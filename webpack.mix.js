@@ -18,6 +18,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 	.copy('resources/assets/css/crm/layout.css', 'public/css/crm')
 	.copy('resources/assets/css/crm/sidebar.css', 'public/css/crm')
 	.copy('resources/assets/css/components.css', 'public/css')
+	.copy('resources/assets/css/cookieConsent.css', 'public/css')
 	.js('resources/assets/js/jquery.redirect.js', 'public/js')
 	.babel([
 		'resources/assets/js/helperFunctions.js',
@@ -25,6 +26,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 	], 'public/js/helperMethods.js')
 
 	//Webshop
+	.copy('resources/assets/css/webshop/profile.css', 'public/css/webshop')
 	.copy('resources/assets/css/webshop/layout.css', 'public/css/webshop')
 	.copy('resources/assets/css/webshop/header.css', 'public/css/webshop')
 	.copy('resources/assets/css/webshop/login.css', 'public/css/webshop')

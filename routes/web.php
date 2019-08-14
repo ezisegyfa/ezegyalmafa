@@ -15,6 +15,8 @@ use App\Http\Controllers\Crm\CrmController;
 
 Auth::routes();
 
+Route::get('asdf', 'Webshop\HomeController@asdf');
+
 Route::get('admin/login', 'Auth\LoginController@showAdminLoginForm');
 Route::get('user/login', 'Auth\LoginController@showUserLoginForm');
 Route::get('user/register', 'Auth\RegisterController@showUserRegistrationForm');

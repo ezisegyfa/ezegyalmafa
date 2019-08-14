@@ -1,9 +1,22 @@
 .bg-dark {
     background-color: #0c0c0c !important;
 }
+select {
+    color: black !important;
+}
+input {
+    color: black !important;
+}
+
+.card-header {
+	display: flex;
+	align-items: center;
+}
+
 .card-form .row {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
 .card-form .label {

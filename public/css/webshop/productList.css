@@ -7,6 +7,7 @@
   border-radius: 3px;
   padding: 1px;
   color: black;
+  font-family: impact, fantasy;
 }
 .col-item .options {
   position:absolute;
@@ -22,6 +23,13 @@
   align-items: center;
   display: flex;
   justify-content: center;
+}
+.col-item .photo a img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 243px;
+  width: 243px;
 }
 .col-item .photo .options {
   display:none;
@@ -156,6 +164,7 @@
   padding-right: 1.3rem;
   border-color: black !important;
   border-width: 1px;
+  font-family: impact, fantasy;
 }
 #product_list_pagination_row {
   display: flex;

@@ -57,4 +57,16 @@ return [
         'default' => 'Anonymized',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Re-authentication
+    |--------------------------------------------------------------------------
+    |
+    | Only authenticated users should be able to download their data.
+    | Re-authentication is recommended to prevent information leakage.
+    |
+    */
+
+    're-authenticate' => false,
+
 ];

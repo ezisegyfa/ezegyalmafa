@@ -32,10 +32,14 @@ $(document).ready(function(){
 
     var productDetailsSectionHeight = $('#product_details_section').outerHeight()
     var productImageSectionHeight = $('#product_image_section').outerHeight()
-    if (productImageSectionHeight > productDetailsSectionHeight)
-        $('#product_details_section').height($('#product_image_section').outerHeight())
-    else
-        $('#product_image_section').height($('#product_details_section').outerHeight())
+    if (productImageSectionHeight > productDetailsSectionHeight) {
+        $('#product_details_section').outerHeight(productImageSectionHeight)
+        console.log('sd1')
+    }
+    else {
+        $('#product_image_section').outerHeight(productDetailsSectionHeight)
+        console.log($('#product_details_section').outerHeight())
+    }
     
     var userInfosSection = $('#user_infos_section')
     if (userInfosSection)

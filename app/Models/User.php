@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Helpers\ModelHelpers\ModelHelperMethods;
 use Illuminate\Notifications\Notifiable;
+use Soved\Laravel\Gdpr\Portable;
+use Soved\Laravel\Gdpr\Retentionable;
+use Soved\Laravel\Gdpr\Contracts\Portable as PortableContract;
 
-class User extends Authenticatable
+class User extends Authenticatable implements PortableContract
 {
-    use ModelHelperMethods, Notifiable;
+    use Portable, Retentionable, ModelHelperMethods, Notifiable;
     
 
     public static $renderColumnNames = ['email'];
+
+    protected $gdprWith = ['settlement'];
 
     /**
      * The database table used by the model.

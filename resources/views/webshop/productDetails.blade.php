@@ -9,8 +9,8 @@
         <div class="row">
             <!-- Image -->
             <div class="col-12 col-lg-6">
-                <div class="card mb-3">
-                    <div id="product_image_section" class="card-body">
+                <div id="product_image_section" class="card mb-3">
+                    <div class="card-body">
                         <img class="img-fluid" src="{{ $productType->getMainImageLink() }}" />
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                             <span class="price-new">$productType->price</span>
                         @endif
                         @if (count($productType->getSpecialityNames()) > 0)
-                            <h2>{{ __('ProductDetails.Specialities') }}</h2>
+                            <h2>@lang('productDetails.Specialities')</h2>
                         @endif
                         @foreach ($productType->getSpecialityNames() as $speciality)
                             {{ $speciality }}
@@ -34,7 +34,7 @@
                         @endforeach
                         <br>
                         @if (count($productType->getPropertyNames()) > 0)
-                            <h2>{{ __('ProductDetails.Properties') }}</h2>
+                            <h2>@lang('productDetails.Properties')</h2>
                         @endif
                         @foreach ($productType->getPropertyNames() as $property)
                             {{ $property }}
